@@ -2,11 +2,6 @@ body {
     margin: 0;
     background-color: black;
 }
-header {
-    padding: .5em;
-    border: 1px solid white;
-    color: white;
-}
 
 #title{
     margin-top: 1em;
@@ -20,7 +15,7 @@ header {
     
 }
 
-#input{
+#search{
     background-color:white;
     border: 1px solid white;
     width: 50%;
@@ -31,4 +26,24 @@ header {
     margin-left: auto;
     margin-right: auto;
     
+}
+
+#input {
+    background-color:white;
+    border: 1px solid white;
+    border-radius: 1.5em;
+    width: 80%;
+}
+
+#input:focus {
+    outline: none;
+}
+
+.logosearch {
+    size: 100%;
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+    margin-top: .9em;
+    color: rgb(28, 28, 28); 
 }
