@@ -65,9 +65,6 @@
                 $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["comment"], $comment["grade"], $comment["date"]);
                 $comment->display_comment();
             }
-
-            $comment = new Comment(0, $this->ID_beer, 0, "Cette bière est bonne", 5, 0);
-            $comment->display_comment();
             
         }
     }
