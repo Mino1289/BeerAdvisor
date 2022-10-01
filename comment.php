@@ -23,8 +23,6 @@
             $result->execute();
             $user = $result->fetch(PDO::FETCH_ASSOC);
 
-            $user["username"] = "Mino1289";
-
             echo "<div class='comment'>";
             echo "<a href='user.php?id=". $this->ID_user ."'><h3>".$user['username']."</h3></a>";
             echo "<p>". $this->content."</p>";

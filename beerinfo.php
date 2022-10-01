@@ -54,7 +54,6 @@
             echo "<h2 class='titlecomment'>Comments :</h2>";
             // les commentaires
             include "comment.php";
-            // include "database.php";
             global $db;
 
             $sql = "SELECT * FROM comment WHERE ID_beer = $this->ID_beer";
