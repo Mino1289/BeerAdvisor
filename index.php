@@ -10,7 +10,7 @@
     <title>Beer Advisor</title>
     <?php include 'database.php'; ?>
 </head>
-<body>
+<body >
     <?php
         include 'header.php';
     ?>
