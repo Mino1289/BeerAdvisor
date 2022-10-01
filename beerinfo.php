@@ -28,8 +28,9 @@
             return $this->name;
         }
 
-        function display() {
+        function display_box() {
             echo "<div class='beer'>";
+            echo "<div class='beerlogo'><i class='fa fa-beer'></i></div>";
             echo "<h2>".$this->name."</h2>";
             echo "<div class=beerinfo>";
             echo "<p>Color : ".$this->color."</p>";
@@ -38,7 +39,5 @@
             echo "<p>Brewery : ".$this->brewery."</p>";
             echo "<p>Location : ".$this->location."</p>";
             echo "</div></div>";
-
-            return $this->name;
         }
     }
