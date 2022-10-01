@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="./img/logo.ico" type="image/x-icon">
     <title>Beer Advisor</title>
+    <?php include 'database.php'; ?>
 </head>
 <body>
     <?php
@@ -15,9 +16,10 @@
     ?>
     <h1 id="title">BEER ADVISOR</h1>
     <div id="search">
+        
         <div id=""><i class="fa fa-search logosearch"></i></div>
-        <input id="input" type="text" placeholder="Rechercher une bière" maxlength="32" autocomplete="off">
+        <input id="input" name="name" type="text" placeholder="Rechercher une bière" maxlength="32" autocomplete="off">
+       
     </div>
-
 </body>
 </html>
