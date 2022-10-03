@@ -49,11 +49,25 @@
     $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
 
+    $qry = 
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // clean the input of a user when he submits
+        
         $name = test_input($_POST["name"]);
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a pattern in the string and return true in this case
+            $nameErr = "Only letters and white space allowed";
+        }
+
+
         $firstname = test_input($_POST["firstname"]);
+
         $username = test_input($_POST["username"]);
+
         $mail = test_input($_POST["mail"]);
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter var filters a variable with a specific filter. In this case it's for email
+            $mailErr = "Invalid mail format";
+        }
+
         $password = test_input($_POST["password"]);
     }
 
@@ -65,14 +79,9 @@
         return $data;
     }
 
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a pattern in the string and return true in this case
-        $nameErr = "Only letters and white space allowed";
-    }
+
     
-    
-    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter var filters a variable with a specific filter. In this case it's for email
-        $mailErr = "Invalid mail format";
-    }
+
 ?>
 </body>
 </html>
