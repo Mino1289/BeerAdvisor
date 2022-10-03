@@ -49,8 +49,25 @@
     $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
     global $db;
-     
-    $qry = $db->prepare
+    
+    
+    // Function which is able to  look for double data in the same field
+    function __ishere($item,$nameOfField){
+        $isSame=" ";
+        $sql="SELECT $nameOfField FROM user";
+        $result = $db->prepare($sql);
+        $result->execute();
+        $items = $result->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($items as $isSame){
+            if($items == $isSame){
+                return True;
+            }else{
+                return False;
+            }
+        }
+
+    }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // clean the input of a user when he submits
         
