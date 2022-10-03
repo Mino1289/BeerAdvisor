@@ -48,8 +48,9 @@
     include 'database.php';
     $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
-
-    $qry = 
+    global $db;
+     
+    $qry = $db->prepare
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // clean the input of a user when he submits
         
