@@ -85,7 +85,7 @@
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter var filters a variable with a specific filter. In this case it's for email
             $mailErr = "Invalid mail format";
         }
-
+        // Pas oublier de crypter le mdp
         $password = test_input($_POST["password"]);
     }
 
