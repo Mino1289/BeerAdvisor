@@ -63,7 +63,7 @@
 
         foreach ($items as $isSame){
             if($items == $isSame){
-                return TRUE;
+                $Booll = TRUE;
             }
         }
         return $Booll;
