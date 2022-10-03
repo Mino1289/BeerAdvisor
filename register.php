@@ -53,6 +53,8 @@
     
     // Function which is able to  look for double data in the same field
     function __ishere($item,$nameOfField){
+        
+        $Booll = FALSE;
         $isSame=" ";
         $sql="SELECT $nameOfField FROM user";
         $result = $db->prepare($sql);
@@ -61,12 +63,10 @@
 
         foreach ($items as $isSame){
             if($items == $isSame){
-                return True;
-            }else{
-                return False;
+                return TRUE;
             }
         }
-
+        return $Booll;
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") { // clean the input of a user when he submits
