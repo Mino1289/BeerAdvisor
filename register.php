@@ -14,6 +14,7 @@
 <?php include 'header.php'; ?>
 
 <?php 
+    
     include 'database.php';
     $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
@@ -38,30 +39,44 @@
         return $Booll;
     }
 
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") { // clean the input of a user when he submits
-
-         $name = test_input($_POST["name"]);
-         if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
-            $nameErr = "Only letters and white space allowed";
-         }
-         $firstname = test_input($_POST["firstname"]);
-         $username = test_input($_POST["username"]);
-         $mail = test_input($_POST["mail"]);
-         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-             $mailErr = "Invalid mail format";
-         }
-         // Pas oublier de crypter le mdp
-         $password = test_input($_POST["password"]);
-        }
-
-    //Mettre dans un autre .php car déjà utilsé dans d'autre .php come sur le dev de vic 
     function test_input($data) {
         $data = trim($data); // Remove whitespace and other predifined caracter from both sides of a string
         $data = stripslashes($data);// Remove backslashes
         $data = htmlspecialchars($data);// Convert predifined caracters
         return $data;
     }
+    
+    // finall function to send safe data 
+    function __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank){
+        
+        $sql="INSERT INTO user(name,firstname,username,mail,password,profile_pircture,rank) VALUES (?,?,?,?,?,?,?)";
+        $result = $db->prepare($sql);
+        $result->execute([$name],[$firstname],[$username],[$username],[$mail],[$password],[$profile_picture],[$rank]);
+
+    }
+
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+
+         $name = test_input($_POST["name"]);
+         if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
+            $nameErr = "Only letters and white space allowed";
+         }
+         
+         $firstname = test_input($_POST["firstname"]);
+         $username = test_input($_POST["username"]);
+         
+         $mail = test_input($_POST["mail"]);
+         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
+             $mailErr = "Invalid mail format";
+         }
+         
+         
+         // Pas oublier de crypter le mdp
+         $password = test_input($_POST["password"]);
+        }
+
+    
 
 
     
