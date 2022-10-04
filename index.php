@@ -17,8 +17,8 @@
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div id="search">
             <div id=""><i class="fa fa-fw fa-search" id="logosearch"></i></div>
-            <input name="value" id="input" type="text" placeholder="Rechercher une bière" maxlength="32" autocomplete="off">
-            <input type="submit" value="Rechercher" id="submit">
+            <input name="value" id="input" type="text" placeholder="Find a beer" maxlength="32" autocomplete="off">
+            <input type="submit" value="research" id="submit">
         </div>
     </form>
     <div id="spacing">
