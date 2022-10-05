@@ -76,13 +76,6 @@
             $mailErr = "Invalid mail format";
         }
         
-
-        if(__ishere($name,'name',$db)){
-            $nameErr ="This name is already taken";
-        }
-        if(__ishere($firstname,'firstname',$db)){
-            $firstnameErr ="This firstname is already taken";
-        }
         if(__ishere($username,'username',$db)){
             $usernameErr ="This username is already taken";
         }
