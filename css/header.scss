@@ -4,13 +4,11 @@ header {
   color: white;
 }
 
-
 .menu-container {
   display: inline-block;
   cursor: pointer;
   margin-top: .5em;
   margin-left: .5em;
-
 }
 
 .bar1,
@@ -42,11 +40,11 @@ header {
   position: absolute;
   left: calc(50px + 1em);
   top: .5em;
-  background-color: #f1f1f1;
+  background-color: black;
   overflow: hidden;
   text-decoration: none;
-
-  font-size: 1.5em;
+  font-size: 1.2em;
+  font-family: Arial, sans-serif;
 }
 
 .hide {
@@ -55,15 +53,20 @@ header {
 
 .topnav a {
   float: left;
-  color: #333;
+  color: white;
   text-align: center;
   padding: 14px 16px;
+  background-color: black;
+  border-radius: 60%;
 
   transition: .5s;
 }
 
 .topnav a:hover {
+  transition: .5s;
+
   background-color: #ddd;
   color: black;
-  transition: .5s;
+  border-radius: 12.5%;
 }
+
