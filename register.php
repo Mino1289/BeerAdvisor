@@ -22,17 +22,17 @@
     $Bool = FALSE;
     
     // Function which is able to  look for double data in the same field
-    function __ishere($item,$nameOfField){
+    function __ishere($item,$nameOfField,$db){
         
         $Booll = FALSE;
         $isSame=" ";
         $sql="SELECT $nameOfField FROM user";
         $result = $db->prepare($sql);
         $result->execute();
-        $items = $result->fetchAll(PDO::FETCH_ASSOC);
+        $items = $result->fetchAll(PDO::FETCH_COLUMN);
 
         foreach ($items as $isSame){
-            if($items == $isSame){
+            if($item == $isSame){
                 $Booll = TRUE;
             }
         }
@@ -46,41 +46,38 @@
         return $data;
     }
     
-    // finall function to send safe data 
-    function __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank){
+    // final function to send safe data 
+    function __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db){
         
-        $sql="INSERT INTO user(name,firstname,username,mail,password,profile_pircture,rank) VALUES (?,?,?,?,?,?,?)";
+        $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,rank) VALUES (?,?,?,?,?,?,?)";
         $result = $db->prepare($sql);
-        $result->execute([$name],[$firstname],[$username],[$username],[$mail],[$password],[$profile_picture],[$rank]);
+        $result->execute(array($name,$firstname,$username,$mail,$password,$profile_picture,$rank));
 
     }
 
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
-         $name = test_input($_POST["name"]);
-         if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
+        $password = test_input($_POST["password"]);
+        $firstname = test_input($_POST["firstname"]);
+        $username = test_input($_POST["username"]);        
+        $name = test_input($_POST["name"]);
+        $mail = test_input($_POST["mail"]);
+        $profile_picture = $_POST["profile_picture"];
+        $rank= $_POST["rank"];
+        
+        // __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+        
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
             $nameErr = "Only letters and white space allowed";
          }
-         
-         $firstname = test_input($_POST["firstname"]);
-         $username = test_input($_POST["username"]);
-         
-         $mail = test_input($_POST["mail"]);
-         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-             $mailErr = "Invalid mail format";
-         }
-         
-         
-         // Pas oublier de crypter le mdp
-         $password = test_input($_POST["password"]);
+        if(__ishere($name,'name',$db)){
+            $nameErr ="This name is already taken";
         }
-
-    
-
-
-    
-
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
+             $mailErr = "Invalid mail format";
+        }
+    }
 ?>
 
 <div id="form">
