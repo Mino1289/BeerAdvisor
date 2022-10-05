@@ -69,7 +69,7 @@
         
         
         
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
+        if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
             $nameErr = "Only letters and white space allowed";
         }
         if (!preg_match("/^[a-zA-Z-' ]*$/",$firstname)) { // preg_match look for a specific pattern in the string 
@@ -87,6 +87,7 @@
         }
 
         if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
+            $password= password_hash($password,PASSWORD_BCRYPT);
             __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
             $validation=" Welcome $username !";
         }
