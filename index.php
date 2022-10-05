@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/beer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="./img/logo.ico" type="image/x-icon">
     <title>Beer Advisor</title>
+    <?php include 'database.php'; ?>
 </head>
-<body>
+<body >
     <?php
         include 'header.php';
     ?>
