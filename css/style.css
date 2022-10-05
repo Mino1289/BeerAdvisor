@@ -3,7 +3,7 @@ body {
     background-color: black;
 }
 
-#title{
+#title {
     margin-top: 1em;
     text-align: center;
     font-size: 5em;
@@ -12,24 +12,24 @@ body {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
-#search{
-    background-color:white;
+#search {
+    background-color: white;
     border: 1px solid white;
     width: 50%;
     height: 3em;
     border-radius: 1.5em;
-    display:flex;
+    display: flex;
     margin-top: 10em;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 #input {
-    background-color:white;
+    background-color: white;
     border: 1px solid white;
     border-radius: 1.5em;
     width: 80%;
@@ -40,7 +40,7 @@ body {
 }
 
 #submit {
-    background-color:white;
+    background-color: white;
     border: 1px solid white;
     border-radius: 1.5em;
     width: 20%;
@@ -58,5 +58,5 @@ body {
     height: 2em;
     margin-left: 1em;
     margin-top: .9em;
-    color: rgb(28, 28, 28); 
+    color: rgb(28, 28, 28);
 }

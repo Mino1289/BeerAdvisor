@@ -16,9 +16,9 @@
     <h1 id="title">BEER ADVISOR</h1>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div id="search">
-            <div id=""><i class="fa fa-search" id ="logosearch"></i></div>
-            <input name="value" id="input" type="text" placeholder="Rechercher une bière" maxlength="32" autocomplete="off">
-            <input type="submit" value="Rechercher" id="submit">
+            <div id=""><i class="fa fa-fw fa-search" id="logosearch"></i></div>
+            <input name="value" id="input" type="text" placeholder="Find a beer" maxlength="32" autocomplete="off">
+            <input type="submit" value="research" id="submit">
         </div>
     </form>
     <div id="spacing">
@@ -58,7 +58,7 @@
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $beer) {
         $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color'],$beer['strength'],$beer['taste'],$beer['brewery']);
-        $beer->display();
+        $beer->display_box();
         // echo "<script>console.log('Debug Objects: " . $beer->display() . "' );</script>";
     }
     
