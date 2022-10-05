@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+/*
+#register_form
+{      
+    display: flex;
+    border: 2px solid white;
+    text-align: left;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+}
+*/
+input   
+{
+    border-radius: 1.5em;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    padding: .5em;
+    line-height: 1em;
+    vertical-align: middle;
+}
+
+#name:hover
+{
+    -webkit-box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4); 
+    box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4);
+}
+
+#name {
+    background-color: white;
+    border: 1px solid white;
+    width: 15em;
+    height: 3em;
+    border-radius: 1.5em;
+    display: flex;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#input {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 1.5em;
+    color: black;
+    width: 40%;
+}
+
+#input:focus {
+    outline: none;
+}
+
+#spacing {
+    margin-top: 4em;
+}
+
+#logosearch {
+    size: 100%;
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+    margin-top: .9em;
+    color: rgb(28, 28, 28);
+}
+
+#profile_picture
+{
+    background-color: white;
+    width: 10em;
+    padding-top: 5%;
+}

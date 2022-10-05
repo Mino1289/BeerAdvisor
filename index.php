@@ -16,16 +16,13 @@
         include 'header.php';
     ?>
     <h1 id="title">BEER ADVISOR</h1>
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="spacing">
         <div id="search">
             <div id=""><i class="fa fa-fw fa-search" id="logosearch"></i></div>
             <input name="value" id="input" type="text" placeholder="Find a beer" maxlength="32" autocomplete="off">
             <input type="submit" value="research" id="submit">
         </div>
     </form>
-    <div id="spacing">
-        
-    </div>
 
     <?php
     include "database.php";
