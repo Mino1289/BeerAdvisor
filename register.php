@@ -18,6 +18,7 @@
     include 'database.php';
     $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
+    $validation =" ";
     global $db;
     $Bool = FALSE;
     
@@ -66,17 +67,34 @@
         $profile_picture = $_POST["profile_picture"];
         $rank= $_POST["rank"];
         
-        // __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+        
         
         if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
             $nameErr = "Only letters and white space allowed";
-         }
+        }
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
+            $mailErr = "Invalid mail format";
+        }
+        
+
         if(__ishere($name,'name',$db)){
             $nameErr ="This name is already taken";
         }
-        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-             $mailErr = "Invalid mail format";
+        if(__ishere($firstname,'firstname',$db)){
+            $firstnameErr ="This firstname is already taken";
         }
+        if(__ishere($username,'username',$db)){
+            $usernameErr ="This username is already taken";
+        }
+        if(__ishere($mail,'mail',$db)){
+            $mailErr ="This mail is already taken";
+        }
+
+        if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
+            __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+            $validation=" Welcome $username !";
+        }
+       
     }
 ?>
 
@@ -87,15 +105,20 @@
         <input   required id='name' name='name' type="text" maxlength=20 /><span class="error"><?php echo $nameErr;?></span>
         </br>
         <label for='firstname'>Firstname</label>
-        <input   required id='firstname' name="firstname" type="text" maxlength=20/></br>
+        <input   required id='firstname' name="firstname" type="text" maxlength=20/><span class="error"><?php echo $firstnameErr;?></span>
+        </br>
         <label for='username'>Username</label>
-        <input   required id='username' name="username" type="text" maxlength=20/></br>
+        <input   required id='username' name="username" type="text" maxlength=20/><span class="error"><?php echo $usernameErr;?></span>
+        </br>
         <label for='mail'>Mail</label>
-        <input   id='mail' required name="mail" type="email" placeholder="email@domain " maxlength=60/></br>
+        <input   id='mail' required name="mail" type="email" placeholder="email@domain " maxlength=60/><span class="error"><?php echo $mailErr;?></span>
+        </br>
         <label for='password'>Password</label>
-        <input   id='password' required name="password"  type="password" maxlength=40/></br>
+        <input   id='password' required name="password"  type="password" maxlength=40/>
+        </br>
         <label for='profile_picture'>Profile Picture</label>
-        <input   id='profile_picture' name="profile_picture" type="file" /></br>
+        <input   id='profile_picture' name="profile_picture" type="file" />
+        </br>
 
         <label for='rank'>Rank</label>
         <select id='rank' name="rank">
@@ -107,7 +130,7 @@
             <option value="alcoholic">alcoholic</option>
         </select> </br>
 
-        <input name="submit" type="submit" value="Submit" />
+        <input name="submit" type="submit" value="Submit" /><?php echo $validation;?>
     </form>
 </div>
 
