@@ -33,7 +33,7 @@
         $profile_picture = $_POST["profile_picture"];
         $rank= $_POST["rank"];
         
-        
+       
         
         if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
             $nameErr = "Only letters and white space allowed";
@@ -53,7 +53,7 @@
         }
 
         if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
-            $password= password_hash($password,PASSWORD_ARGON2I);
+            $password = md5($password);
             __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
             $validation=" Welcome $username !";
         }

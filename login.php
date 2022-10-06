@@ -21,7 +21,7 @@
     if($_SERVER["REQUEST_METHOD"]=="POST"){ // Variable are already define because we use required balise 
         $password = test_input($_POST["password"]);
         $mail = test_input($_POST["mail"]);
-
+        echo $mail;
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
             $mailErr = "Invalid mail format";
         }
@@ -30,16 +30,14 @@
             $mailErr ="This mail does not exist";
         }
         
-        $password= password_hash($password,PASSWORD_ARGON2I);
+        $password= md5($password);
         
         if($mailErr == " "){
             $sql="SELECT password FROM user WHERE mail=?";
             $qry = $db->prepare($sql);
             $qry->execute([$mail]);
             $verifPassword =$qry->fetch();
-            echo $verifPassword[0];
-            echo"</br>";
-            echo $password;
+
             if($verifPassword[0] != $password){
                 $passwordErr="incorrect password, retry please";
             }else{
@@ -47,7 +45,7 @@
                 $qry = $db->prepare($sql);
                 $qry->execute([$password]);
                 $username =$qry->fetch();
-                $validation = " Welcome Back $username !";
+                $validation = " Welcome Back $username[0] !";
             }
         }
 
