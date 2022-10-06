@@ -7,7 +7,7 @@ function __ishere($item,$nameOfField,$db){
     $sql="SELECT $nameOfField FROM user";
     $result = $db->prepare($sql);
     $result->execute();
-    $items = $result->fetchAll(PDO::FETCH_COLUMN);
+    $items = $result->fetchAll(PDO::FETCH_COLUMN); //Maybye Fetch? 
     foreach ($items as $isSame){
         if($item == $isSame){
             $Booll = TRUE;

@@ -14,9 +14,41 @@
     include 'database.php';
     include 'function.php';
     global $db;
-    $email = $password =" ";
-    $emailErr = $passwordErr=" ";
-    
+    $mail = $password =$validation=$username= " ";
+    $mailErr = $passwordErr=" ";
+    $verifPassword=" ";
+
+    if($_SERVER["REQUEST_METHOD"]=="POST"){ // Variable are already define because we use required balise 
+        $password = test_input($_POST["password"]);
+        $mail = test_input($_POST["mail"]);
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
+            $mailErr = "Invalid mail format";
+        }
+
+        if(!__ishere($mail,'mail',$db)){
+            $mailErr ="This mail does not exist";
+        }
+        
+        $password= password_hash($password,PASSWORD_BCRYPT);
+
+        if($mailErr == " "){
+            $sql="SELECT password FROM user WHERE mail=?";
+            $qry = $db->prepare($sql);
+            $qry->execute(array($mail));
+            $verifPassword =$qry->fetch();
+            if($verifPassword != $password){
+                $passwordErr="incorrect password, retry please";
+            }else{
+                $sql="SELECT username FROM user WHERE password=?";
+                $qry = $db->prepare($sql);
+                $qry->execute(array($password));
+                $username =$qry->fetch();
+                $validation = " Welcome Back $username !";
+            }
+        }
+
+    }
     
 
 ?>
@@ -30,9 +62,10 @@
     </div>      
     <div class="name">
         <div id=""><i class="fa fa-fw fa-lock" id="logosearch"></i></div>
-        <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error">
+        <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error"><?php echo $passwordErr;?></span>
     </div>
-   
+    
+    <input name="submit" type="submit" value="Submit" /><?php echo $validation;?>
 </form>
 </body>
 </html>
