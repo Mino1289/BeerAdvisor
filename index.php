@@ -28,9 +28,8 @@
     </div>
 
     <?php
-    include "database.php";
+   
     include "beerinfo.php";
-
     global $db;
     // define variables and set to empty values
     $value = "";

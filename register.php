@@ -53,7 +53,7 @@
         }
 
         if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
-            $password= password_hash($password,PASSWORD_BCRYPT);
+            $password= password_hash($password,PASSWORD_ARGON2I);
             __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
             $validation=" Welcome $username !";
         }

@@ -30,19 +30,22 @@
             $mailErr ="This mail does not exist";
         }
         
-        $password= password_hash($password,PASSWORD_BCRYPT);
-
+        $password= password_hash($password,PASSWORD_ARGON2I);
+        
         if($mailErr == " "){
             $sql="SELECT password FROM user WHERE mail=?";
             $qry = $db->prepare($sql);
-            $qry->execute(array($mail));
+            $qry->execute([$mail]);
             $verifPassword =$qry->fetch();
-            if($verifPassword != $password){
+            echo $verifPassword[0];
+            echo"</br>";
+            echo $password;
+            if($verifPassword[0] != $password){
                 $passwordErr="incorrect password, retry please";
             }else{
                 $sql="SELECT username FROM user WHERE password=?";
                 $qry = $db->prepare($sql);
-                $qry->execute(array($password));
+                $qry->execute([$password]);
                 $username =$qry->fetch();
                 $validation = " Welcome Back $username !";
             }
@@ -66,6 +69,8 @@
     </div>
     
     <input name="submit" type="submit" value="Submit" /><?php echo $validation;?>
+
+   
 </form>
 </body>
 </html>
