@@ -1,3 +1,0 @@
-
-            
-            <input name="submit" type="submit" value="Submit" /><?php echo $validation;?>

@@ -98,54 +98,64 @@
         }
     ?>
 
+    <h1 id="title">Register form</h1>
+
     <div id="register_form">
         <form name="sign" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
             
-            <div id="spacing">
+            <div id="spacing"></div>
+
+            <div id="boiteD">
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required id="input" name="name" type="text" maxlength=20 placeholder="Name" autocomplete="off"><span class="error"><?php echo $nameErr;?></span>
+                </div>
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required id='input' name="firstname" type="text" maxlength=20 placeholder="Firstname" autocomplete="off"/><span class="error"><?php echo $firstnameErr;?></span>
+                </div>
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required id='input' name="username" type="text" maxlength=20 placeholder="Username" autocomplete="off"/><span class="error"><?php echo $usernameErr;?></span>
+                </div>
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-envelope" id="logosearch"></i></div>
+                    <input required id='input' name="mail" type="text" maxlength=60 placeholder="Email" autocomplete="off"/><span class="error"><?php echo $mailErr;?></span>
+                </div>
+
             </div>
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-user" id="logosearch"></i></div>
-                <input required id="input" name="name" type="text" maxlength=20 placeholder="Name" autocomplete="off"><span class="error"><?php echo $nameErr;?></span>
-            </div>
+            <div id="boiteG">
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-user" id="logosearch"></i></div>
-                <input required id='input' name="firstname" type="text" maxlength=20 placeholder="Firstname" autocomplete="off"/><span class="error"><?php echo $firstnameErr;?></span>
-            </div>
+                <div class="name">
+                    <div><i class="fa fa-fw fa-lock" id="logosearch"></i></div>
+                    <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error">
+                </div>
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-user" id="logosearch"></i></div>
-                <input required id='input' name="username" type="text" maxlength=20 placeholder="Username" autocomplete="off"/><span class="error"><?php echo $usernameErr;?></span>
-            </div>
+                <div class="name">
+                    <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
+                    <input id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/><span class="error">
+                </div>
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-envelope" id="logosearch"></i></div>
-                <input required id='input' name="mail" type="text" maxlength=60 placeholder="Email" autocomplete="off"/><span class="error"><?php echo $mailErr;?></span>
-            </div>
+                <div class="name">
+                    
+                    <div><i class="fa fa-fw fa-star" id="logosearch"></i></div>
+                    <select id='rank' name="rank">
+                        <option value="novice">novice</option>
+                        <option value="amateur">amateur</option>
+                        <option value="intermediate">intermediate</option>
+                        <option value="expert">expert</option>
+                        <option value="professionnal">professionnal</option>
+                        <option value="alcoholic">alcoholic</option>
+                    </select>
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-lock" id="logosearch"></i></div>
-                <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error">
-            </div>
+                </div>
 
-            <div id="name">
-                <div id=""><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
-                <input id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/><span class="error">
-            </div>
-
-            <div id="name">
-                
-            <label for='rank'>Rank</label>
-
-            <select id='rank' name="rank">
-                <option value="novice">novice</option>
-                <option value="amateur">amateur</option>
-                <option value="intermediate">intermediate</option>
-                <option value="expert">expert</option>
-                <option value="professionnal">professionnal</option>
-                <option value="alcoholic">alcoholic</option>
-            </select>
+                <input name="submit" type="submit" value="Sign up" id="submit"/><?php echo $validation;?>
 
             </div>
 

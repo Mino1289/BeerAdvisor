@@ -3,21 +3,44 @@ body {
     background-color: black;
     color: white;
     font-family: Arial, sans-serif;
+    width: 100%;
 }
-/*
-#register_form
-{      
-    display: flex;
-    border: 2px solid white;
-    text-align: left;
-    justify-content: center;
+
+#title {
+    margin-top: 1em;
+    text-align: center;
+    font-size: 5em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
-    font-family: Arial, sans-serif;
-    font-size: 2em;
+
 }
-*/
+
+#register_form
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#boiteD
+{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#boiteG
+{
+    border: none;// 1px solid violet;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 input   
 {
     border-radius: 1.5em;
@@ -29,26 +52,26 @@ input
     vertical-align: middle;
 }
 
-#name:hover
+.name:hover
 {
-    -webkit-box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4); 
-    box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4);
+    -webkit-box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.5); 
+    box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.5);
 }
 
-#name {
+.name {
     background-color: white;
     border: 1px solid white;
-    width: 15em;
+    width: 20%;
     height: 3em;
     border-radius: 1.5em;
     display: flex;
     margin-top: 1em;
-    margin-left: auto;
-    margin-right: auto;
+    // margin-left: auto;
+    // margin-right: auto;
 
 }
 
-#input {
+.input {
     background-color: white;
     border: 1px solid white;
     border-radius: 1.5em;
@@ -56,12 +79,12 @@ input
     width: 40%;
 }
 
-#input:focus {
+.input:focus {
     outline: none;
 }
 
 #spacing {
-    margin-top: 4em;
+    margin-top: 2.5em;
 }
 
 #logosearch {
@@ -78,4 +101,42 @@ input
     background-color: white;
     width: 10em;
     padding-top: 5%;
+}
+
+#rank
+{
+    background-color: white;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 10em;
+    font-size: 1em;
+
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+
+#submit:hover
+{
+    -webkit-box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4); 
+    box-shadow: inset -1px 3px 8px 5px white, 2px 5px 16px 0px black, 5px 5px 35px 12px rgba(255,137,0,0.4);
+}
+
+#submit {
+    background-color: white;
+    width: 10em;
+    height: 3em;
+    border-radius: 1.5em;
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    font-size: 1em;
 }
