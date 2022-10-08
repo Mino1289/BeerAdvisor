@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#title {
+.title {
     margin-top: 1em;
     text-align: center;
     font-size: 5em;
@@ -62,4 +62,8 @@ body {
     margin-left: 1em;
     margin-top: .9em;
     color: rgb(28, 28, 28);
+}
+
+p {
+    color: #ffffff;
 }
