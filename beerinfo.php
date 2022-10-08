@@ -28,15 +28,18 @@
         }
 
         function display_box() {
+            global $db;
+
+            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer =". $this->ID_beer;
+            $result = $db->prepare($sql);
+            $result->execute();
+            $grades = $result->fetch();
+            $grade = $grades['avgrade'];
+
             echo "<div class='beerbox'>";
             echo "<a href='beer.php?id=".$this->ID_beer."'><h2>".$this->name."</h2></a>";
-            echo "<div class=beerinfo>";
-            echo "<p>Color : ".$this->color."</p>";
-            echo "<p>Taste : ".$this->taste."</p>";
-            echo "<p>Strength : ".$this->strength."%</p>";
-            echo "<p>Brewery : ".$this->brewery."</p>";
-            echo "<p>Location : ".$this->location."</p>";
-            echo "</div></div>";
+            echo "<p>Average grade : ".$grade."</p>";
+            echo "</div>";
         }
 
         function display_page() {
@@ -50,9 +53,8 @@
             echo "<p>Strength : ".$this->strength."%</p>";
             echo "<p>Brewery : ".$this->brewery."</p>";
             echo "<p>Location : ".$this->location."</p>";
-            echo "</div></div>";
-            echo "<h2 class='titlecomment'>Comments :</h2>";
-            // les commentaires
+           
+            // les commentaires + btn ajouter commentaire
             include "comment.php";
             global $db;
 
@@ -61,11 +63,24 @@
             $result->execute();
             $comments = $result->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach ($comments as $comment) {
-                $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["comment"], $comment["grade"], $comment["date"]);
-                $comment->display_comment();
-            }
+            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer =". $this->ID_beer;
+            $result = $db->prepare($sql);
+            $result->execute();
+            $grades = $result->fetch();
+            $grade = $grades['avgrade'];
+
+            echo "<p>Average Grade : ".$grade."/5</p>";
+            echo "</div></div>";
+            echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
             
+            $n = count($comments);
+            if ($n > 0) {
+                echo "<h2 class='titlecomment'>" . $n . " Comment(s) :</h2>";
+                foreach ($comments as $comment) {
+                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["comment"], $comment["grade"], $comment["date"]);
+                    $comment->display_comment();
+                }
+            }
         }
     }
 ?>
