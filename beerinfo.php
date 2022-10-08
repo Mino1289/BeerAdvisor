@@ -7,9 +7,10 @@
         public float $strength;
         public $taste;
         public $brewery;
+        public $category;
 
 
-        function __construct($ID_beer, $name, $location, $color, $strength, $taste, $brewery) {
+        function __construct($ID_beer, $name, $location, $color, $strength, $taste, $brewery, $category) {
             $this->ID_beer = $ID_beer;
             $this->name = $name;
             $this->location = $location;
@@ -17,6 +18,7 @@
             $this->strength = $strength;
             $this->taste = $taste;
             $this->brewery = $brewery;
+            $this->category = $category;
         }
 
         function get_ID_beer() {
@@ -49,6 +51,7 @@
             echo "<h1>".$this->name."</h1>";
             echo "<div class='info'>";
             echo "<p>Color : ".$this->color."</p>";
+            echo "<p>Category : ".$this->category."</p>";
             echo "<p>Taste : ".$this->taste."</p>";
             echo "<p>Strength : ".$this->strength."%</p>";
             echo "<p>Brewery : ".$this->brewery."</p>";
@@ -72,6 +75,7 @@
             echo "<p>Average Grade : ".$grade."/5</p>";
             echo "</div></div>";
             echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
+            // TODO: add a btn when logged to like the beer
             
             $n = count($comments);
             if ($n > 0) {

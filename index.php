@@ -15,7 +15,7 @@
     <?php
         include 'header.php';
     ?>
-    <h1 id="title">BEER ADVISOR</h1>
+    <h1 class="title">BEER ADVISOR</h1>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div id="search">
             <div id=""><i class="fa fa-fw fa-search" id="logosearch"></i></div>
@@ -61,7 +61,7 @@
     
     $n = count($result);
     foreach ($result as $beer) {
-        $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color'],$beer['strength'],$beer['taste'],$beer['brewery']);
+        $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color'],$beer['strength'],$beer['taste'],$beer['brewery'], $beer['category']);
         $beer->display_box();
     }
     if ($n == 0) {

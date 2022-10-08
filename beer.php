@@ -13,7 +13,7 @@
     <?php
         include 'header.php';
 
-        if ($_GET["id"] != "") {
+        if (isset($_GET["id"])) {
             $ID_beer = $_GET["id"];
             include 'database.php';
             include 'beerinfo.php';
@@ -23,12 +23,15 @@
 
             $result = $db->prepare($sql);
             $result->execute();
-            $beer = $result->fetch(PDO::FETCH_ASSOC);
-
-            $beer = new Beer($beer["ID_beer"], $beer["name"], $beer["location"], $beer["color"], $beer["strength"], $beer["taste"], $beer["brewery"]);
-            $beer->display_page();
+            $beer = $result->fetch();
+            if (isset($beer["ID_beer"])) {
+                $beer = new Beer($beer["ID_beer"], $beer["name"], $beer["location"], $beer["color"], $beer["strength"], $beer["taste"], $beer["brewery"], $beer["category"]);
+                $beer->display_page();
+            } else {
+                echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
+            }
         } else {
-            echo "<p>Cette bière n'existe pas</p>";
+            echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
         }
     ?>
     
