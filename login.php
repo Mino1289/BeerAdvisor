@@ -18,7 +18,7 @@
     $mailErr = $passwordErr=" ";
     $verifPassword=" ";
 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){ // Variable are already define because we use required balise 
+    if($_SERVER["REQUEST_METHOD"]=="POST"){ // Variables are already define because we use required balise 
         $password = test_input($_POST["password"]);
         $mail = test_input($_POST["mail"]);
        

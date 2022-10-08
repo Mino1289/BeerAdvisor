@@ -38,7 +38,7 @@
         if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
             $nameErr = "Only letters and white space allowed";
         }
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$firstname)) { // preg_match look for a specific pattern in the string 
+        if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$firstname)) { // preg_match look for a specific pattern in the string 
             $firstnameErr = "Only letters and white space allowed";
         }
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
