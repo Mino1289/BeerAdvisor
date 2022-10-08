@@ -7,6 +7,7 @@
     </div>
     <div id="topnav" class="topnav hide">
         <a href="./index.php">Home</a>
+        <a href="./add_beer.php">Add a beer</a>
         <a href="./login.php">Sign in</a>
         <a href="./register.php">Sign up</a>
     </div>

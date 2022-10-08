@@ -21,12 +21,12 @@
             $sql = "SELECT * FROM user WHERE ID_user = ".$this->ID_user;
             $result = $db->prepare($sql);
             $result->execute();
-            $user = $result->fetch(PDO::FETCH_ASSOC);
+            $user = $result->fetch();
 
             echo "<div class='comment'>";
-            echo "<a href='user.php?id=". $this->ID_user ."'><h3>".$user['username']."</h3></a>";
-            echo "<p>". $this->content."</p>";
-            // echo "<p>".$this->grade."</p>";
+            echo "<a href='user.php?username=". $user['username'] ."'><h3>".$user['username']."</h3></a>";
+            echo "<p>". $this->content ."</p>";
+            echo "<p>". $this->grade ."/5</p>";
             echo "<p>".date('l jS F Y',$this->date)."</p>";
             echo "</div>";
         }
