@@ -46,7 +46,7 @@
                         $qry = $db->prepare($sql);
                         $qry->execute([$password]);
                         $username =$qry->fetch();
-                        $validation = " Welcome Back $username[0] !";
+                        $validation = "<p id='welcome_back'>Welcome back $username[0] !<p>";
                     }
                 }
 
@@ -73,7 +73,9 @@
                     <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error"><?php echo $passwordErr;?></span>
                 </div>
                 
-                <input name="submit" type="submit" value="Submit" id="submit" /><?php echo $validation;?>
+                <input name="submit" type="submit" value="Submit" id="submit" />
+                
+                <?php echo $validation;?>
 
             </div>
         </form>
