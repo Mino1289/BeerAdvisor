@@ -23,10 +23,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 15em;
+    width: 25%;
     margin-left: auto;
     margin-right: auto;
-    // border: 1px solid red;
     text-align: center;
 }
 
@@ -109,4 +108,53 @@ input
 {
     margin-top: 2em;
     color: white;
+}
+
+.error
+{
+    border: 2px solid red;
+    border-radius: 1.4em;
+    animation: .25s shake;
+    width: 100%;
+}
+
+@keyframes shake
+{
+    30%{
+        transform:translateX(-.25em);
+    }
+
+    50%{
+        transform: translatex(.25em);
+    }
+
+    70%{
+        transform:translatex(-.25em);
+    }
+
+    90%{
+        transform: translatex(.25em);
+    }
+}
+
+#error_mail
+{
+    display: flex;
+    width: 100%;
+    color: red;
+    margin: .1em;
+    font-size: 1em;
+    justify-content: center;
+    animation: .25s shake;
+}
+
+#error_pass
+{
+    display: flex;
+    width: 100%;
+    color: red;
+    margin: .1em;
+    font-size: 1em;
+    justify-content: center;
+    animation: .25s shake;
 }

@@ -11,6 +11,15 @@
     </head>
 
     <body>
+
+        <script>
+            function validate(input)
+            {
+                document.getElementsByName(input)[0].classList.remove("sucess");
+                document.getElementsByName(input)[0].classList.add("error");
+            }
+        </script>
+
         <?php
             include 'database.php';
             include 'function.php';
@@ -24,11 +33,13 @@
                 $mail = test_input($_POST["mail"]);
             
                 if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-                    $mailErr = "Invalid mail format";
+                    $mailErr = "<script>validate('mail1');</script><p id='error_mail'>Incorrect format mail</p>";
                 }
 
-                if(!__ishere($mail,'mail',$db)){
-                    $mailErr ="This mail does not exist";
+                if(!__ishere($mail,'mail',$db))
+                {
+                    $mailErr ="<script>validate('mail1');</script><p id='error_mail'>Incorrect mail</p>";
+                    
                 }
                 
                 $password= md5($password);
@@ -40,7 +51,7 @@
                     $verifPassword =$qry->fetch();
 
                     if($verifPassword[0] != $password){
-                        $passwordErr="incorrect password, retry please";
+                        $passwordErr="<script>validate('password1');</script><p id='error_pass'>Wrong password</p>";
                     }else{
                         $sql="SELECT username FROM user WHERE password=?";
                         $qry = $db->prepare($sql);
@@ -51,7 +62,6 @@
                 }
 
             }
-            
 
         ?>
 
@@ -63,18 +73,22 @@
 
             <div id="member_login">
 
-                <div class="name">
+                <div class="name" name="mail1">
                     <div><i class="fa fa-fw fa-envelope" id="logosearch"></i></div>
-                    <input required id='input' name="mail" type="text" maxlength=60 placeholder="Email" autocomplete="off"/><span class="error"><?php echo $mailErr;?></span>
+                    <input required class='input' name="mail" type="text" maxlength=60 placeholder="Email" autocomplete="off"/>
                 </div>
 
-                <div class="name">
+                <?php echo $mailErr;?>
+
+                <div class="name" name="password1">
                     <div><i class="fa fa-fw fa-lock" id="logosearch"></i></div>
-                    <input required id='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error"><?php echo $passwordErr;?></span>
+                    <input required class='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/>
                 </div>
                 
-                <input name="submit" type="submit" value="Submit" id="submit" />
-                
+                <?php echo $passwordErr;?>
+
+                <input name="submit" type="submit" value="Submit" id="submit" onSubmit="validate(.name)"/>
+
                 <?php echo $validation;?>
 
             </div>
