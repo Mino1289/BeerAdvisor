@@ -62,7 +62,7 @@
 
         }
     ?>
-
+    <?php include "header.php"?>
     <h1 id="title">Register form</h1>
 
     <form name="sign" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
