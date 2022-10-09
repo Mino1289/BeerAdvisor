@@ -43,7 +43,7 @@ CREATE TABLE `beer` (
 --
 
 INSERT INTO `beer` (`ID_beer`, `name`, `location`, `color`, `strength`, `taste`, `brewery`, `category`) VALUES
-(1, '1664 Kronenbourg', 'Strasbourg, France', 'blonde', '6', 'soft', 'Kronenbourg', `lager`);
+(1, '1664 Kronenbourg', 'Strasbourg, France', 'blonde', '6', 'soft', 'Kronenbourg', 'lager');
 
 -- --------------------------------------------------------
 
