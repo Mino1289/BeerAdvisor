@@ -9,11 +9,16 @@ body {
     text-align: center;
     font-size: 5em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(255, 255, 255);
+    color: white;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
 
+h1 a
+{
+    color: white;
+    text-decoration: none;
 }
 
 #search {
@@ -23,10 +28,9 @@ body {
     height: 3em;
     border-radius: 1.5em;
     display: flex;
-    margin-top: 10em;
     margin-left: auto;
     margin-right: auto;
-
+    margin-top: 10em;
 }
 
 #input {
@@ -51,10 +55,6 @@ body {
     cursor: pointer;
 }
 
-#spacing {
-    margin-top: 5em;
-}
-
 #logosearch {
     size: 100%;
     width: 2em;
@@ -65,10 +65,10 @@ body {
 }
 
 p {
-    color: #ffffff;
+    color: white;
 }
 
 p a {
-    color: #ffffff;
+    color: white;
     text-decoration: underline;
 }
