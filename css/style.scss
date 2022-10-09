@@ -9,11 +9,16 @@ body {
     text-align: center;
     font-size: 5em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgb(255, 255, 255);
+    color: white;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
 
+h1 a
+{
+    color: white;
+    text-decoration: none;
 }
 
 #search {
@@ -60,10 +65,10 @@ body {
 }
 
 p {
-    color: #ffffff;
+    color: white;
 }
 
 p a {
-    color: #ffffff;
+    color: white;
     text-decoration: underline;
 }
