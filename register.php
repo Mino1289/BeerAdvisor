@@ -62,7 +62,7 @@
    
         
 
-        }
+    }
     ?>
     <?php include "header.php"?>
     <h1 id="title">Register form</h1>
