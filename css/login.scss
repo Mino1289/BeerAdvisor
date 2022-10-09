@@ -18,31 +18,16 @@ body {
 
 }
 
-#register_form
+#member_login
 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-}
-
-#boiteD
-{
-    margin-right: 10%;
+    width: 15em;
+    margin-left: auto;
+    margin-right: auto;
     // border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 20%;
-}
-
-#boiteG
-{
-    // border: 1px solid green;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 20%;
+    text-align: center;
 }
 
 input   
@@ -100,37 +85,6 @@ input
     color: rgb(28, 28, 28);
 }
 
-#profile_picture
-{
-    background-color: white;
-    width: 6em;
-    padding-top: 4%;
-}
-
-#rank
-{
-    background-color: white;
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    background-image: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    width: 10em;
-    font-size: 1em;
-
-    padding-bottom: 2%;
-    padding-left: 2%;
-    color: black;
-}
-
-#rank:hover
-{
-    color: rgb(255,163,26);
-}
-
 #submit {
     background-color: white;
     width: 10em;
@@ -138,7 +92,7 @@ input
     border-radius: 1.5em;
     display: flex;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 3em;
     margin-left: auto;
     margin-right: auto;
     color: black;
