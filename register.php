@@ -6,95 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/register.scss">
     <link rel="icon" href="./img/logo.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Register</title>
+
 </head>
 <body>
 
-    <?php
+
+<?php 
     
-        include 'header.php';
-        include 'database.php';
-        
-        $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
-        $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
-        $validation =" ";
-        global $db;
-        $Bool = FALSE;
-        
-        // Function which is able to  look for double data in the same field
-        function __ishere($item,$nameOfField,$db){
-            
-            $Booll = FALSE;
-            $isSame=" ";
-            $sql="SELECT $nameOfField FROM user";
-            $result = $db->prepare($sql);
-            $result->execute();
-            $items = $result->fetchAll(PDO::FETCH_COLUMN);
+    include 'database.php';
+    include 'function.php';
+    $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
+    $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
+    $validation =" ";
+    global $db;
+    $Bool = FALSE;
 
-            foreach ($items as $isSame){
-                if($item == $isSame){
-                    $Booll = TRUE;
-                }
-            }
-            return $Booll;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+
+        $password = test_input($_POST["password"]);
+        $firstname = test_input($_POST["firstname"]);
+        $username = test_input($_POST["username"]);        
+        $name = test_input($_POST["name"]);
+        $mail = test_input($_POST["mail"]);
+        $profile_picture = $_POST["profile_picture"];
+        $rank= $_POST["rank"];
+        
+       
+        
+        if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
+            $nameErr = "Only letters and white space allowed";
         }
-
-        function test_input($data) {
-            $data = trim($data); // Remove whitespace and other predifined caracter from both sides of a string
-            $data = stripslashes($data);// Remove backslashes
-            $data = htmlspecialchars($data);// Convert predifined caracters
-            return $data;
+        if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$firstname)) { // preg_match look for a specific pattern in the string 
+            $firstnameErr = "Only letters and white space allowed";
         }
-        
-        // final function to send safe data 
-        function __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db){
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
+            $mailErr = "Invalid mail format";
             
-            $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,rank) VALUES (?,?,?,?,?,?,?)";
-            $result = $db->prepare($sql);
-            $result->execute(array($name,$firstname,$username,$mail,$password,$profile_picture,$rank));
-
-        }
-
-        
-        if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-
-            $password = test_input($_POST["password"]);
-            $firstname = test_input($_POST["firstname"]);
-            $username = test_input($_POST["username"]);        
-            $name = test_input($_POST["name"]);
-            $mail = test_input($_POST["mail"]);
-            $profile_picture = $_POST["profile_picture"];
-            $rank= $_POST["rank"];
-            
-            
-            
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // preg_match look for a specific pattern in the string 
-                $nameErr = "Only letters and white space allowed";
-            }
-            if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-                $mailErr = "Invalid mail format";
-            }
-            
-
-            if(__ishere($name,'name',$db)){
-                $nameErr ="This name is already taken";
-            }
-            if(__ishere($firstname,'firstname',$db)){
-                $firstnameErr ="This firstname is already taken";
-            }
             if(__ishere($username,'username',$db)){
-                $usernameErr ="This username is already taken";
-            }
-            if(__ishere($mail,'mail',$db)){
-                $mailErr ="This mail is already taken";
-            }
+            $usernameErr ="This username is already taken";
+        }
+        if(__ishere($mail,'mail',$db)){
+            $mailErr ="This mail is already taken";
+        }
 
-            if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
-                __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
-                $validation=" Welcome $username !";
-            }
-        
+        if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
+            $password = md5($password);
+            __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+            $validation=" Welcome $username !";
+        }
+       
+    }
+
         }
     ?>
 
@@ -102,6 +67,7 @@
 
     <form name="sign" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
         
+
         <div class="spacing"></div>
 
         <div id="register_form">
@@ -112,6 +78,7 @@
                     <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
                     <input required class='input' name="name" type="text" maxlength=20 placeholder="Name" autocomplete="off"><span class="error"><?php echo $nameErr;?></span>
                 </div>
+
 
                 <div class="name">
                     <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
