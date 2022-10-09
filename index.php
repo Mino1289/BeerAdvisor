@@ -72,11 +72,11 @@
                     $beer->display_box();
                 }
                 if ($n == 0) {
-                    echo "<p class='add_beer'> No beer found. <a href='add_beer.php'>Add one <a> ?</p>";
+                    echo "<p id='no_beer_found'> No beer found. <a href='add_beer.php'>Add one <a> ?</p>";
                 } else {
-                    echo "<link rel='stylesheet' href='./css/beer.scss'>";
-                    echo "<p class='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
+                    echo "<p id='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
                 }
+                echo "<link rel='stylesheet' href='./css/beer.scss'>";
 
             ?>
 
