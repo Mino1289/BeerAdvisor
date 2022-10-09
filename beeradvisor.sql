@@ -30,19 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `beer` (
   `ID_beer` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `location` varchar(50) NOT NULL,
-  `color` set('white','blonde','amber','brown','black') NOT NULL,
-  `strength` decimal(10,0) NOT NULL,
-  `taste` set('soft','bitter','acidic','sweet','saucy') NOT NULL,
-  `brewery` varchar(50) NOT NULL
+  `location` varchar(50) DEFAULT NULL,
+  `color` set('white','blonde','amber','brown','black') DEFAULT NULL,
+  `strength` decimal(10,0) DEFAULT NULL,
+  `taste` set('soft','bitter','acidic','sweet','saucy') DEFAULT NULL,
+  `brewery` varchar(50) DEFAULT NULL,
+  `category` set('lager','ale','lambic','stout','pilsner') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `beer`
 --
 
-INSERT INTO `beer` (`ID_beer`, `name`, `location`, `color`, `strength`, `taste`, `brewery`) VALUES
-(1, '1664 Kronenbourg', 'Strasbourg, France', 'blonde', '6', 'soft', 'Kronenbourg');
+INSERT INTO `beer` (`ID_beer`, `name`, `location`, `color`, `strength`, `taste`, `brewery`, `category`) VALUES
+(1, '1664 Kronenbourg', 'Strasbourg, France', 'blonde', '6', 'soft', 'Kronenbourg', 'lager');
 
 -- --------------------------------------------------------
 
@@ -66,8 +67,9 @@ CREATE TABLE `comment` (
   `ID_comment` int(11) NOT NULL,
   `ID_user` int(11) NOT NULL,
   `ID_beer` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` varchar(300) NOT NULL,
   `grade` int(11) NOT NULL,
+  `picture` mediumblob DEFAULT NULL,
   `date_publication` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

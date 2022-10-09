@@ -4,6 +4,9 @@
     border-radius: 2.5em;
     margin: 10px;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
 }
 
 .beerbox h2 {
@@ -14,26 +17,17 @@
     margin-left: 2em;
 }
 
+.beerbox p {
+    text-align: right;
+    margin: 0;
+    margin-right: .5em;
+    vertical-align: middle;
+    color: #000000;
+}
+
 a {
     color: #000;
     text-decoration: none;
-}
-
-
-.beerinfo p {
-    margin: 0;
-    padding: 0;
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-
-.beerinfo {
-    margin-top: .5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .beer {
@@ -59,4 +53,15 @@ a {
     color:#ffffff;
     text-align: center;
     margin-top: 5em;
-}   
+}
+
+.add_beer {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 5em;
+}
+
+.add_beer a {
+    color: #ffffff;
+    text-decoration: underline;
+}
