@@ -13,6 +13,7 @@
 </head>
 <body >
     <?php
+        include 'database.php';
         include 'header.php';
     ?>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="spacing">
