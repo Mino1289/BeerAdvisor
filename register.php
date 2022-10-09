@@ -51,9 +51,9 @@
         if(__ishere($mail,'mail',$db)){
             $mailErr ="This mail is already taken";
         }
-        echo "ma grosse bite 34";
+       
         if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
-            echo "ma grosse bite ";
+         
             $password = md5($password);
             __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
             $validation=" Welcome $username !";
