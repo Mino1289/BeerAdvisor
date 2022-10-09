@@ -40,7 +40,7 @@
 
             echo "<div class='beerbox'>";
             echo "<a href='beer.php?id=".$this->ID_beer."'><h2>".$this->name."</h2></a>";
-            echo "<p>Average grade : ".$grade."</p>";
+            echo "<p>Average grade : ".$grade."/5</p>";
             echo "</div>";
         }
 
@@ -76,6 +76,9 @@
             echo "</div></div>";
             echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
             // TODO: add a btn when logged to like the beer
+            if (isset($_SESSION['ID_user'])) {
+                echo "<a href='like.php?id=".$this->ID_beer."'><button>Like</button></a>";
+            }
             
             $n = count($comments);
             if ($n > 0) {
