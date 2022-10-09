@@ -22,7 +22,7 @@
     $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
     $validation =" ";
     global $db;
-    $Bool = FALSE;
+  
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
@@ -44,21 +44,23 @@
         }
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
             $mailErr = "Invalid mail format";
-            
+        }    
             if(__ishere($username,'username',$db)){
             $usernameErr ="This username is already taken";
         }
         if(__ishere($mail,'mail',$db)){
             $mailErr ="This mail is already taken";
         }
-
+        echo "ma grosse bite 34";
         if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
+            echo "ma grosse bite ";
             $password = md5($password);
             __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
             $validation=" Welcome $username !";
         }
        
-    }
+   
+        
 
         }
     ?>
