@@ -15,7 +15,6 @@
         <script>
             function validate(input)
             {
-                document.getElementsByName(input)[0].classList.remove("sucess");
                 document.getElementsByName(input)[0].classList.add("error");
             }
         </script>
@@ -33,12 +32,14 @@
                 $mail = test_input($_POST["mail"]);
             
                 if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
-                    $mailErr = "<script>validate('mail1');</script><p id='error_mail'>Incorrect format mail</p>";
+                    $mailErr = "<script>validate('mail1');</script>
+                    <p class='error_message'>Incorrect format mail</p>";
                 }
 
                 if(!__ishere($mail,'mail',$db))
                 {
-                    $mailErr ="<script>validate('mail1');</script><p id='error_mail'>Incorrect mail</p>";
+                    $mailErr ="<script>validate('mail1');</script>
+                    <p class='error_message'>Incorrect mail</p>";
                     
                 }
                 
@@ -51,7 +52,8 @@
                     $verifPassword =$qry->fetch();
 
                     if($verifPassword[0] != $password){
-                        $passwordErr="<script>validate('password1');</script><p id='error_pass'>Wrong password</p>";
+                        $passwordErr="<script>validate('password1');</script>
+                        <p class='error_message'>Wrong password</p>";
                     }else{
                         $sql="SELECT username FROM user WHERE password=?";
                         $qry = $db->prepare($sql);
@@ -67,7 +69,7 @@
 
         <?php include 'header.php'; ?>
 
-        <h1 id="title">Member login</h1>
+        <h1 id="title"><a href="./login.php">Member login</a></h1>
 
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
@@ -87,7 +89,7 @@
                 
                 <?php echo $passwordErr;?>
 
-                <input name="submit" type="submit" value="Submit" id="submit" onSubmit="validate(.name)"/>
+                <input name="submit" type="submit" value="Submit" id="submit"/>
 
                 <?php echo $validation;?>
 
