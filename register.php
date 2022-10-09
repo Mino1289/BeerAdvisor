@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/register.scss">
     <link rel="icon" href="./img/logo.ico" type="image/x-icon">
-   
-    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Register</title>
+
 </head>
 <body>
-<?php include 'header.php'; ?>
+
 
 <?php 
     
@@ -43,9 +44,8 @@
         }
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) { // filter_var filters a variable with a specific filter. In this case it's for email
             $mailErr = "Invalid mail format";
-        }
-        
-        if(__ishere($username,'username',$db)){
+            
+            if(__ishere($username,'username',$db)){
             $usernameErr ="This username is already taken";
         }
         if(__ishere($mail,'mail',$db)){
@@ -59,44 +59,80 @@
         }
        
     }
-?>
 
-<div id="form">
+        }
+    ?>
+
+    <h1 id="title">Register form</h1>
+
     <form name="sign" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
+        
 
-        <label for='name'>Name </label>
-        <input   required id='name' name='name' type="text" maxlength=20 /><span class="error"><?php echo $nameErr;?></span>
-        </br>
-        <label for='firstname'>Firstname</label>
-        <input   required id='firstname' name="firstname" type="text" maxlength=20/><span class="error"><?php echo $firstnameErr;?></span>
-        </br>
-        <label for='username'>Username</label>
-        <input   required id='username' name="username" type="text" maxlength=20/><span class="error"><?php echo $usernameErr;?></span>
-        </br>
-        <label for='mail'>Mail</label>
-        <input   id='mail' required name="mail" type="email" placeholder="email@domain " maxlength=60/><span class="error"><?php echo $mailErr;?></span>
-        </br>
-        <label for='password'>Password</label>
-        <input   id='password' required name="password"  type="password" maxlength=40/>
-        </br>
-        <label for='profile_picture'>Profile Picture</label>
-        <input   id='profile_picture' name="profile_picture" type="file" />
-        </br>
+        <div class="spacing"></div>
 
-        <label for='rank'>Rank</label>
-        <select id='rank' name="rank">
-            <option value="novice">novice</option>
-            <option value="amateur">amateur</option>
-            <option value="intermediate">intermediate</option>
-            <option value="expert">expert</option>
-            <option value="professionnal">professionnal</option>
-            <option value="alcoholic">alcoholic</option>
-        </select> </br>
+        <div id="register_form">
 
-        <input name="submit" type="submit" value="Submit" /><?php echo $validation;?>
+            <div id="boiteD">
+                
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required class='input' name="name" type="text" maxlength=20 placeholder="Name" autocomplete="off"><span class="error"><?php echo $nameErr;?></span>
+                </div>
+
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required class='input' name="firstname" type="text" maxlength=20 placeholder="Firstname" autocomplete="off"/><span class="error"><?php echo $firstnameErr;?></span>
+                </div>
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input required class='input' name="username" type="text" maxlength=20 placeholder="Username" autocomplete="off"/><span class="error"><?php echo $usernameErr;?></span>
+                </div>
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-envelope" id="logosearch"></i></div>
+                    <input required class='input' name="mail" type="text" maxlength=60 placeholder="Email" autocomplete="off"/><span class="error"><?php echo $mailErr;?></span>
+                </div>
+            
+            </div>
+
+            <div id="boiteG">
+
+                <div>
+
+                    <div class="name">
+                        <div><i class="fa fa-fw fa-lock" id="logosearch"></i></div>
+                        <input required class='input' name="password" type="password" maxlength=40 placeholder="Password" autocomplete="off"/><span class="error">
+                    </div>
+
+                    <div class="name">
+                        <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
+                        <input class='input' id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/><span class="error">
+                    </div>
+
+                    <div class="name">
+                        
+                        <div><i class="fa fa-fw fa-star" id="logosearch"></i></div>
+                        <select id='rank' name="rank">
+                            <option value="novice">novice</option>
+                            <option value="amateur">amateur</option>
+                            <option value="intermediate">intermediate</option>
+                            <option value="expert">expert</option>
+                            <option value="professionnal">professionnal</option>
+                            <option value="alcoholic">alcoholic</option>
+                        </select>
+
+                    </div>
+
+                    <input name="submit" type="submit" value="Sign up" id="submit"/><?php echo $validation;?>
+
+                </div>
+
+            </div>
+
+        </div>
     </form>
-</div>
-
 
 </body>
 </html>
