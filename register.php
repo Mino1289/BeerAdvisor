@@ -31,6 +31,7 @@
             global $db;
         
 
+
             if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
                 $password = test_input($_POST["password"]);
@@ -68,6 +69,8 @@
                     __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
                     $validation="<p id='welcome'>Welcome $username !</p>";
                 }
+
+
         
             }
         ?>
