@@ -19,7 +19,7 @@
             include 'header.php';
         ?>
 
-        <h1 class="title"><a  href="./index.php">BEER ADVISOR</a></h1>
+        <h1 id="title"><a href="./index.php">BEER ADVISOR</a></h1>
 
         <div id="box_google_type">
 
