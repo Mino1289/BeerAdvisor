@@ -66,7 +66,7 @@
                 }
                 if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
                     $password = md5($password);
-                    __sendData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+                    __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
                     $validation="<p id='welcome'>Welcome $username !</p>";
                 }
 
