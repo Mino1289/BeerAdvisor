@@ -75,7 +75,7 @@
                 } else {
                     echo "<p id='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
                 }
-                echo "<link rel='stylesheet' href='./css/beer.scss'>";
+                echo "<link rel='stylesheet' href='./css/beer_research.scss'>";
 
             ?>
 
