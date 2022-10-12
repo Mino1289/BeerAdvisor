@@ -24,7 +24,7 @@
             $user = $result->fetch();
 
             echo "<div class='comment'>";
-            echo "<a href='user.php?username=". $user['username'] ."'><h3>".$user['username']."</h3></a>";
+            echo "<a href='user.php?id=". $user['ID_user'] ."'><h3>".$user['username']."</h3></a>";
             echo "<p>". $this->content ."</p>";
             echo "<p>". $this->grade ."/5</p>";
             echo "<p>".date('l jS F Y',$this->date)."</p>";
