@@ -59,7 +59,7 @@
                         $qry = $db->prepare($sql);
                         $qry->execute([$password]);
                         $username =$qry->fetch();
-                        $validation = "<p id='welcome_back'>Welcome back $username[0] !<p>";
+                        $validation = "<p id='welcome_back'>Welcome back $username[0] !<p><style>#welcome_back{color:green;}</style>";
                     }
                 }
 
