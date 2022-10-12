@@ -10,27 +10,24 @@
 <body>
     <?php
         include 'header.php';
-        if (isset($_SESSION['id'])) {
-            echo '<h1>Bonjour ' . $_SESSION['pseudo'] . '</h1>';
+        if (isset($_GET["id"])) {
+            $ID_user = $_GET["id"];
+
+            include 'database.php';
+            include 'userinfo.php';
+            global $db;
+
+            $sql = "SELECT * FROM user WHERE ID_user = " .$ID_user;
+
+            $result = $db->prepare($sql);
+            $result->execute();
+            $user = $result->fetch();
+
+            $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"], $user["password"], $user["rank"]);
+            $user->display_page();
         } else {
-            if (isset($_GET["id"])) {
-                $ID_user = $_GET["id"];
-
-                include 'database.php';
-                include 'userinfo.php';
-                global $db;
-
-                $sql = "SELECT * FROM user WHERE ID_user = " .$ID_user;
-
-                $result = $db->prepare($sql);
-                $result->execute();
-                $user = $result->fetch(PDO::FETCH_ASSOC);
-
-                $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"], $user["password"], $user["rank"]);
-                $user->display_page();
-            } else {
-                echo "<p>Cet utilisateur n'existe pas</p>";
-            }
+            echo "<p>Cet utilisateur n'existe pas</p>";
+        }
     ?>
     
 </body>

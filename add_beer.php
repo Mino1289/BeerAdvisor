@@ -37,7 +37,7 @@
             $result = $query->fetch();
             
             $beer = new Beer($result["ID_beer"], $result["name"], $result["location"], $result["color"], $result["strength"], $result["taste"], $result["brewery"], $result["category"]);
-            
+            $beer->display_box();
         }
     } else {
         // add a beer

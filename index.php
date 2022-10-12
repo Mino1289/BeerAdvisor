@@ -15,8 +15,7 @@
     <body>
 
         <?php
-            include 'database.php';
-            include 'header.php';
+           include 'header.php';
         ?>
 
         <h1 id="title"><a href="./index.php">BEER ADVISOR</a></h1>
