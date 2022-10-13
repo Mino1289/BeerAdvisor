@@ -22,7 +22,7 @@
         </script>
 
         <?php 
-            
+            session_start();
             include 'database.php';
             include 'function.php';
             $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
@@ -52,7 +52,7 @@
                     $firstnameErr = "<script>validate('firstname_box');</script>
                     <p class='error_message'>Only letters and white space allowed</p>";
                 }
-                if(__ishere($username,'username',$db)){
+                if(__isuserhere($username,'username',$db)){
                     $usernameErr ="<script>validate('username_box');</script>
                     <p class='error_message'>This username is already taken</p>";
                 }
@@ -60,7 +60,7 @@
                     $mailErr = "<script>validate('mail_box');</script>
                     <p class='error_message'>Invalid mail format</p>";
                 }    
-                if(__ishere($mail,'mail',$db)){
+                if(__isuserhere($mail,'mail',$db)){
                     $mailErr = "<script>validate('mail_box');</script>
                     <p class='error_message'>This mail is already taken</p>";
                 }
@@ -68,6 +68,7 @@
                     $password = md5($password);
                     __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
                     $validation="<p id='welcome'>Welcome $username !</p>";
+                    $_SESSION['ID_user'] = $db->lastInsertId();
                 }
 
 
@@ -133,12 +134,16 @@
                         
                         <div><i class="fa fa-fw fa-star" id="logosearch"></i></div>
                         <select id='rank' name="rank">
-                            <option value="novice">novice</option>
-                            <option value="amateur">amateur</option>
-                            <option value="intermediate">intermediate</option>
-                            <option value="expert">expert</option>
-                            <option value="professionnal">professionnal</option>
-                            <option value="alcoholic">alcoholic</option>
+                            <?php
+                                $sql = "SELECT * FROM rank";
+                                $result = $db->prepare($sql);
+                                $result->execute();
+                                $ranks = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach($ranks as $rank){
+                                    echo "<option value='".$rank['ID_rank']."'>".$rank['rank_name']."</option>";
+                                }
+                            ?>                            
                         </select>
 
                     </div>

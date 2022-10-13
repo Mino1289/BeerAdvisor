@@ -1,6 +1,6 @@
 <?php
 // Function which is able to  look for double data in the same field
-function __ishere($item,$nameOfField,$db){
+function __isuserhere($item,$nameOfField,$db){
     
     $Booll = FALSE;
     $isSame=" ";
