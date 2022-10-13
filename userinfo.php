@@ -22,7 +22,6 @@
         }
 
         function display_page() {
-            include "database.php";
             global $db;
 
             $sql = "SELECT * FROM beer_user WHERE ID_user = " .$this->ID_user;
@@ -48,12 +47,16 @@
             echo "<div class='beeruser'>";
             echo "<h1>Bières</h1>";
             foreach ($beeruser as $beer) {
-                $sql = "SELECT * FROM beer WHERE ID_beer = " .$beer["ID_beer"];
+                $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+                        INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
+                        INNER JOIN category ON beer.ID_category = category.ID_category 
+                        WHERE ID_beer = " .$beer["ID_beer"];
+                        
                 $query = $db->prepare($sql);
                 $query->execute();
 
                 $beer = $query->fetch(PDO::FETCH_ASSOC);
-                $beer = new Beer($beer["ID_beer"], $beer["name"], $beer["location"], $beer["color"], $beer["strength"], $beer["taste"], $beer["brewery"], $beer["category"]);
+                $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
                 $beer->display_box();
             }
             echo "</div>";
