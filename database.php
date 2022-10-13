@@ -1,5 +1,4 @@
 <?php
-
     define("HOST", "localhost");
     define("DB_NAME", "beeradvisor");
     define("USER", "root");

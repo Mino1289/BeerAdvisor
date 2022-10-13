@@ -16,6 +16,22 @@ function __isuserhere($item,$nameOfField,$db){
     return $Booll;
 }
 
+function __isbeerhere($item,$nameOfField,$db){
+    
+    $Booll = FALSE;
+    $isSame=" ";
+    $sql="SELECT $nameOfField FROM beer";
+    $result = $db->prepare($sql);
+    $result->execute();
+    $items = $result->fetchAll(PDO::FETCH_COLUMN); //Maybye Fetch? 
+    foreach ($items as $isSame){
+        if($item == $isSame){
+            $Booll = TRUE;
+        }
+    }
+    return $Booll;
+}
+
 function test_input($data) {
     $data = trim($data); // Remove whitespace and other predifined caracter from both sides of a string
     $data = stripslashes($data);// Remove backslashes

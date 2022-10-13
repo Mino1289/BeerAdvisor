@@ -45,7 +45,6 @@
         }
 
         function display_page() {
-
             echo "<title> Beer Advisor | ".$this->name ."</title>";
             echo "<h1>".$this->name."</h1>";
             echo "<div class='beer'>";
@@ -78,6 +77,7 @@
 
             echo "<li>Average Grade : ".$grade."/5</li>";
             echo "</ul>";
+            echo "<a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
             if (isset($_SESSION['ID_user'])) {
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
                 echo "<a href='like.php?id=".$this->ID_beer."'><button>Like</button></a>";
