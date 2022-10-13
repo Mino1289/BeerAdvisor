@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php
+        session_start();
         include 'header.php';
 
         if (isset($_GET["id"])) {
@@ -18,13 +19,16 @@
             include 'beerinfo.php'; 
             global $db;
 
-            $sql = "SELECT * FROM beer WHERE ID_beer = $ID_beer";
+            $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+                    INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
+                    INNER JOIN category ON beer.ID_category = category.ID_category 
+                    WHERE ID_beer = $ID_beer";
 
             $result = $db->prepare($sql);
             $result->execute();
             $beer = $result->fetch();
             if (isset($beer["ID_beer"])) {
-                $beer = new Beer($beer["ID_beer"], $beer["name"], $beer["location"], $beer["color"], $beer["strength"], $beer["taste"], $beer["brewery"], $beer["category"]);
+                $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
                 $beer->display_page();
             } else {
                 echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";

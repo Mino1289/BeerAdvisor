@@ -26,7 +26,7 @@ function test_input($data) {
  // final function to send safe data 
 function __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db){
         
-    $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,rank) VALUES (?,?,?,?,?,?,?)";
+    $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,ID_rank) VALUES (?,?,?,?,?,?,?)";
     $result = $db->prepare($sql);
     $result->execute(array($name,$firstname,$username,$mail,$password,$profile_picture,$rank));
 
