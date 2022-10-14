@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -36,6 +36,7 @@
             <?php
         
                 include "beerinfo.php";
+                include "function.php";
                 include "database.php";
                 global $db;
                 // define variables and set to empty values
@@ -49,25 +50,22 @@
                     }
                 }
 
-                function test_input($data) {
-                    $data = trim($data);
-                    $data = stripslashes($data);
-                    $data = htmlspecialchars($data);
-                    return $data;
-                }
                 if ($value == "") {
                     return;
                 } else {
-                    $sql = "SELECT * FROM beer WHERE name LIKE '%$value%'";
+                    $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+                            INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
+                            INNER JOIN category ON beer.ID_category = category.ID_category 
+                            WHERE name LIKE '%$value%'";
                 }
 
                 $query = $db->prepare($sql);
                 $query->execute();
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                
+
                 $n = count($result);
                 foreach ($result as $beer) {
-                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color'],$beer['strength'],$beer['taste'],$beer['brewery'], $beer['category']);
+                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
                     $beer->display_box();
                 }
                 if ($n == 0) {
@@ -75,7 +73,7 @@
                 } else {
                     echo "<p id='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
                 }
-                echo "<link rel='stylesheet' href='./css/beer.scss'>";
+                echo "<link rel='stylesheet' href='./css/beer_research.scss'>";
 
             ?>
 

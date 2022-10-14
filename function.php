@@ -1,10 +1,26 @@
 <?php
 // Function which is able to  look for double data in the same field
-function __ishere($item,$nameOfField,$db){
+function __isuserhere($item,$nameOfField,$db){
     
     $Booll = FALSE;
     $isSame=" ";
     $sql="SELECT $nameOfField FROM user";
+    $result = $db->prepare($sql);
+    $result->execute();
+    $items = $result->fetchAll(PDO::FETCH_COLUMN); //Maybye Fetch? 
+    foreach ($items as $isSame){
+        if($item == $isSame){
+            $Booll = TRUE;
+        }
+    }
+    return $Booll;
+}
+
+function __isbeerhere($item,$nameOfField,$db){
+    
+    $Booll = FALSE;
+    $isSame=" ";
+    $sql="SELECT $nameOfField FROM beer";
     $result = $db->prepare($sql);
     $result->execute();
     $items = $result->fetchAll(PDO::FETCH_COLUMN); //Maybye Fetch? 
@@ -26,7 +42,7 @@ function test_input($data) {
  // final function to send safe data 
 function __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db){
         
-    $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,rank) VALUES (?,?,?,?,?,?,?)";
+    $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,ID_rank) VALUES (?,?,?,?,?,?,?)";
     $result = $db->prepare($sql);
     $result->execute(array($name,$firstname,$username,$mail,$password,$profile_picture,$rank));
 

@@ -20,6 +20,7 @@
         </script>
 
         <?php
+            session_start();
             include 'database.php';
             include 'function.php';
             global $db;
@@ -36,7 +37,7 @@
                     <p class='error_message'>Incorrect format mail</p>";
                 }
 
-                if(!__ishere($mail,'mail',$db))
+                if(!__isuserhere($mail,'mail',$db))
                 {
                     $mailErr ="<script>validate('mail1');</script>
                     <p class='error_message'>Incorrect mail</p>";
@@ -55,11 +56,12 @@
                         $passwordErr="<script>validate('password1');</script>
                         <p class='error_message'>Wrong password</p>";
                     }else{
-                        $sql="SELECT username FROM user WHERE password=?";
+                        $sql="SELECT username, ID_user FROM user WHERE password=?";
                         $qry = $db->prepare($sql);
                         $qry->execute([$password]);
-                        $username =$qry->fetch();
-                        $validation = "<p id='welcome_back'>Welcome back $username[0] !<p>";
+                        $username = $qry->fetch();
+                        $validation = "<p id='welcome_back'>Welcome back $username[0] !<p><style>#welcome_back{color:green;}</style>";
+                        $_SESSION['ID_user'] = $username["ID_user"];
                     }
                 }
 

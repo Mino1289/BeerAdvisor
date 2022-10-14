@@ -45,17 +45,20 @@
         }
 
         function display_page() {
-
             echo "<title> Beer Advisor | ".$this->name ."</title>";
-            echo "<div class='beer'>";
             echo "<h1>".$this->name."</h1>";
-            echo "<div class='info'>";
-            echo "<p>Color : ".$this->color."</p>";
-            echo "<p>Category : ".$this->category."</p>";
-            echo "<p>Taste : ".$this->taste."</p>";
-            echo "<p>Strength : ".$this->strength."%</p>";
-            echo "<p>Brewery : ".$this->brewery."</p>";
-            echo "<p>Location : ".$this->location."</p>";
+            echo "<div class='beer'>";
+            echo "<div id='black_box'>";
+            echo "<img src='img/photo_test.jpg' id='picture_beer'>";
+            echo "<ul id='green_box'>";
+            echo "<li>Color : ".$this->color."</li>";
+            echo "<li>Category : ".$this->category."</li>";
+            echo "<li>Taste : ".$this->taste."</li>";
+            echo "<li>Strength : ".$this->strength."%</li>";
+            echo "</ul></div>";
+            echo "<ul id='red_box'>";
+            echo "<li>Brewery : ".$this->brewery."</li>";
+            echo "<li>Location : ".$this->location."</li>";
            
             // les commentaires + btn ajouter commentaire
             include "comment.php";
@@ -72,15 +75,16 @@
             $grades = $result->fetch();
             $grade = $grades['avgrade'];
 
-            echo "<p>Average Grade : ".$grade."/5</p>";
-            echo "</div></div>";
-
+            echo "<li>Average Grade : ".$grade."/5</li>";
+            echo "</ul>";
+            echo "<a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
             if (isset($_SESSION['ID_user'])) {
-                // edit this to work on the beer page
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
                 echo "<a href='like.php?id=".$this->ID_beer."'><button>Like</button></a>";
             }
-            
+            echo "</div>";
+            echo "<link rel='stylesheet' href='./css/beer_display.scss'>";
+
             $n = count($comments);
             if ($n > 0) {
                 echo "<h2 class='titlecomment'>" . $n . " Comment(s) :</h2>";
