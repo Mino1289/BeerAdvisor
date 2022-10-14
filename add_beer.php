@@ -145,7 +145,7 @@
 
                 <div class="name">
                     <div><i class="fa fa-fw fa-thermometer-3" id="logosearch"></i></div>
-                    <input required class='input' placeholder="Strength" type="text" name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
+                    <input required class='input' placeholder="Strength" type="number" name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
                 </div>
 
                 <?php echo $strengthErr ?>
