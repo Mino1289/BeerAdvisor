@@ -13,6 +13,13 @@
 
 <body>
 
+    <script>
+        function validate(input)
+        {
+            document.getElementsByName(input)[0].classList.add("error");
+        }
+    </script>
+
     <?php
 
         session_start();
@@ -65,23 +72,33 @@
             $taste = test_input($_POST["taste"]);
             $brewery = test_input($_POST["brewery"]);
             $category = test_input($_POST["category"]);
-
+            /*
             if (empty($name)) {
-                $nameErr = "<p>Name is required</p><br>";
-            } 
+
+                $nameErr = "<script>validate('name_box');</script>
+                <p class='error_message'>Name is required</p>";
+            } */
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
-                    $nameErr = "<p>This Beer already exists</p><br>";
+                    
+                    $nameErr = "<script>validate('name_box');</script>
+                    <p class='error_message'>This Beer already exists</p>";
                 }
             } 
             if ($color == "0") {
-                $colorErr = "<p>Color is required</p><br>";
+                
+                $colorErr = "<script>validate('color_box');</script>
+                <p class='error_message'>Color is required</p>";
             } 
             if ($taste == "0") {
-                $tasteErr = "<p>Taste is required</p><br>";
+                
+                $tasteErr = "<script>validate('taste_box');</script>
+                <p class='error_message'>Taste is required</p>";
             } 
             if ($category == "0") {
-                $categoryErr = "<p>Category is required</p><br>";
+                
+                $categoryErr = "<script>validate('category_box');</script>
+                <p class='error_message'>Category is required</p>";
             } 
             if (empty($nameErr) && empty($colorErr) && empty($tasteErr) && empty($categoryErr)) {
                 if (isset($_SESSION["ID_ADD_BEER"])) {
@@ -122,30 +139,30 @@
 
             <div id="boiteD">
             
-                <div class="name">
+                <div class="conteneur" name="name_box">
                     <div><i class="fa fa-fw fa-tag" id="logosearch"></i></div>
                     <input required class='input' placeholder="Name" type="text" name="name" value="<?php if (isset($beer->name)) {echo $beer->name;} ?>">
                 </div>  
 
                 <?php echo $nameErr ?>
 
-                <div class="name">
+                <div class="conteneur">
                     <div><i class="fa fa-fw fa-map-marker" id="logosearch"></i></div>
-                    <input required class='input' placeholder="Location" type="text" name="location" value="<?php if (isset($beer->location)) {echo $beer->location;} ?>">
+                    <input class='input' placeholder="Location" type="text" name="location" value="<?php if (isset($beer->location)) {echo $beer->location;} ?>">
                 </div>
                 
                 <?php echo $locationErr ?>
 
-                <div class="name">
+                <div class="conteneur">
                     <div><i class="fa fa-fw fa-beer" id="logosearch"></i></div>
-                    <input required class='input' placeholder="Brewery" type="text" name="brewery" value="<?php if (isset($beer->brewery)) {echo $beer->brewery;} ?>">
+                    <input class='input' placeholder="Brewery" type="text" name="brewery" value="<?php if (isset($beer->brewery)) {echo $beer->brewery;} ?>">
                 </div>
 
                 <?php echo $breweryErr ?>
 
-                <div class="name">
+                <div class="conteneur">
                     <div><i class="fa fa-fw fa-thermometer-3" id="logosearch"></i></div>
-                    <input required class='input' placeholder="Strength" type="number" name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
+                    <input class='input' placeholder="Strength" type="number" name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
                 </div>
 
                 <?php echo $strengthErr ?>
@@ -154,7 +171,7 @@
 
             <div id="boiteG">
 
-                <div class="name">
+                <div class="conteneur" name="color_box">
 
                     <div><i class="fa fa-fw fa-tint" id="logosearch"></i></div>
                     <select name="color" class="select_options">
@@ -181,7 +198,7 @@
             
                 <?php echo $colorErr ?>
                 
-                <div class="name">
+                <div class="conteneur" name="taste_box">
                     
                     <div><i class="fa fa-fw fa-flask" id="logosearch"></i></div>
                     <select name="taste" class="select_options">
@@ -208,7 +225,7 @@
 
                 <?php echo $tasteErr ?>
 
-                <div class="name">
+                <div class="conteneur" name="category_box">
 
                     <div><i class="fa fa-fw fa-folder" id="logosearch"></i></div>
                     <select name="category" class="select_options">
