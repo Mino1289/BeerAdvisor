@@ -40,7 +40,7 @@
 
             echo "<div class='beerbox'>";
             echo "<a href='beer.php?id=".$this->ID_beer."'><h2>".$this->name."</h2></a>";
-            echo "<p>Average grade : ".$grade."/5</p>";
+            echo "<p>Average grade : ".round($grade,1)."/5</p>";
             echo "</div>";
         }
 
@@ -73,7 +73,7 @@
             $result = $db->prepare($sql);
             $result->execute();
             $grades = $result->fetch();
-            $grade = $grades['avgrade'];
+            $grade = round($grades['avgrade'],1);
 
             echo "<li>Average Grade : ".$grade."/5</li>";
             echo "</ul>";
@@ -89,7 +89,7 @@
             if ($n > 0) {
                 echo "<h2 class='titlecomment'>" . $n . " Comment(s) :</h2>";
                 foreach ($comments as $comment) {
-                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["comment"], $comment["grade"], $comment["date"]);
+                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
                     $comment->display_comment();
                 }
             }

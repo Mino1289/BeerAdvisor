@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 12 oct. 2022 à 17:24
+-- Généré le : sam. 15 oct. 2022 à 16:52
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -43,8 +43,8 @@ CREATE TABLE `beer` (
 --
 
 INSERT INTO `beer` (`ID_beer`, `name`, `location`, `ID_color`, `strength`, `ID_taste`, `brewery`, `ID_category`) VALUES
-(1, '1664 Kronenbourg', 'Strasbourg, France', 2, '6', 1, 'Kronenbourg', 1),
-(2, 'Grimbergen', 'Waarlos, Belgium', 1, '7', 1, 'Maes', 2);
+(1, '1664 Kronenbourg', 'Strasbourg, France', 3, '6.00', 2, 'Kronenbourg', 2),
+(2, 'Grimbergen', 'Waarlos, Belgium', 2, '7.00', 2, 'Maes', 3);
 
 -- --------------------------------------------------------
 
@@ -114,10 +114,10 @@ CREATE TABLE `comment` (
   `ID_comment` int(11) NOT NULL,
   `ID_user` int(11) NOT NULL,
   `ID_beer` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `grade` int(11) NOT NULL,
-  `date_publication` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_drinking` datetime NOT NULL
+  `content` text DEFAULT NULL,
+  `grade` decimal(1,0) NOT NULL,
+  `date_publication` date NOT NULL DEFAULT current_timestamp(),
+  `date_drinking` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -281,19 +281,19 @@ ALTER TABLE `beer_user`
 -- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `ID_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `color`
 --
 ALTER TABLE `color`
-  MODIFY `ID_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_color` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `ID_comment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `follow`
@@ -311,13 +311,13 @@ ALTER TABLE `rank`
 -- AUTO_INCREMENT pour la table `taste`
 --
 ALTER TABLE `taste`
-  MODIFY `ID_taste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_taste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
