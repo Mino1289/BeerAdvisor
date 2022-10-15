@@ -129,7 +129,7 @@ CREATE TABLE `comment` (
 CREATE TABLE `follow` (
   `ID` int(11) NOT NULL,
   `ID_user` int(11) NOT NULL,
-  `ID_folowed` int(11) NOT NULL
+  `ID_followed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
