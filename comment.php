@@ -6,14 +6,16 @@
         public $content;
         public $grade;
         public $date;
+        public $date_drinking;
 
-        function __construct($ID_comment, $ID_beer, $ID_user, $content, $grade, $date) {
+        function __construct($ID_comment, $ID_beer, $ID_user, $content, $grade, $date, $date_drinking) {
             $this->ID_comment = $ID_comment;
             $this->ID_beer = $ID_beer;
             $this->ID_user = $ID_user;
             $this->content = $content;
             $this->grade = $grade;
-            $this->date = $date;
+            $this->date = strtotime($date);
+            $this->date_drinking = date("l jS F Y",strtotime($date_drinking));
         }      
             
         function display_comment() {
@@ -27,7 +29,8 @@
             echo "<a href='user.php?id=". $user['ID_user'] ."'><h3>".$user['username']."</h3></a>";
             echo "<p>". $this->content ."</p>";
             echo "<p>". $this->grade ."/5</p>";
-            echo "<p>".date('l jS F Y',$this->date)."</p>";
+            echo "<p> Drinking Date: ". $this->date_drinking ."</p>";
+            echo "<p> Posted: ".date('l jS F Y',$this->date)."</p>";
             echo "</div>";
         }
     }

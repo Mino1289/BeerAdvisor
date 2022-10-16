@@ -22,6 +22,8 @@
         }
 
         function display_page() {
+
+            include 'beerinfo.php';
             global $db;
 
             $sql = "SELECT * FROM beer_user WHERE ID_user = " .$this->ID_user;
@@ -39,8 +41,20 @@
             echo "<p>".$this->rank."</p>";
 
             if (isset($_SESSION["ID_user"]) && $_SESSION["ID_user"] != $this->ID_user) {
+                $ID_user = $_SESSION["ID_user"];
+
+                $sql = "SELECT * FROM follow WHERE ID_user = $ID_user AND ID_followed =". $this->ID_user;
+                $result = $db->prepare($sql);
+                $result->execute();
+                $follow = $result->fetch();
+                if (empty($follow)) {
+                    $act = "Follow";
+                } else {
+                    $act = "Unfollow";
+                }
                 // add a btn to follow the user
-                echo "<button>Follow</button>";
+                echo "<form method='post'>
+                <button type='submit'>$act</button></form>";
             }
             
             echo "</div>";
