@@ -240,7 +240,7 @@ ALTER TABLE `comment`
 ALTER TABLE `follow`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_user` (`ID_user`),
-  ADD KEY `ID_folowed` (`ID_folowed`);
+  ADD KEY `ID_followed` (`ID_followed`);
 
 --
 -- Index pour la table `rank`
@@ -350,7 +350,7 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `follow`
   ADD CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `user` (`ID_user`),
-  ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`ID_folowed`) REFERENCES `user` (`ID_user`);
+  ADD CONSTRAINT `follow_ibfk_2` FOREIGN KEY (`ID_followed`) REFERENCES `user` (`ID_user`);
 
 --
 -- Contraintes pour la table `user`

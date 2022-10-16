@@ -193,3 +193,18 @@ input
     justify-content: center;
     animation: .25s shake;
 }
+
+#welcome
+{
+    margin-top: 3em;
+    color: green;
+    display: flex;
+    justify-content: center;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
