@@ -15,7 +15,7 @@
             $this->content = $content;
             $this->grade = $grade;
             $this->date = strtotime($date);
-            $this->date_drinking = date("l jS F Y",strtotime($date_drinking));
+            $this->date_drinking = date("jS F Y",strtotime($date_drinking));
         }      
             
         function display_comment() {
@@ -26,11 +26,12 @@
             $user = $result->fetch();
 
             echo "<div class='comment'>";
-            echo "<a href='user.php?id=". $user['ID_user'] ."'><h3>".$user['username']."</h3></a>";
-            echo "<p>". $this->content ."</p>";
-            echo "<p>". $this->grade ."/5</p>";
-            echo "<p> Drinking Date: ". $this->date_drinking ."</p>";
-            echo "<p> Posted: ".date('l jS F Y',$this->date)."</p>";
+            echo "<h3><span>From</span><a href='user.php?id=". $user['ID_user'] ."' class='user_name'> ".$user['username']."</a>
+                <span>| Drinking Date : ". $this->date_drinking ."</span></h3>";
+            echo "<p class='comment_text'>Comment : ". $this->content ."</p>";
+            // echo "<div class='border_separation'></div>";
+            echo "<p class='grade'>Grade : ". $this->grade ."/5</p>";
+            echo "<p class='post_date'> Posted on : ".date('jS F Y',$this->date)."</p>";
             echo "</div>";
         }
     }

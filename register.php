@@ -67,7 +67,7 @@
                 if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
                     $password = md5($password);
                     __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
-                    $validation="<p id='welcome'>Welcome $username !</p>";
+                    $validation="<p id='welcome'>You are now registered $username !</p>";
                     $_SESSION['ID_user'] = $db->lastInsertId();
                 }
 

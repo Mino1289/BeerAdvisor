@@ -59,7 +59,6 @@
             echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
         }
 
-
     ?>
     
     <!-- <div class='beer'>
