@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="./img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/add_comment.scss">
     <title>Beer Advisor</title>
 </head>
 <body>
@@ -62,26 +63,42 @@
                 header("Location: beer.php?id=$ID_beer");
             }
         }
-        
-
     ?>
+
+    <h1 id="title">Add a comment</h1>
+
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-        <label for="content">Comment content</label>
-        <input type="text" name="content" id="" maxlength="300"><br>
+        
+        <div class="comment">
+            <div><i class="fa fa-fw fa-comments" id="logosearch"></i></div>
+            <textarea style="overflow:hidden" required class='input' name="content" maxlength=300 placeholder="Comment content" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+        
         <?php echo $commentErr; ?>
 
-        <label for="nocom">No comment</label>
-        <input type="text" name="nocom" id=""><br>
+        <div class="name">
+            <div><i class="fa fa-fw fa-star" id="logosearch"></i></div>
+            <p>Grade :</p>
+            <div id="range_grade">
+                <input type="range" name="grade" max="5" min="0" step="0.5" value="2.5">
+            </div>
+        </div>
 
-        <label for="grade">Grade</label>
-        <input type="range" name="grade" id="" max="5" min="0" step="0.5" value="2.5"><br>
-
-        <label for="date">Driking date</label>
-        <input type="date" name="date_drinking" id=""><br>
+        <div class="name">
+            <div><i class="fa fa-fw fa-calendar" id="logosearch"></i></div>
+            <p>Drinking date :</p>
+            <div id="date_case">
+                <input type="date" name="date_drinking">
+            </div>
+        </div>
+        
         <?php echo $dateErr;echo $date; ?>
         <br>
-        <button type="submit">Add Comment</button>
+
+        <!-- <button type="submit">Add Comment</button> -->
+        <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
     </form>
+
 </body>
 </html>

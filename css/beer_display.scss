@@ -138,7 +138,7 @@ button:hover
 
 .comment
 {
-    // border: 1px solid violet;
+    //border: 1px solid violet;
     width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -167,6 +167,7 @@ h3
 {
     font-size: 1em;
     margin-left: .5em;
+    word-wrap: break-word;
 }
 
 .grade

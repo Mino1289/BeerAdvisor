@@ -28,8 +28,14 @@
             echo "<div class='comment'>";
             echo "<h3><span>From</span><a href='user.php?id=". $user['ID_user'] ."' class='user_name'> ".$user['username']."</a>
                 <span>| Drinking Date : ". $this->date_drinking ."</span></h3>";
-            echo "<p class='comment_text'>Comment : ". $this->content ."</p>";
-            // echo "<div class='border_separation'></div>";
+
+            if (empty($this->content)){}
+            else
+            {
+                echo "<p class='comment_text'>Comment : ". $this->content ."</p>";
+                // echo "<div class='border_separation'></div>";
+            }
+            
             echo "<p class='grade'>Grade : ". $this->grade ."/5</p>";
             echo "<p class='post_date'> Posted on : ".date('jS F Y',$this->date)."</p>";
             echo "</div>";
