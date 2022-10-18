@@ -37,10 +37,16 @@
             $result->execute();
             $grades = $result->fetch();
             $grade = $grades['avgrade'];
+            if ($grade == 0 || $grade == NULL) {
+                $grade = "-";
+            }
+            else {
+                $grade = round($grade, 1)."/5";
+            }
 
             echo "<div class='beerbox'>";
             echo "<a href='beer.php?id=".$this->ID_beer."'><h2>".$this->name."</h2></a>";
-            echo "<p>Average grade : ".round($grade,1)."/5</p>";
+            echo "<p>Average grade : ".$grade."</p>";
             echo "</div>";
         }
 
@@ -74,8 +80,12 @@
             $result->execute();
             $grades = $result->fetch();
             $grade = round($grades['avgrade'],1);
-
-            echo "<li>Average Grade : ".$grade."/5</li>";
+            if ($grade == 0) {
+                $grade = "-";
+            } else {
+                $grade = $grade."/5";
+            }
+            echo "<li>Average Grade : ".$grade."</li>";
             echo "</ul>";
             echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
