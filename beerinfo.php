@@ -77,7 +77,7 @@
 
             echo "<li>Average Grade : ".$grade."/5</li>";
             echo "</ul>";
-            echo "<a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
+            echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
             $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user'];
             $result = $db->prepare($sql);
@@ -92,18 +92,31 @@
             if (isset($_SESSION['ID_user'])) {
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
                 echo "<form method='post'>
-                <button type='submit'>$act</button></form>";
+                <button type='submit'>$act</button></div></form>";
             }
             echo "</div>";
-            echo "<link rel='stylesheet' href='./css/beer_display.scss'>";
+            // echo "<link rel='stylesheet' href='./css/beer_display.scss'>";
 
             $n = count($comments);
-            if ($n > 0) {
-                echo "<h2 class='titlecomment'>" . $n . " Comment(s) :</h2>";
+            if ($n == 1) {
+                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comment</h2>";
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
                     $comment->display_comment();
+                    echo "<div class='border_separation'></div>";
                 }
+                echo "<div class='border_separation_undo'></div>";
+                echo "</div>";
+            }
+            if ($n > 1) {
+                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comments</h2>";
+                foreach ($comments as $comment) {
+                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
+                    $comment->display_comment();
+                    echo "<div class='border_separation'></div>";
+                }
+                echo "<div class='border_separation_undo'></div>";
+                echo "</div>";
             }
         }
     }
