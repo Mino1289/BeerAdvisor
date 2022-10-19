@@ -77,6 +77,7 @@
                     }
                     $validation="<p id='welcome'>You are now registered $username !</p>";
                     $_SESSION['ID_user'] = $db->lastInsertId();
+                    header("Location: ./index.php");
                     
              }
 
