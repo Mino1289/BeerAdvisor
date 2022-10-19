@@ -34,12 +34,13 @@
 
             echo "<div class='user'>";
             echo "<h1>".$this->username."</h1>";
-            echo "<img src='".$this->profile_picture."' alt='profile_picture'>";
+            echo '<img width="20em" heigth="20em" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
             echo "<p>".$this->name."</p>";
             echo "<p>".$this->firstname."</p>";
             echo "<p>".$this->mail."</p>";
             echo "<p>".$this->rank."</p>";
 
+            $follow;
             if (isset($_SESSION["ID_user"]) && $_SESSION["ID_user"] != $this->ID_user) {
                 $ID_user = $_SESSION["ID_user"];
 
@@ -58,24 +59,24 @@
             }
             
             echo "</div>";
-            echo "<div class='beeruser'>";
-            echo "<h1>Bières</h1>";
-            foreach ($beeruser as $beer) {
-                $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
-                        INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
-                        INNER JOIN category ON beer.ID_category = category.ID_category 
-                        WHERE ID_beer = " .$beer["ID_beer"];
-                        
-                $query = $db->prepare($sql);
-                $query->execute();
+            if (!empty($follow) || $_SESSION["ID_user"] == $this->ID_user) {
+                echo "<div class='beeruser'>";
+                echo "<h1>Bières</h1>";
+                foreach ($beeruser as $beer) {
+                    $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+                            INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
+                            INNER JOIN category ON beer.ID_category = category.ID_category 
+                            WHERE ID_beer = " .$beer["ID_beer"];
+                            
+                    $query = $db->prepare($sql);
+                    $query->execute();
 
-                $beer = $query->fetch(PDO::FETCH_ASSOC);
-                $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
-                $beer->display_box();
+                    $beer = $query->fetch(PDO::FETCH_ASSOC);
+                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
+                    $beer->display_box();
+                }
+                echo "</div>";
             }
-            echo "</div>";
-
         }
-
     }
 ?>
