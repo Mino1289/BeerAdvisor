@@ -1,4 +1,6 @@
+
 <link rel="stylesheet" href="./css/header.scss">
+
 <header>
     <div class="menu-container" onclick="changeState(this)">
         <div class="bar1"></div>
@@ -8,8 +10,12 @@
     <div id="topnav" class="topnav hide">
         <a href="./index.php">Home</a>
         <a href="./add_beer.php">Add a beer</a>
-        <a href="./login.php">Sign in</a>
-        <a href="./register.php">Sign up</a>
+        <?php
+            if(!(isset($_SESSION['ID_user']))){
+                echo' <a href="./login.php">Sign in</a>';
+                echo' <a href="./register.php">Sign up</a>';
+            }
+        ?>
 
     </div>
     <script>

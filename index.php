@@ -11,13 +11,22 @@
         <link rel="icon" href="./img/logo.ico" type="image/x-icon">
         <title>Beer Advisor</title>
     </head>
-        
+    
     <body>
 
         <?php
            include 'header.php';
         ?>
+        <?php
+        
+        if(isset($_SESSION['profile_picture'])){ // Je sais pas si je dois le mettre dans Header à toi de voir pour le css Paul 
+            echo '<a href="user.php?id='.$_SESSION['ID_user'].'"><img alt="profile_picture" src="data:image/png;base64,'. base64_encode($_SESSION['profile_picture']) . '" /></a>';
+        }else
+        {
+            echo '<a href="register.php"><img alt="profile_picture" src="img/No_account.png"/></a>';
+        }
 
+        ?>
         <h1 id="title"><a href="./index.php">BEER ADVISOR</a></h1>
 
         <div id="box_google_type">
@@ -74,7 +83,7 @@
                     echo "<p id='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
                 }
                 echo "<link rel='stylesheet' href='./css/beer_research.scss'>";
-
+                
             ?>
 
             <!-- Affichage d'une bière 
