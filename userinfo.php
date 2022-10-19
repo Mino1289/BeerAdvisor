@@ -32,6 +32,7 @@
 
             $beeruser = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
             
             echo "<h1 id='username'>What about ".$this->username." ?</h1>";
             echo "<div id='black_box'>";
@@ -61,6 +62,7 @@
                 echo "<form method='post'>
                 <div id='follow_button'><button type='submit'>$act</button></div></form>";
             
+
                 if (!empty($follow) || $_SESSION["ID_user"] == $this->ID_user) {
                     echo "<div id='beeruser'>";
                     echo "<h1>Beers informations</h1>";
@@ -86,6 +88,9 @@
             
             }            
             echo "<link rel='stylesheet' href='./css/user.scss'>";
+            if(isset($_SESSION['ID_user']) && $_GET["id"]==$_SESSION['ID_user']){
+                echo "<a href='./disconnect.php'> Disconnect</a>";
+            }    
         }
 
     }
