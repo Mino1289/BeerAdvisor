@@ -88,7 +88,15 @@
             <div><i class="fa fa-fw fa-calendar" id="logosearch"></i></div>
             <p>Drinking date :</p>
             <div id="date_case">
-                <input type="date" name="date_drinking">
+                <input type="date" name="date_drinking" max="<?php echo date('Y-m-d', time());?>">
+            </div>
+        </div>
+
+        <div class="name">
+            <div><i class="fa fa-fw fa-image" id="logosearch"></i></div>
+            <p>Picture</p>
+            <div id="picture">
+                <input name="profile_picture" id="profile_picture" type="file" autocomplete="off">
             </div>
         </div>
         

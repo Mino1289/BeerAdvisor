@@ -7,8 +7,9 @@
         public $grade;
         public $date;
         public $date_drinking;
+        public $picture;
 
-        function __construct($ID_comment, $ID_beer, $ID_user, $content, $grade, $date, $date_drinking) {
+        function __construct($ID_comment, $ID_beer, $ID_user, $content, $grade, $date, $date_drinking, $picture) {
             $this->ID_comment = $ID_comment;
             $this->ID_beer = $ID_beer;
             $this->ID_user = $ID_user;
@@ -16,6 +17,7 @@
             $this->grade = $grade;
             $this->date = strtotime($date);
             $this->date_drinking = date("jS F Y",strtotime($date_drinking));
+            $this->picture = $picture;
         }      
             
         function display_comment() {
