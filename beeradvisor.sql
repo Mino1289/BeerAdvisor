@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 15 oct. 2022 à 16:52
+-- Généré le : mer. 19 oct. 2022 à 18:03
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -44,7 +44,9 @@ CREATE TABLE `beer` (
 
 INSERT INTO `beer` (`ID_beer`, `name`, `location`, `ID_color`, `strength`, `ID_taste`, `brewery`, `ID_category`) VALUES
 (1, '1664 Kronenbourg', 'Strasbourg, France', 3, '6.00', 2, 'Kronenbourg', 2),
-(2, 'Grimbergen', 'Waarlos, Belgium', 2, '7.00', 2, 'Maes', 3);
+(2, 'Grimbergen', 'Waarlos, Belgium', 2, '6.40', 2, 'Maes', 3),
+(3, '3 monts', 'St Sylvestre Cappel, France', 3, '4.80', 2, 'St Sylvestre', 8),
+(64, 'Adelscott', 'Schiltigheim, France', 4, '6.60', 1, 'Fisher', 8);
 
 -- --------------------------------------------------------
 
@@ -79,7 +81,10 @@ INSERT INTO `category` (`ID_category`, `category_name`) VALUES
 (3, 'ale'),
 (4, 'lambic'),
 (5, 'stout'),
-(6, 'pilsner');
+(6, 'pilsner'),
+(7, 'abbay'),
+(8, 'special'),
+(9, 'cellar');
 
 -- --------------------------------------------------------
 
@@ -117,7 +122,8 @@ CREATE TABLE `comment` (
   `content` text DEFAULT NULL,
   `grade` decimal(2,1) NOT NULL,
   `date_publication` date NOT NULL DEFAULT current_timestamp(),
-  `date_drinking` date NOT NULL
+  `date_drinking` date NOT NULL,
+  `picture` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -188,7 +194,7 @@ CREATE TABLE `user` (
   `firstname` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `mail` varchar(60) NOT NULL,
-  `profile_picture` mediumblob DEFAULT NULL,
+  `profile_picture` longblob DEFAULT NULL,
   `password` text NOT NULL,
   `ID_rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -269,19 +275,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `beer`
 --
 ALTER TABLE `beer`
-  MODIFY `ID_beer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_beer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT pour la table `beer_user`
 --
 ALTER TABLE `beer_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `ID_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `color`
@@ -293,13 +299,13 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT pour la table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `ID_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `follow`
 --
 ALTER TABLE `follow`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `rank`
@@ -317,7 +323,7 @@ ALTER TABLE `taste`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées

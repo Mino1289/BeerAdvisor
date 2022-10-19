@@ -44,7 +44,7 @@
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (empty($_POST["value"])) {
-                        return;
+                        header("Location: ./beers.php");
                     } else {
                         $value = test_input($_POST["value"]);
                     }

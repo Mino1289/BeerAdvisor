@@ -21,7 +21,14 @@
             $query->execute();
             $result = $query->fetch();
             $max_id = $result[0];
-            if ($_GET["id"] > $max_id) {
+
+            $sql = "SELECT ID_user from user WHERE ID_user = ".$_GET["id"];
+            $query = $db->prepare($sql);
+            $query->execute();
+            $exist = $query->fetch();
+
+
+            if ($_GET["id"] > $max_id || empty($exist)) {
                 echo "<p>This user doesn't exist</p>";
             }
             
