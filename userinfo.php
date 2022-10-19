@@ -55,7 +55,7 @@
                 }
                 // add a btn to follow the user
                 echo "<form method='post'>
-                <button type='submit'>$act</button></form>";
+                <div id='follow_button'><button type='submit'>$act</button></div></form>";
             }
             
             echo "</div>";
