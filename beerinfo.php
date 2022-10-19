@@ -81,7 +81,7 @@
 
  
             if (isset($_SESSION['ID_user'])) {
-                $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; // Smell shit 
+                $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; 
                 $result = $db->prepare($sql);
                 $result->execute();
                 $beer_user = $result->fetch();
