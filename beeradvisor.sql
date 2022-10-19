@@ -117,7 +117,8 @@ CREATE TABLE `comment` (
   `content` text DEFAULT NULL,
   `grade` decimal(2,1) NOT NULL,
   `date_publication` date NOT NULL DEFAULT current_timestamp(),
-  `date_drinking` date NOT NULL
+  `date_drinking` date NOT NULL,
+  `picture` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -188,7 +189,7 @@ CREATE TABLE `user` (
   `firstname` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `mail` varchar(60) NOT NULL,
-  `profile_picture` mediumblob DEFAULT NULL,
+  `profile_picture` longblob DEFAULT NULL,
   `password` text NOT NULL,
   `ID_rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
