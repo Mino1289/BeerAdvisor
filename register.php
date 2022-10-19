@@ -39,10 +39,9 @@
                 $username = test_input($_POST["username"]);        
                 $name = test_input($_POST["name"]);
                 $mail = test_input($_POST["mail"]);
-                $profile_picture = $_POST["profile_picture"];
+               
                 $rank= $_POST["rank"];
                 
-            
                 
                 if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
                     $nameErr = "<script>validate('name_box');</script>
@@ -64,23 +63,33 @@
                     $mailErr = "<script>validate('mail_box');</script>
                     <p class='error_message'>This mail is already taken</p>";
                 }
-                if($nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
-                    $password = md5($password);
-                    __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db);
+            
+                   
+
+                    if(isset($_FILES["profile_picture"]["tmp_name"]) && $nameErr == " " &&  $firstnameErr == " " && $usernameErr == " " && $mailErr == " "  ){
+                        
+                        $password = md5($password);
+                        __sendUserData($name,$firstname,$username,$mail,$password,$rank,$db);
+                        $sql = "UPDATE user SET profile_picture = ? WHERE mail=?";
+                        $qry = $db->prepare($sql);
+                        $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $mail]);
+                        
+                    }
                     $validation="<p id='welcome'>You are now registered $username !</p>";
                     $_SESSION['ID_user'] = $db->lastInsertId();
-                }
+                    
+             }
 
 
         
-            }
+            
         ?>
 
         <?php include "header.php"?>
 
         <h1 id="title"><a href="./register.php">Register form</a></h1>
 
-        <form name="sign" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
+        <form name="sign" enctype="multipart/form-data"  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
         
             <div class="spacing"></div>
 
@@ -127,7 +136,8 @@
 
                     <div class="name">
                         <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
-                        <input class='input' id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+                        <input required class='input' id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/>
                     </div>
 
                     <div class="name">

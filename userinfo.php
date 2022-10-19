@@ -39,7 +39,7 @@
             echo "<p>".$this->firstname."</p>";
             echo "<p>".$this->mail."</p>";
             echo "<p>".$this->rank."</p>";
-
+           
             if (isset($_SESSION["ID_user"]) && $_SESSION["ID_user"] != $this->ID_user) {
                 $ID_user = $_SESSION["ID_user"];
 
@@ -74,6 +74,10 @@
                 $beer->display_box();
             }
             echo "</div>";
+            
+            if(isset($_SESSION['ID_user']) && $_GET["id"]==$_SESSION['ID_user']){
+                echo "<a href='./disconnect.php'> Disconnect</a>";
+            }    
 
         }
 

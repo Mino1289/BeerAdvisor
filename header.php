@@ -10,7 +10,7 @@
         <a href="./add_beer.php">Add a beer</a>
         <a href="./login.php">Sign in</a>
         <a href="./register.php">Sign up</a>
-        <a href="./disconnect.php">Disconnect</a>
+        
     </div>
     <script>
         function changeState(x) {
