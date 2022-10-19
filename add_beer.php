@@ -72,12 +72,7 @@
             $taste = test_input($_POST["taste"]);
             $brewery = test_input($_POST["brewery"]);
             $category = test_input($_POST["category"]);
-            /*
-            if (empty($name)) {
-
-                $nameErr = "<script>validate('name_box');</script>
-                <p class='error_message'>Name is required</p>";
-            } */
+            
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
                     
