@@ -35,7 +35,7 @@
             
             echo "<h1 id='username'>What about ".$this->username." ?</h1>";
             echo "<div id='black_box'>";
-            echo "<img src='".$this->profile_picture."' alt='profile_picture'>";
+            echo '<img alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
             echo "<ul id='information_user'>";
             echo "<li>Name : ".$this->name."</li>";
             echo "<li>Firstname : ".$this->firstname."</li>";
@@ -60,31 +60,32 @@
                 // add a btn to follow the user
                 echo "<form method='post'>
                 <div id='follow_button'><button type='submit'>$act</button></div></form>";
-            }
             
-            echo "<div id='beeruser'>";
-            echo "<h1>Beers informations</h1>";
-            foreach ($beeruser as $beer) {
-                $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
-                        INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
-                        INNER JOIN category ON beer.ID_category = category.ID_category 
-                        WHERE ID_beer = " .$beer["ID_beer"];
-                        
-                $query = $db->prepare($sql);
-                $query->execute();
-
-                $beer = $query->fetch(PDO::FETCH_ASSOC);
-                $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
-                $beer->display_box();
-                echo "<div class='border_separation'></div>";
-            }
-            
-            echo "<div class='border_separation_undo'></div>";
+                if (!empty($follow) || $_SESSION["ID_user"] == $this->ID_user) {
+                    echo "<div id='beeruser'>";
+                    echo "<h1>Beers informations</h1>";
+                    foreach ($beeruser as $beer) {
+                        $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+                                INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
+                                INNER JOIN category ON beer.ID_category = category.ID_category 
+                                WHERE ID_beer = " .$beer["ID_beer"];
+                                
+                        $query = $db->prepare($sql);
+                        $query->execute();
         
-            echo "</div>";
+                        $beer = $query->fetch(PDO::FETCH_ASSOC);
+                        $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
+                        $beer->display_box();
+                        echo "<div class='border_separation'></div>";
+                    }
+                }
+                
+                echo "<div class='border_separation_undo'></div>";
             
+                echo "</div>";
+            
+            }            
             echo "<link rel='stylesheet' href='./css/user.scss'>";
-
         }
 
     }
