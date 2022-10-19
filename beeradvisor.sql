@@ -115,7 +115,7 @@ CREATE TABLE `comment` (
   `ID_user` int(11) NOT NULL,
   `ID_beer` int(11) NOT NULL,
   `content` text DEFAULT NULL,
-  `grade` decimal(1,0) NOT NULL,
+  `grade` decimal(2,1) NOT NULL,
   `date_publication` date NOT NULL DEFAULT current_timestamp(),
   `date_drinking` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

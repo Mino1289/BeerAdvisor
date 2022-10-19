@@ -101,11 +101,7 @@
                 <p class='error_message'>Category is required</p>";
             } 
             if (empty($nameErr) && empty($colorErr) && empty($tasteErr) && empty($categoryErr)) {
-                if (isset($_SESSION["ID_ADD_BEER"])) {
-                    if (empty($_SESSION["ID_ADD_BEER"])) {
-                        echo "No ID";
-                        return;
-                    } 
+                if (isset($_SESSION["ID_ADD_BEER"]) && !empty($_SESSION["ID_ADD_BEER"])) {
                     // update a beer            
                     $ID_beer = $_SESSION["ID_ADD_BEER"];
                     $sql = "UPDATE beer SET name = '$name', location = '$location', ID_color = '$color', strength = '$strength', ID_taste = '$taste', brewery = '$brewery', ID_category = '$category' WHERE ID_beer = $ID_beer";

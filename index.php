@@ -11,7 +11,7 @@
         <link rel="icon" href="./img/logo.ico" type="image/x-icon">
         <title>Beer Advisor</title>
     </head>
-
+        
     <body>
 
         <?php
