@@ -109,26 +109,16 @@
             // echo "<link rel='stylesheet' href='./css/beer_display.scss'>";
 
             $n = count($comments);
-            if ($n == 1) {
-                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comment</h2>";
-                foreach ($comments as $comment) {
-                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
-                    $comment->display_comment();
-                    echo "<div class='border_separation'></div>";
-                }
-                echo "<div class='border_separation_undo'></div>";
-                echo "</div>";
+            if ($n > 0) {
+                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comment". ($n > 1 ? "s" : "") ."</h2>";
             }
-            if ($n > 1) {
-                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comments</h2>";
-                foreach ($comments as $comment) {
-                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
-                    $comment->display_comment();
-                    echo "<div class='border_separation'></div>";
-                }
-                echo "<div class='border_separation_undo'></div>";
-                echo "</div>";
+            foreach ($comments as $comment) {
+                $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"], $comment["picture"]);
+                $comment->display_comment();
+                echo "<div class='border_separation'></div>";
             }
+            echo "<div class='border_separation_undo'></div>";
+            echo "</div>";
         }
     }
 ?>
