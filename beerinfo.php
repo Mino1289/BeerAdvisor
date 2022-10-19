@@ -89,17 +89,18 @@
             echo "</ul>";
             echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
-            $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user'];
-            $result = $db->prepare($sql);
-            $result->execute();
-            $beer_user = $result->fetch();
-            if (empty($beer_user)) {
-                $act = "Like";
-            } else {
-                $act = "Dislike";
-            }
-
+ 
             if (isset($_SESSION['ID_user'])) {
+                $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; 
+                $result = $db->prepare($sql);
+                $result->execute();
+                $beer_user = $result->fetch();
+                if (empty($beer_user)) {
+                    $act = "Like";
+                } else {
+                    $act = "Dislike";
+                }
+    
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
                 echo "<form method='post'>
                 <button type='submit'>$act</button></div></form>";
