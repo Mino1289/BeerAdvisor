@@ -79,7 +79,7 @@
             echo "</ul>";
             echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
-            $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user'];
+            $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; // Smell shit 
             $result = $db->prepare($sql);
             $result->execute();
             $beer_user = $result->fetch();
