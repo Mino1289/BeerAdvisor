@@ -56,16 +56,18 @@
                         $passwordErr="<script>validate('password1');</script>
                         <p class='error_message'>Wrong password</p>";
                     }else{
-                        $sql="SELECT username, ID_user FROM user WHERE password=?";
+                        $sql="SELECT username, ID_user FROM user WHERE password=? AND mail= ?";
                         $qry = $db->prepare($sql);
-                        $qry->execute([$password]);
+                        $qry->execute([$password,$mail]);
                         $username = $qry->fetch();
                         $validation = "<p id='welcome_back'>Welcome back $username[0] !<p><style>#welcome_back{color:green;}</style>";
                         $_SESSION['ID_user'] = $username["ID_user"];
+                        $_SESSION['profile_picture'] = __findPP($mail,$password,$db);
+                        header("Location: ./user.php?id=".$username['ID_user']);
                     }
                 }
 
-            }
+            } 
 
         ?>
 

@@ -40,10 +40,24 @@ function test_input($data) {
 }
 
  // final function to send safe data 
-function __sendUserData($name,$firstname,$username,$mail,$password,$profile_picture,$rank,$db){
+function __sendUserData($name,$firstname,$username,$mail,$password,$rank,$db){
         
-    $sql="INSERT INTO user(name,firstname,username,mail,password,profile_picture,ID_rank) VALUES (?,?,?,?,?,?,?)";
+    $sql="INSERT INTO user(name,firstname,username,mail,password,ID_rank) VALUES (?,?,?,?,?,?)";
     $result = $db->prepare($sql);
-    $result->execute(array($name,$firstname,$username,$mail,$password,$profile_picture,$rank));
+    $result->execute(array($name,$firstname,$username,$mail,$password,$rank));
+
+}
+
+function __findPP($mail,$password,$db){
+   
+    $profile_picture;
+
+    $sql = "SELECT profile_picture FROM user WHERE mail = ? AND password = ?";
+    $qry = $db->prepare($sql);
+    $qry->execute([$mail,$password]);
+    $result = $qry->fetch();
+    $profile_picture = $result['profile_picture'];
+
+    return $profile_picture;
 
 }

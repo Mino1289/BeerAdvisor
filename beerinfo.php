@@ -37,10 +37,16 @@
             $result->execute();
             $grades = $result->fetch();
             $grade = $grades['avgrade'];
+            if ($grade == 0 || $grade == NULL) {
+                $grade = "-";
+            }
+            else {
+                $grade = round($grade, 1)."/5";
+            }
 
             echo "<div class='beerbox'>";
             echo "<a href='beer.php?id=".$this->ID_beer."'><h2>".$this->name."</h2></a>";
-            echo "<p>Average grade : ".round($grade,1)."/5</p>";
+            echo "<p>Average grade : ".$grade."</p>";
             echo "</div>";
         }
 
@@ -74,22 +80,27 @@
             $result->execute();
             $grades = $result->fetch();
             $grade = round($grades['avgrade'],1);
-
-            echo "<li>Average Grade : ".$grade."/5</li>";
+            if ($grade == 0) {
+                $grade = "-";
+            } else {
+                $grade = $grade."/5";
+            }
+            echo "<li>Average Grade : ".$grade."</li>";
             echo "</ul>";
             echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
-            $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user'];
-            $result = $db->prepare($sql);
-            $result->execute();
-            $beer_user = $result->fetch();
-            if (empty($beer_user)) {
-                $act = "Like";
-            } else {
-                $act = "Dislike";
-            }
-
+ 
             if (isset($_SESSION['ID_user'])) {
+                $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; 
+                $result = $db->prepare($sql);
+                $result->execute();
+                $beer_user = $result->fetch();
+                if (empty($beer_user)) {
+                    $act = "Like";
+                } else {
+                    $act = "Dislike";
+                }
+    
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
                 echo "<form method='post'>
                 <button type='submit'>$act</button></div></form>";
@@ -98,26 +109,16 @@
             // echo "<link rel='stylesheet' href='./css/beer_display.scss'>";
 
             $n = count($comments);
-            if ($n == 1) {
-                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comment</h2>";
-                foreach ($comments as $comment) {
-                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
-                    $comment->display_comment();
-                    echo "<div class='border_separation'></div>";
-                }
-                echo "<div class='border_separation_undo'></div>";
-                echo "</div>";
+            if ($n > 0) {
+                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comment". ($n > 1 ? "s" : "") ."</h2>";
             }
-            if ($n > 1) {
-                echo "<div id='comments_box'><h2 class='titlecomment'>" . $n . " Comments</h2>";
-                foreach ($comments as $comment) {
-                    $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"]);
-                    $comment->display_comment();
-                    echo "<div class='border_separation'></div>";
-                }
-                echo "<div class='border_separation_undo'></div>";
-                echo "</div>";
+            foreach ($comments as $comment) {
+                $comment = new Comment($comment["ID_comment"], $comment["ID_beer"], $comment["ID_user"], $comment["content"], $comment["grade"], $comment["date_publication"], $comment["date_drinking"], $comment["picture"]);
+                $comment->display_comment();
+                echo "<div class='border_separation'></div>";
             }
+            echo "<div class='border_separation_undo'></div>";
+            echo "</div>";
         }
     }
 ?>
