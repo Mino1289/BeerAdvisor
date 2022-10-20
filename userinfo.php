@@ -36,7 +36,13 @@
             
             echo "<h1 id='username'>What about ".$this->username." ?</h1>";
             echo "<div id='black_box'>";
-            echo '<img id="picture_beer" alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
+            if(isset($_SESSION['profile_picture'])){
+                echo '<img id="picture_beer" alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
+            }
+            else
+            {
+                echo '<img id="picture_beer" alt="profile_picture" src="img/No_account.png" />';
+            }
             echo "<ul id='information_user'>";
             echo "<li>Name : ".$this->name."</li>";
             echo "<li>Firstname : ".$this->firstname."</li>";
