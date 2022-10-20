@@ -98,8 +98,6 @@
             <input type="submit" value="Research" id="submit">
         </div>
 
-        <div id="bordure_separation"></div>
-
     </form>
 
     <?php
@@ -153,7 +151,10 @@
 
                 $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
                 $beer->display_box();
+                echo "<div class='border_separation'></div>";
             }
+            
+            echo "<div class='border_separation_undo'></div>";
         }
     ?>
         

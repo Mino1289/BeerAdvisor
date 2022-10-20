@@ -11,13 +11,13 @@
         <link rel="icon" href="./img/logo.ico" type="image/x-icon">
         <title>Beer Advisor</title>
     </head>
-        
+    
     <body>
 
         <?php
            include 'header.php';
         ?>
-
+        
         <h1 id="title"><a href="./index.php">BEER ADVISOR</a></h1>
 
         <div id="box_google_type">
@@ -74,7 +74,7 @@
                     echo "<p id='add_beer'> Not what you were looking for ? <a href='add_beer.php'>Add a beer<a> ?</p>";
                 }
                 echo "<link rel='stylesheet' href='./css/beer_research.scss'>";
-
+                
             ?>
 
             <!-- Affichage d'une bière 

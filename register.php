@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +23,7 @@
         </script>
 
         <?php 
-            session_start();
+            
             include 'database.php';
             include 'function.php';
             $nameErr = $firstnameErr = $usernameErr = $mailErr =" ";  // Useful to display an error if there is already the same data in the table 'user'
@@ -70,14 +71,16 @@
                         
                         $password = md5($password);
                         __sendUserData($name,$firstname,$username,$mail,$password,$rank,$db);
+                        $_SESSION['ID_user'] = $db->lastInsertId();
                         $sql = "UPDATE user SET profile_picture = ? WHERE mail=?";
                         $qry = $db->prepare($sql);
                         $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $mail]);
-                        
+                        $validation="<p id='welcome'>You are now registered $username !</p>";
+                        $_SESSION['profile_picture'] = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+                        header("Location: ./index.php");
                     }
-                    $validation="<p id='welcome'>You are now registered $username !</p>";
-                    $_SESSION['ID_user'] = $db->lastInsertId();
-                    header("Location: ./index.php");
+                   
+                   
                     
              }
 

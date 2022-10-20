@@ -62,6 +62,7 @@
                         $username = $qry->fetch();
                         $validation = "<p id='welcome_back'>Welcome back $username[0] !<p><style>#welcome_back{color:green;}</style>";
                         $_SESSION['ID_user'] = $username["ID_user"];
+                        $_SESSION['profile_picture'] = __findPP($mail,$password,$db);
                         header("Location: ./user.php?id=".$username['ID_user']);
                     }
                 }
