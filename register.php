@@ -171,6 +171,6 @@
             <?php echo $validation;?>
 
         </form>
-
+        <a href="login.php"> Already register ? </a>                        
     </body>
 </html>
