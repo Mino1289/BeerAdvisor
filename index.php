@@ -43,8 +43,9 @@
                 $value = "";
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    
                     if (empty($_POST["value"])) {
-                        header("Location: ./beers.php");
+                        echo "<script> window.location.href='beers.php'; </script>";
                     } else {
                         $value = test_input($_POST["value"]);
                     }

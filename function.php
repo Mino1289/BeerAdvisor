@@ -50,8 +50,6 @@ function __sendUserData($name,$firstname,$username,$mail,$password,$rank,$db){
 
 function __findPP($mail,$password,$db){
    
-    $profile_picture;
-
     $sql = "SELECT profile_picture FROM user WHERE mail = ? AND password = ?";
     $qry = $db->prepare($sql);
     $qry->execute([$mail,$password]);

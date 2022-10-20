@@ -36,7 +36,7 @@
             
             echo "<h1 id='username'>What about ".$this->username." ?</h1>";
             echo "<div id='black_box'>";
-            if(isset($_SESSION['profile_picture'])){
+            if(!empty($this->profile_picture)){
                 echo '<img id="picture_beer" alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
             }
             else
