@@ -36,7 +36,7 @@
             
             echo "<h1 id='username'>What about ".$this->username." ?</h1>";
             echo "<div id='black_box'>";
-            echo '<img alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
+            echo '<img id="picture_beer" alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->profile_picture) . '" />';
             echo "<ul id='information_user'>";
             echo "<li>Name : ".$this->name."</li>";
             echo "<li>Firstname : ".$this->firstname."</li>";
@@ -88,8 +88,10 @@
             
             }            
             echo "<link rel='stylesheet' href='./css/user.scss'>";
-            if(isset($_SESSION['ID_user']) && $_GET["id"]==$_SESSION['ID_user']){
-                echo "<a href='./disconnect.php'> Disconnect</a>";
+
+            if(isset($_SESSION['ID_user']) && $_GET["id"]==$_SESSION['ID_user'])
+            {
+                echo "<div id='disconnect_button_box'><a id='disconnect_button' href='./disconnect.php'>Disconnect</a></div>";
             }    
         }
 

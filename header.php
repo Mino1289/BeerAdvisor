@@ -18,6 +18,20 @@
         ?>
 
     </div>
+
+    <?php
+        
+        if(isset($_SESSION['profile_picture']))
+        {
+            echo '<a href="user.php?id='.$_SESSION['ID_user'].'"><img id="pdp" alt="profile_picture" src="data:image/png;base64,'. base64_encode($_SESSION['profile_picture']) . '" /></a>';
+        }
+        else
+        {
+            echo '<a href="register.php"><img id="pdp" alt="profile_picture" src="img/No_account.png"/></a>';
+        }
+
+    ?>
+
     <script>
         function changeState(x) {
             x.classList.toggle("change");
