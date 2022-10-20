@@ -153,7 +153,7 @@
                 $beer->display_box();
                 echo "<div class='border_separation'></div>";
             }
-
+            
             echo "<div class='border_separation_undo'></div>";
         }
     ?>

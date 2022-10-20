@@ -117,7 +117,10 @@
                 $comment->display_comment();
                 echo "<div class='border_separation'></div>";
             }
-            echo "<div class='border_separation_undo'></div>";
+            if ($n > 0) {
+                echo "<div class='border_separation_undo'></div>";
+            }
+            
             echo "</div>";
         }
     }
