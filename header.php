@@ -14,6 +14,9 @@
             if(!(isset($_SESSION['ID_user']))){
                 echo' <a href="./login.php">Sign in</a>';
                 echo' <a href="./register.php">Sign up</a>';
+            } else if($_SESSION['ID_user'] == 1) {
+                // admin logged in
+                echo '<a href="./panel.php">Panel</a>';
             }
         ?>
 
@@ -32,6 +35,8 @@
         {
             echo '<a href="register.php"><img id="pdp" alt="profile_picture" src="img/No_account.png"/></a>';
         }
+
+
 
     ?>
 
