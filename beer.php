@@ -29,8 +29,6 @@
             $beer = $result->fetch();
             if (isset($beer["ID_beer"])) {
                 $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
-                $beer->display_page();
-
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $ID_user = $_SESSION["ID_user"];
                     
@@ -38,20 +36,23 @@
                     $result = $db->prepare($sql);
                     $result->execute();
                     $beer_user = $result->fetch();
-                    $ID_beer_user = $beer_user["ID"];
                     if (empty($beer_user)) {
                         // like -> add in the db
                         $sql = "INSERT INTO beer_user (ID_beer, ID_user) VALUES ($ID_beer, $ID_user)";
                         $query = $db->prepare($sql);
                         $query->execute();
                     } else {
+                        $ID_beer_user = $beer_user["ID"];
                         // dislike -> delete from the db
                         $sql = "DELETE FROM beer_user WHERE ID = $ID_beer_user";
                         $query = $db->prepare($sql);
                         $query->execute();
                     }
-                    header("Location: beer.php?id=$ID_beer");
                 }
+                
+                $beer->display_page();
+
+                
             } else {
                 echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
             }

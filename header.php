@@ -23,7 +23,10 @@
         
         if(isset($_SESSION['profile_picture']))
         {
-            echo '<a href="user.php?id='.$_SESSION['ID_user'].'"><img id="pdp" alt="profile_picture" src="data:image/png;base64,'. base64_encode($_SESSION['profile_picture']) . '" /></a>';
+            $img = base64_encode($_SESSION['profile_picture']);
+            echo '<a href="user.php?id='.$_SESSION['ID_user'].'">';
+            echo '<img id="pdp" alt="profile_picture" src="data:image/png;base64,'.$img.'" />';
+            echo '</a>';
         }
         else
         {

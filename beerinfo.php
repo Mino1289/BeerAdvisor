@@ -102,7 +102,7 @@
                 }
     
                 echo "<a href='add_comment.php?id=".$this->ID_beer."'><button>Add a comment</button></a>";
-                echo "<form method='post'>
+                echo "<form method='post' action='beer.php?id=".$this->ID_beer."'>
                 <button type='submit'>$act</button></div></form>";
             }
             echo "</div>";
