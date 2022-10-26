@@ -60,7 +60,8 @@
                 echo "$sql";
                 $query = $db->prepare($sql);
                 $query->execute();
-                header("Location: beer.php?id=$ID_beer");
+                // header("Location: beer.php?id=$ID_beer");
+                echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
             }
         }
     ?>

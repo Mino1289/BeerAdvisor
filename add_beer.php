@@ -114,7 +114,8 @@
                 if (empty($id)) {
                     echo "Error";
                 } else {
-                    header("Location: beer.php?id=$id");
+                    // header("Location: beer.php?id=$id");
+                    echo "<script> window.location.href='beers.php?id=".$id."'; </script>";
                 }                
             }    
         }
