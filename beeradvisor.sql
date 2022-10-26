@@ -35,7 +35,10 @@ CREATE TABLE `beer` (
   `strength` decimal(3,2) DEFAULT NULL,
   `ID_taste` int(11) DEFAULT NULL,
   `brewery` varchar(50) DEFAULT NULL,
-  `ID_category` int(11) DEFAULT NULL
+  `ID_category` int(11) DEFAULT NULL,
+  `ID_hops` int(11) DEFAULT NULL,
+  `ID_grains` int(11) DEFAULT NULL,
+  `IBU_value` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -108,6 +111,48 @@ INSERT INTO `color` (`ID_color`, `color_name`) VALUES
 (4, 'amber'),
 (5, 'brown'),
 (6, 'black');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `hops`
+--
+
+CREATE TABLE `hops` (
+  `ID_hops` int(11) NOT NULL,
+  `hops_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `hops`
+--
+
+INSERT INTO `hops` (`ID_hops`, `hops_name`) VALUES
+(1, 'unknown'),
+(2, 'chinook'),
+(3, 'citra');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grains`
+--
+
+CREATE TABLE `grains` (
+  `ID_grains` int(11) NOT NULL,
+  `grains_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `grains`
+--
+
+INSERT INTO `grains` (`ID_grains`, `grains_name`) VALUES
+(1, 'unknown'),
+(2, 'malted barley'),
+(3, 'though wheat'),
+(4, 'corn'),
+(5, 'rice');
 
 -- --------------------------------------------------------
 
@@ -211,6 +256,18 @@ ALTER TABLE `beer`
   ADD KEY `ID_category` (`ID_category`),
   ADD KEY `ID_color` (`ID_color`),
   ADD KEY `ID_taste` (`ID_taste`);
+
+--
+-- Index pour la table `grains`
+--
+ALTER TABLE `grains`
+  ADD PRIMARY KEY (`ID_grains`);
+
+--
+-- Index pour la table `hops`
+--
+ALTER TABLE `hops`
+  ADD PRIMARY KEY (`ID_hops`);
 
 --
 -- Index pour la table `beer_user`
@@ -320,6 +377,18 @@ ALTER TABLE `taste`
   MODIFY `ID_taste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT pour la table `hops`
+--
+ALTER TABLE `hops`
+  MODIFY `ID_hops` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `taste`
+--
+ALTER TABLE `grains`
+  MODIFY `ID_grains` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
@@ -335,7 +404,9 @@ ALTER TABLE `user`
 ALTER TABLE `beer`
   ADD CONSTRAINT `beer_ibfk_1` FOREIGN KEY (`ID_category`) REFERENCES `category` (`ID_category`),
   ADD CONSTRAINT `beer_ibfk_2` FOREIGN KEY (`ID_color`) REFERENCES `color` (`ID_color`),
-  ADD CONSTRAINT `beer_ibfk_3` FOREIGN KEY (`ID_taste`) REFERENCES `taste` (`ID_taste`);
+  ADD CONSTRAINT `beer_ibfk_3` FOREIGN KEY (`ID_taste`) REFERENCES `taste` (`ID_taste`),
+  ADD CONSTRAINT `beer_ibfk_4` FOREIGN KEY (`ID_hops`) REFERENCES `hops` (`ID_hops`),
+  ADD CONSTRAINT `beer_ibfk_5` FOREIGN KEY (`ID_grains`) REFERENCES `grains` (`ID_grains`);
 
 --
 -- Contraintes pour la table `beer_user`
