@@ -208,3 +208,37 @@ form
     flex-direction: column;
     justify-content: center;
 }
+
+#already_an_account_box
+{
+    margin-top: 4em;
+    display: flex;
+    color: white;
+    text-decoration: none;
+    justify-content: center;
+    width: 100%;
+}
+
+#already_an_account_button
+{
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border-radius: 1.5em;
+    border: 1px solid white;
+    padding: .7em;
+    font-size: 1em;
+    transition: .5s;
+}
+
+#already_an_account_button:hover
+{
+    text-decoration: underline;
+    background-color: black;
+    color: white;
+    border-radius: 1.5em;
+    border: 1px solid black;
+    padding: .7em;
+    font-size: 1.1em;
+    transition: .5s;
+}
