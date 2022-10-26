@@ -38,7 +38,10 @@ CREATE TABLE `beer` (
   `ID_category` int(11) DEFAULT NULL,
   `ID_hops` int(11) DEFAULT NULL,
   `ID_grains` int(11) DEFAULT NULL,
-  `IBU_value` int(11) DEFAULT NULL
+  `IBU` decimal(6,2) DEFAULT NULL,
+  `clarity` decimal(3,2) DEFAULT NULL,
+  `calories` decimal (4, 2) DEFAULT NULL,
+  `carbohydrates` decimal (4, 2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -222,10 +225,10 @@ CREATE TABLE `taste` (
 
 INSERT INTO `taste` (`ID_taste`, `taste_name`) VALUES
 (1, 'unknown'),
-(2, 'soft'),
-(3, 'bitter'),
-(4, 'acidic'),
-(5, 'sweet');
+(2, 'apple'),
+(3, 'cherry'),
+(4, 'lemon'),
+(5, 'grass');
 
 -- --------------------------------------------------------
 

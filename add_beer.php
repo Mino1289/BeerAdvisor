@@ -52,7 +52,11 @@
                 $query->execute();
                 $beer = $query->fetch();
                 if (!empty($beer)) {
-                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
+                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],
+                                    $beer['color_name'],$beer['strength'],$beer['taste_name'],
+                                    $beer['brewery'], $beer['category_name'], $beer['IBU'],
+                                    $beer['hops_name'], $beer['grains_name'], $beer['calories'],
+                                    $beer['clarity'], $beer['carbohydrates']);
                 }
                 
 
@@ -72,6 +76,12 @@
             $taste = test_input($_POST["taste"]);
             $brewery = test_input($_POST["brewery"]);
             $category = test_input($_POST["category"]);
+            $calories = test_input($_POST["calories"]);
+            $clarity = test_input($_POST["clarity"]);
+            $carbohydrates = test_input($_POST["carbohydrates"]);
+            $IBU = test_input($_POST["IBU"]);
+            $hops_name = test_input($_POST["hops"]);
+            $grains_name = test_input($_POST["grains"]);
             
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
@@ -99,14 +109,23 @@
                 if (isset($_SESSION["ID_ADD_BEER"]) && !empty($_SESSION["ID_ADD_BEER"])) {
                     // update a beer            
                     $ID_beer = $_SESSION["ID_ADD_BEER"];
-                    $sql = "UPDATE beer SET name = '$name', location = '$location', ID_color = '$color', strength = '$strength', ID_taste = '$taste', brewery = '$brewery', ID_category = '$category' WHERE ID_beer = $ID_beer";
+                    $sql = "UPDATE beer SET name = '$name', location = '$location', ID_color = '$color', strength = '$strength', 
+                            ID_taste = '$taste', brewery = '$brewery', ID_category = '$category', IBU = '$IBU',
+                            ID_hops = '$hops_name', ID_grains = '$grains_name', clarity = '$clarity', calories = '$calories',
+                            carbohydrates = '$carbohydrates' WHERE ID_beer = $ID_beer";
+
                     $query = $db->prepare($sql);
                     $query->execute();
                     $id=$ID_beer;
                     
                 } else {
                     // add a beer
-                    $sql = "INSERT INTO beer (name, location, ID_color, strength, ID_taste, brewery, ID_category) VALUES ('$name', '$location', '$color', '$strength', '$taste', '$brewery', '$category')";
+                    $sql = "INSERT INTO beer 
+                        (name, location, ID_color, strength, ID_taste, brewery, ID_category, IBU, ID_hops, ID_grains, clarity, calories, carbohydrates) 
+                        VALUES 
+                        ('$name', '$location', '$color', '$strength', '$taste', '$brewery', '$category', '$IBU', '$hops_name', '$grains_name', '$clarity',
+                        '$calories', '$carbohydrates')";
+
                     $query = $db->prepare($sql);
                     $query->execute();
                     $id=$db->lastInsertId();
@@ -152,15 +171,35 @@
                 <?php echo $breweryErr ?>
 
                 <div class="conteneur">
-                    <div><i class="fa fa-fw fa-thermometer-3" id="logosearch"></i></div>
+                    <div><i class="fa fa-fw fa-thermometer-2" id="logosearch"></i></div>
                     <input class='input' placeholder="Strength" type="number" step="0.1" min=0 name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
                 </div>
 
                 <?php echo $strengthErr ?>
 
+                <div class="conteneur">
+                    <div><i class="fa fa-fw fa-thermometer-3" id="logosearch"></i></div>
+                    <input class='input' placeholder="IBU" type="number" step="0.1" min=0 name="IBU" value="<?php if (isset($beer->IBU)) {echo $beer->IBU;} ?>">
+                </div>
+
+                <div class="conteneur">
+                    <div><i class="fa fa-fw fa-fire" id="logosearch"></i></div>
+                    <input class='input' placeholder="Calories" type="number" step="0.5" min=0 name="calories" value="<?php if (isset($beer->calories)) {echo $beer->calories;} ?>">
+                </div>
+
+                <div class="conteneur">
+                    <div><i class="fa fa-fw fa-eye" id="logosearch"></i></div>
+                    <input class='input' placeholder="Clarity" type="number" step="1" min=0 name="clarity" value="<?php if (isset($beer->clarity)) {echo $beer->clarity;} ?>">
+                </div>
+
             </div>
 
             <div id="boiteG">
+
+                <div class="conteneur">
+                    <div><i class="fa fa-fw fa-battery-2" id="logosearch"></i></div>
+                    <input class='input' placeholder="Carbohydrates" type="number" step="1" min=0 name="carbohydrates" value="<?php if (isset($beer->carbohydrates)) {echo $beer->carbohydrates;} ?>">
+                </div>
 
                 <div class="conteneur" name="color_box">
 
@@ -242,6 +281,56 @@
                 </div>
                 
                 <?php echo $categoryErr ?>
+
+                <div class="conteneur" name="grains_box">
+
+                    <div><i class="fa fa-fw fa-tree" id="logosearch"></i></div>
+                    <select name="grains" class="select_options">
+
+                        <option value="0">Choose a grains</option>
+                        
+                        <?php
+                            $sql = "SELECT * FROM grains";
+                            $query = $db->prepare($sql);
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $grains) {
+                                if (isset($beer->grains) && $beer->grains == $grains['grains_name']) {
+                                    echo "<option value='" . $grains['ID_grains'] . "' selected>" . $grains['grains_name'] . "</option>";
+                                } else {
+                                    echo "<option value='" . $grains['ID_grains'] . "'>" . $grains['grains_name'] . "</option>";
+                                }
+                            }
+                        ?>
+
+                    </select>
+
+                </div>
+
+                <div class="conteneur" name="hops_box">
+
+                    <div><i class="fa fa-fw fa-tree" id="logosearch"></i></div>
+                    <select name="hops" class="select_options">
+
+                        <option value="0">Choose a hops</option>
+                        
+                        <?php
+                            $sql = "SELECT * FROM hops";
+                            $query = $db->prepare($sql);
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $hops) {
+                                if (isset($beer->hops) && $beer->hops == $hops['hops_name']) {
+                                    echo "<option value='" . $hops['ID_hops'] . "' selected>" . $hops['hops_name'] . "</option>";
+                                } else {
+                                    echo "<option value='" . $hops['ID_hops'] . "'>" . $hops['hops_name'] . "</option>";
+                                }
+                            }
+                        ?>
+
+                    </select>
+
+                </div>
                 
                 <input type="submit" value="Submit" id="submit">
 

@@ -5,12 +5,19 @@
         public $location;
         public $color;
         public float $strength;
+        public float $IBU;
         public $taste;
         public $brewery;
         public $category;
+        public $hops;
+        public $grains;
+        public $calories;
+        public $clarity;
+        public $carbohydrates;
 
+        function __construct($ID_beer, $name, $location, $color, $strength, $taste, 
+            $brewery, $category, $IBU, $hops, $grains, $calories, $clarity, $carbohydrates) {
 
-        function __construct($ID_beer, $name, $location, $color, $strength, $taste, $brewery, $category) {
             $this->ID_beer = $ID_beer;
             $this->name = $name;
             $this->location = $location;
@@ -19,6 +26,12 @@
             $this->taste = $taste;
             $this->brewery = $brewery;
             $this->category = $category;
+            $this->hops = $hops;
+            $this->grains = $grains;
+            $this->calories = $calories;
+            $this->clarity = $clarity;
+            $this->carbohydrates = $carbohydrates;
+            $this->IBU = $IBU;
         }
 
         function get_ID_beer() {
@@ -61,10 +74,15 @@
             echo "<li>Category : ".$this->category."</li>";
             echo "<li>Taste : ".$this->taste."</li>";
             echo "<li>Strength : ".$this->strength."%</li>";
-            echo "</ul></div>";
-            echo "<ul id='red_box'>";
             echo "<li>Brewery : ".$this->brewery."</li>";
+            echo "</ul></div>";
+
+            echo "<div id='info_supp'>";
+
+            echo "<ul id='red_box'>";
+            echo "<li>Calories : ".$this->taste."</li>";
             echo "<li>Location : ".$this->location."</li>";
+            echo "<li>IBU : ".$this->IBU."%</li>";
            
             // les commentaires + btn ajouter commentaire
             include "comment.php";
@@ -87,6 +105,16 @@
             }
             echo "<li>Average Grade : ".$grade."</li>";
             echo "</ul>";
+
+            echo "<ul id='pink_box'>";
+            echo "<li>Hops : ".$this->color."</li>";
+            echo "<li>Grains : ".$this->category."</li>";
+            echo "<li>carbohydrates : ".$this->carbohydrates."</li>";
+            echo "<li>Clarity : ".$this->strength."</li>";
+            echo "</ul>";
+
+            echo "</div>";
+
             echo "<div id='button_box'><a href='add_beer.php?id=".$this->ID_beer."'><button id='edit_beer'>Edit this beer</button></a>";
 
  
