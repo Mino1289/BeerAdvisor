@@ -179,6 +179,10 @@
             <?php echo $validation;?>
 
         </form>
-        <a href="login.php"> Already register ? </a>                        
+
+        <div id='already_an_account_box'>
+            <a href="login.php" id='already_an_account_button'>Already an account ?</a>
+        </div> 
+
     </body>
 </html>
