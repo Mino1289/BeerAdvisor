@@ -20,19 +20,21 @@
     </div>
 
     <?php
-        
-        if(isset($_SESSION['profile_picture']))
+
+        if(isset($_SESSION['ID_user']))
         {
+
             $img = base64_encode($_SESSION['profile_picture']);
             echo '<a href="user.php?id='.$_SESSION['ID_user'].'">';
             echo '<img id="pdp" alt="profile_picture" src="data:image/png;base64,'.$img.'" />';
             echo '</a>';
+
         }
         else
         {
-            echo '<a href="register.php"><img id="pdp" alt="profile_picture" src="img/No_account.png"/></a>';
+            echo '<a href="register.php"><img id="pdp" alt="profile_picture" src="img/2754.png"/></a>';
         }
-
+     
     ?>
 
     <script>
