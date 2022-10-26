@@ -22,9 +22,9 @@
             $result = $query->fetch();
             $max_id = $result[0];
 
-            $sql = "SELECT ID_user from user WHERE ID_user = ".$_GET["id"];
+            $sql = "SELECT ID_user from user WHERE ID_user = ?";
             $query = $db->prepare($sql);
-            $query->execute();
+            $query->execute([$_GET["id"]]);
             $exist = $query->fetch();
 
 
@@ -34,31 +34,31 @@
             
             $ID_user = $_GET["id"];
 
-            $sql = "SELECT * FROM user INNER JOIN rank ON user.ID_rank = rank.ID_rank WHERE ID_user = " .$ID_user;
+            $sql = "SELECT * FROM user INNER JOIN rank ON user.ID_rank = rank.ID_rank WHERE ID_user = ?";
 
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([$ID_user]);
             $user = $result->fetch();
 
             $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"], $user["password"], $user["rank_name"]);
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $ID_user = $_SESSION["ID_user"];
                 
-                $sql = "SELECT * FROM follow WHERE ID_user = $ID_user AND ID_followed = $user->ID_user";
+                $sql = "SELECT * FROM follow WHERE ID_user = ? AND ID_followed = ?";
                 $result = $db->prepare($sql);
-                $result->execute();
+                $result->execute([$ID_user, $user->ID_user]);
                 $follow = $result->fetch();
                 if (empty($follow)) {
                     // follow -> add in the db
-                    $sql = "INSERT INTO follow (ID_user, ID_followed) VALUES ($ID_user, $user->ID_user)";
+                    $sql = "INSERT INTO follow (ID_user, ID_followed) VALUES (?, ?)";
                     $query = $db->prepare($sql);
-                    $query->execute();
+                    $query->execute([$ID_user, $user->ID_user]);
                 } else {
                     // dislike -> delete from the db
                     $ID_follow = $follow["ID"];
-                    $sql = "DELETE FROM follow WHERE ID = $ID_follow";
+                    $sql = "DELETE FROM follow WHERE ID = ?";
                     $query = $db->prepare($sql);
-                    $query->execute();
+                    $query->execute([$ID_follow]);
                 }
             }
             $user->display_page();

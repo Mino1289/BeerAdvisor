@@ -56,10 +56,10 @@
             } else if (empty($date)) {
                 $dateErr = "<p>Date is required</p>";
             } else {
-                $sql = "INSERT INTO comment (ID_user, ID_beer, content, grade, date_publication, date_drinking) VALUES ($ID_user, $ID_beer, '$comment', $grade, NOW(), '$date')";
+                $sql = "INSERT INTO comment (ID_user, ID_beer, content, grade, date_publication, date_drinking) VALUES (?, ?, ?, ?, NOW(), ?)";
                 echo "$sql";
                 $query = $db->prepare($sql);
-                $query->execute();
+                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date]);
                 header("Location: beer.php?id=$ID_beer");
             }
         }
