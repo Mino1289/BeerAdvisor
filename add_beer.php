@@ -46,10 +46,10 @@
                 $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                         INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                         INNER JOIN category ON beer.ID_category = category.ID_category 
-                        WHERE ID_beer = $id";
+                        WHERE ID_beer = ?";
                         
                 $query = $db->prepare($sql);
-                $query->execute();
+                $query->execute([$id]);
                 $beer = $query->fetch();
                 if (!empty($beer)) {
                     $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
@@ -99,16 +99,16 @@
                 if (isset($_SESSION["ID_ADD_BEER"]) && !empty($_SESSION["ID_ADD_BEER"])) {
                     // update a beer            
                     $ID_beer = $_SESSION["ID_ADD_BEER"];
-                    $sql = "UPDATE beer SET name = '$name', location = '$location', ID_color = '$color', strength = '$strength', ID_taste = '$taste', brewery = '$brewery', ID_category = '$category' WHERE ID_beer = $ID_beer";
+                    $sql = "UPDATE beer SET name = ?, location = ?, ID_color = ?, strength = ?, ID_taste = ?, brewery = ?, ID_category = ? WHERE ID_beer = ?";
                     $query = $db->prepare($sql);
-                    $query->execute();
+                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category, $ID_beer]);	
                     $id=$ID_beer;
                     
                 } else {
                     // add a beer
-                    $sql = "INSERT INTO beer (name, location, ID_color, strength, ID_taste, brewery, ID_category) VALUES ('$name', '$location', '$color', '$strength', '$taste', '$brewery', '$category')";
+                    $sql = "INSERT INTO beer (name, location, ID_color, strength, ID_taste, brewery, ID_category) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     $query = $db->prepare($sql);
-                    $query->execute();
+                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category]);
                     $id=$db->lastInsertId();
                 }
                 if (empty($id)) {

@@ -32,9 +32,9 @@
         function display_box() {
             global $db;
 
-            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer =". $this->ID_beer;
+            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer = ?";
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([$this->ID_beer]);
             $grades = $result->fetch();
             $grade = $grades['avgrade'];
             if ($grade == 0 || $grade == NULL) {
@@ -70,14 +70,14 @@
             include "comment.php";
             global $db;
 
-            $sql = "SELECT * FROM comment WHERE ID_beer = $this->ID_beer";
+            $sql = "SELECT * FROM comment WHERE ID_beer = ?";
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([$this->ID_beer]);
             $comments = $result->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer =". $this->ID_beer;
+            $sql = "SELECT AVG(grade) AS avgrade FROM comment WHERE ID_beer = ?";
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([$this->ID_beer]);
             $grades = $result->fetch();
             $grade = round($grades['avgrade'],1);
             if ($grade == 0) {
@@ -91,9 +91,9 @@
 
  
             if (isset($_SESSION['ID_user'])) {
-                $sql = "SELECT * FROM beer_user WHERE ID_beer = $this->ID_beer AND ID_user = ".$_SESSION['ID_user']; 
+                $sql = "SELECT * FROM beer_user WHERE ID_beer = ? AND ID_user = ?"; 
                 $result = $db->prepare($sql);
-                $result->execute();
+                $result->execute([$this->ID_beer, $_SESSION['ID_user']]);
                 $beer_user = $result->fetch();
                 if (empty($beer_user)) {
                     $act = "Like";
