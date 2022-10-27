@@ -34,14 +34,6 @@
             $this->IBU = $IBU;
         }
 
-        function get_ID_beer() {
-            return $this->ID_beer;
-        }
-
-        function get_name() {
-            return $this->name;
-        }
-
         function display_box() {
             global $db;
 
@@ -80,7 +72,7 @@
             echo "<div id='info_supp'>";
 
             echo "<ul id='red_box'>";
-            echo "<li>Calories : ".$this->taste."</li>";
+            echo "<li>Calories : ".$this->calories."</li>";
             echo "<li>Location : ".$this->location."</li>";
             echo "<li>IBU : ".$this->IBU."</li>";
            
@@ -107,10 +99,10 @@
             echo "</ul>";
 
             echo "<ul id='pink_box'>";
-            echo "<li>Hops : ".$this->color."</li>";
-            echo "<li>Grains : ".$this->category."</li>";
+            echo "<li>Hops : ".$this->hops."</li>";
+            echo "<li>Grains : ".$this->grains."</li>";
             echo "<li>Carbohydrates : ".$this->carbohydrates."</li>";
-            echo "<li>Clarity : ".$this->strength."</li>";
+            echo "<li>Clarity : ".$this->clarity."</li>";
             echo "</ul>";
 
             echo "</div>";

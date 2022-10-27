@@ -26,26 +26,24 @@
                     INNER JOIN grains ON beer.ID_grains = grains.ID_grains
                     WHERE ID_beer = ?";
 
-            $result = $db->prepare($sql);
-            $result->execute([$ID_beer]);
-            $beer = $result->fetch();
+            $query = $db->prepare($sql);
+            $query->execute([$ID_beer]);
+            $beer = $query->fetch();
             if (isset($beer["ID_beer"])) {
-                $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],
-                $beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name'], $beer['IBU'],$beer['hops_name']
-                ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates']);
-
-                $beer->display_page();
+                $beer = new Beer($beer['ID_beer'], $beer['name'], $beer['location'], $beer['color_name'],
+                $beer['strength'], $beer['taste_name'], $beer['brewery'], $beer['category_name'], $beer['IBU'],
+                $beer['hops_name'], $beer['grains_name'], $beer['calories'], $beer['clarity'], $beer['carbohydrates']);
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $ID_user = $_SESSION["ID_user"];
                     
                     $sql = "SELECT * FROM beer_user WHERE ID_user = ? AND ID_beer = ?";
-                    $result = $db->prepare($sql);
-                    $result->execute([$ID_user, $ID_beer]);
-                    $beer_user = $result->fetch();
+                    $query = $db->prepare($sql);
+                    $query->execute([$ID_user, $ID_beer]);
+                    $beer_user = $query->fetch();
                     if (empty($beer_user)) {
                         // like -> add in the db
-                        $sql = "INSERT INTO beer_user (ID_beer, ID_user) VALUES (?,?)";
+                        $sql = "INSERT INTO beer_user (ID_beer, ID_user) VALUES (?, ?)";
                         $query = $db->prepare($sql);
                         $query->execute([$ID_beer, $ID_user]);
                     } else {

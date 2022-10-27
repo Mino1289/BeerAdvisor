@@ -44,20 +44,18 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ID_beer = $_SESSION["ID_ADD_COMMENT"];
             $comment = test_input($_POST["content"]);
-            $nocom = test_input($_POST["nocom"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
 
             $date = strtotime($date);
             $date = date('Y-m-d', $date);
 
-            if (empty($comment) && empty($nocom)) {
+            if (empty($comment)) {
                 $commentErr = "<p>Comment is required</p>";
             } else if (empty($date)) {
                 $dateErr = "<p>Date is required</p>";
             } else {
                 $sql = "INSERT INTO comment (ID_user, ID_beer, content, grade, date_publication, date_drinking) VALUES (?, ?, ?, ?, NOW(), ?)";
-                echo "$sql";
                 $query = $db->prepare($sql);
                 $query->execute([$ID_user, $ID_beer, $comment, $grade, $date]);
                 echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";

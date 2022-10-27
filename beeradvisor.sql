@@ -48,11 +48,11 @@ CREATE TABLE `beer` (
 -- Déchargement des données de la table `beer`
 --
 
-INSERT INTO `beer` (`ID_beer`, `name`, `location`, `ID_color`, `strength`, `ID_taste`, `brewery`, `ID_category`) VALUES
-(1, '1664 Kronenbourg', 'Strasbourg, France', 3, '6.00', 2, 'Kronenbourg', 2),
-(2, 'Grimbergen', 'Waarlos, Belgium', 2, '6.40', 2, 'Maes', 3),
-(3, '3 monts', 'St Sylvestre Cappel, France', 3, '4.80', 2, 'St Sylvestre', 8),
-(4, 'Adelscott', 'Schiltigheim, France', 4, '6.60', 1, 'Fisher', 8);
+INSERT INTO `beer` (`ID_beer`, `name`, `location`, `ID_color`, `strength`, `ID_taste`, `brewery`, `ID_category`, `ID_hops`, `ID_grains`) VALUES
+(1, '1664 Kronenbourg', 'Strasbourg, France', 3, '6.00', 2, 'Kronenbourg', 2, 1, 1),
+(2, 'Grimbergen', 'Waarlos, Belgium', 2, '6.40', 2, 'Maes', 3, 1, 1),
+(3, '3 monts', 'St Sylvestre Cappel, France', 3, '4.80', 2, 'St Sylvestre', 8, 1, 1),
+(4, 'Adelscott', 'Schiltigheim, France', 4, '6.60', 1, 'Fisher', 8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,9 @@ ALTER TABLE `beer`
   ADD PRIMARY KEY (`ID_beer`),
   ADD KEY `ID_category` (`ID_category`),
   ADD KEY `ID_color` (`ID_color`),
-  ADD KEY `ID_taste` (`ID_taste`);
+  ADD KEY `ID_taste` (`ID_taste`),
+  ADD KEY `ID_hops` (`ID_hops`),
+  ADD KEY `ID_grains` (`ID_grains`);
 
 --
 -- Index pour la table `grains`
@@ -390,13 +392,13 @@ ALTER TABLE `taste`
 -- AUTO_INCREMENT pour la table `hops`
 --
 ALTER TABLE `hops`
-  MODIFY `ID_hops` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_hops` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `taste`
 --
 ALTER TABLE `grains`
-  MODIFY `ID_grains` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_grains` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `user`
