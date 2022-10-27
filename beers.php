@@ -40,7 +40,7 @@
             <div><i class="fa fa-fw fa-search" id="logosearch"></i></div>
             <select name="category">
 
-                <option value="0">Choose a category</option>
+                <option value="0">Category</option>
 
                 <?php
                     $sql = "SELECT * FROM category";
@@ -59,42 +59,80 @@
             </select>
             <select name="color">
 
-                        <option value="0">Choose a color</option>
-                        
-                        <?php
-                            $sql = "SELECT * FROM color";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($result as $color) {
-                                if (isset($beer->color) && $beer->color == $color['color_name']) {
-                                    echo "<option value='" . $color['ID_color'] . "' selected>" . $color['color_name'] . "</option>";
-                                } else {
-                                    echo "<option value='" . $color['ID_color'] . "'>" . $color['color_name'] . "</option>";
-                                }
-                            }
-                        ?>
+                <option value="0">Color</option>
+                
+                <?php
+                    $sql = "SELECT * FROM color";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($result as $color) {
+                        if (isset($beer->color) && $beer->color == $color['color_name']) {
+                            echo "<option value='" . $color['ID_color'] . "' selected>" . $color['color_name'] . "</option>";
+                        } else {
+                            echo "<option value='" . $color['ID_color'] . "'>" . $color['color_name'] . "</option>";
+                        }
+                    }
+                ?>
 
             </select>
             <select name="taste">
 
-                        <option value="0">Choose a taste</option>
-                        
-                        <?php
-                            $sql = "SELECT * FROM taste";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($result as $taste) {
-                                if (isset($beer->taste) && $beer->taste == $taste['taste_name']) {
-                                    echo "<option value='" . $taste['ID_taste'] . "' selected>" . $taste['taste_name'] . "</option>";
-                                } else {
-                                    echo "<option value='" . $taste['ID_taste'] . "'>" . $taste['taste_name'] . "</option>";
-                                }
-                            }
-                        ?>
+                <option value="0">Taste</option>
+                
+                <?php
+                    $sql = "SELECT * FROM taste";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($result as $taste) {
+                        if (isset($beer->taste) && $beer->taste == $taste['taste_name']) {
+                            echo "<option value='" . $taste['ID_taste'] . "' selected>" . $taste['taste_name'] . "</option>";
+                        } else {
+                            echo "<option value='" . $taste['ID_taste'] . "'>" . $taste['taste_name'] . "</option>";
+                        }
+                    }
+                ?>
 
-                    </select>
+            </select>
+            <select name="grains">
+
+                <option value="0">Grains</option>
+                
+                <?php
+                    $sql = "SELECT * FROM grains";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($result as $grains) {
+                        if (isset($beer->grains) && $beer->grains == $grains['grains_name']) {
+                            echo "<option value='" . $grains['ID_grains'] . "' selected>" . $grains['grains_name'] . "</option>";
+                        } else {
+                            echo "<option value='" . $grains['ID_grains'] . "'>" . $grains['grains_name'] . "</option>";
+                        }
+                    }
+                ?>
+
+            </select>
+            <select name="hops">
+
+                <option value="0">Hops</option>
+                
+                <?php
+                    $sql = "SELECT * FROM hops";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($result as $hops) {
+                        if (isset($beer->hops) && $beer->hops == $hops['hops_name']) {
+                            echo "<option value='" . $hops['ID_hops'] . "' selected>" . $hops['hops_name'] . "</option>";
+                        } else {
+                            echo "<option value='" . $hops['ID_hops'] . "'>" . $hops['hops_name'] . "</option>";
+                        }
+                    }
+                ?>
+
+            </select>
             <input type="submit" value="Research" id="submit">
         </div>
 
@@ -106,8 +144,10 @@
             $category = test_input($_POST["category"]);
             $taste = test_input($_POST["taste"]);
             $color = test_input($_POST["color"]);
+            $hops = test_input($_POST["hops"]);
+            $grains = test_input($_POST["grains"]); 
             
-            if ($color != 0 || $taste != 0 || $category != 0)
+            if ($color != 0 || $taste != 0 || $category != 0 || $hops != 0 || $grains != 0)
             {
                 $rq = "WHERE ";
 
@@ -125,13 +165,31 @@
                     $rq = $rq."taste.ID_taste = $taste ";
                 }
 
-                if ($category != 0 && $taste != 0 && $color != 0)
+                if ($category != 0 && ($taste != 0 || $color != 0))
                 {
-                    $rq = $rq."AND category.ID_category = $category;";
+                    $rq = $rq."AND category.ID_category = $category ";
                 }
                 else if ($category != 0)
                 {
-                    $rq = $rq." category.ID_category = $category;";
+                    $rq = $rq." category.ID_category = $category ";
+                }
+
+                if ($hops != 0 && ($category != 0 || $taste != 0 || $color != 0))
+                {
+                    $rq = $rq."AND hops.ID_hops = $hops ";
+                }
+                else if ($hops != 0)
+                {
+                    $rq = $rq." hops.ID_hops = $hops ";
+                }
+
+                if ($grains != 0 && ($hops != 0 || $category != 0 || $taste != 0 || $color != 0))
+                {
+                    $rq = $rq."AND grains.ID_grains = $grains ";
+                }
+                else if ($grains != 0)
+                {
+                    $rq = $rq." grains.ID_grains = $grains ";
                 }
             }
             else
@@ -143,7 +201,7 @@
                 INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                 INNER JOIN category ON beer.ID_category = category.ID_category
                 INNER JOIN hops ON beer.ID_hops = hops.ID_hops
-                INNER JOIN grains ON beer.ID_grains = grains.ID_grains" . $rq;
+                INNER JOIN grains ON beer.ID_grains = grains.ID_grains " . $rq . ";";
 
             $result = $db->prepare($sql);
             $result->execute();

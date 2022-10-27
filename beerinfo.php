@@ -82,7 +82,7 @@
             echo "<ul id='red_box'>";
             echo "<li>Calories : ".$this->taste."</li>";
             echo "<li>Location : ".$this->location."</li>";
-            echo "<li>IBU : ".$this->IBU."%</li>";
+            echo "<li>IBU : ".$this->IBU."</li>";
            
             // les commentaires + btn ajouter commentaire
             include "comment.php";
@@ -109,7 +109,7 @@
             echo "<ul id='pink_box'>";
             echo "<li>Hops : ".$this->color."</li>";
             echo "<li>Grains : ".$this->category."</li>";
-            echo "<li>carbohydrates : ".$this->carbohydrates."</li>";
+            echo "<li>Carbohydrates : ".$this->carbohydrates."</li>";
             echo "<li>Clarity : ".$this->strength."</li>";
             echo "</ul>";
 
