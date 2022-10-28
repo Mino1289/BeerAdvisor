@@ -56,7 +56,9 @@
                 } else {
                     $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                             INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
-                            INNER JOIN category ON beer.ID_category = category.ID_category 
+                            INNER JOIN category ON beer.ID_category = category.ID_category
+                            INNER JOIN hops ON beer.ID_hops = hops.ID_hops
+                            INNER JOIN grains ON beer.ID_grains = grains.ID_grains
                             WHERE name LIKE ?";
                 }
 
@@ -66,7 +68,10 @@
 
                 $n = count($result);
                 foreach ($result as $beer) {
-                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);
+                    $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],
+                    $beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name'], $beer['IBU'],
+                    $beer['hops_name'], $beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates']);
+
                     $beer->display_box();
                 }
                 if ($n == 0) {
