@@ -49,7 +49,7 @@ h1
 
 #black_box
 {
-    border: 1px solid blue;
+    // border: 1px solid blue;
     display: flex;
     flex-direction: row;
     height: 10%;
@@ -75,7 +75,7 @@ h1
     margin-left: 1em;
     display: flex;
     flex-direction: column;
-    border: 1px solid green;
+    // border: 1px solid green;
     height: 100%;
     line-height: 2.8em;
 }
@@ -84,18 +84,19 @@ h1
 {
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    // border: 1px solid red;
     height: 30%;
     line-height: 2.8em;
     font-size: 1.1em;
     justify-content: center;
+    margin-right: 2%;
 }
 
 #pink_box
 {
     display: flex;
     flex-direction: column;
-    border: 1px solid pink;
+    // border: 1px solid pink;
     height: 30%;
     line-height: 2.8em;
     font-size: 1.1em;
@@ -107,7 +108,7 @@ h1
     display: flex;
     flex-direction: row;
     width: 80%;
-    border: 1px solid orange;
+    // border: 1px solid orange;
     justify-content: center;
 }
 
@@ -197,4 +198,19 @@ h3
 .post_date
 {
     font-style: italic;
+}
+
+#doesnt_exit
+{
+    text-decoration: none;
+    // border: 1px solid red;
+    text-align: center;
+    margin-top: 5em;
+    font-size: 1.1em;
+}
+
+#doesnt_exit a
+{
+    text-decoration: none;
+    color: rgb(255,163,26);
 }

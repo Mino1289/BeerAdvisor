@@ -6,7 +6,6 @@ body {
 }
 
 #title {
-    margin-top: 1em;
     text-align: center;
     font-size: 5em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -20,6 +19,12 @@ h1 a
 {
     color: white;
     text-decoration: none;
+}
+
+h1
+{
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 #add_beer_form
@@ -58,6 +63,13 @@ input
     padding: .5em;
     line-height: 1em;
     vertical-align: middle;
+}
+
+#beer_picture
+{
+    background-color: white;
+    width: 6em;
+    padding-top: 4%;
 }
 
 .conteneur:hover
@@ -142,6 +154,13 @@ input
 #submit:hover
 {
     color: rgb(255,163,26);
+}
+
+#button_submit
+{
+    display: flex;
+    margin-top: 2em;
+    // border: 1px solid orange;
 }
 
 .error

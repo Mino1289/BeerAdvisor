@@ -39,9 +39,10 @@ CREATE TABLE `beer` (
   `ID_hops` int(11) DEFAULT NULL,
   `ID_grains` int(11) DEFAULT NULL,
   `IBU` decimal(6,2) DEFAULT NULL,
-  `clarity` decimal(3,1) DEFAULT NULL,
-  `calories` decimal (4, 1) DEFAULT NULL,
-  `carbohydrates` decimal (4, 1) DEFAULT NULL
+  `clarity` decimal(4,1) DEFAULT NULL,
+  `calories` decimal (5,1) DEFAULT NULL,
+  `carbohydrates` decimal (5,1) DEFAULT NULL,
+  `beer_picture` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

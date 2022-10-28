@@ -43,7 +43,6 @@
                
                 $rank= $_POST["rank"];
                 
-                
                 if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
                     $nameErr = "<script>validate('name_box');</script>
                     <p class='error_message'>Only letters and white space allowed</p>";
