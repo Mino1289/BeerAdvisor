@@ -34,8 +34,6 @@
                 $beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name'], $beer['IBU'],$beer['hops_name']
                 ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates']);
 
-                $beer->display_page();
-
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $ID_user = $_SESSION["ID_user"];
                     
@@ -59,7 +57,6 @@
                 
                 $beer->display_page();
 
-                
             } else {
                 echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
             }

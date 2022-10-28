@@ -49,7 +49,7 @@ h1
 
 #black_box
 {
-    // border: 1px solid blue;
+    border: 1px solid blue;
     display: flex;
     flex-direction: row;
     height: 10%;
@@ -57,7 +57,7 @@ h1
     align-items: center;
     font-size: 1.1em;
     justify-content: center;
-    width: 60%;
+    width: 80%;
 }
 
 #picture_beer
@@ -75,8 +75,7 @@ h1
     margin-left: 1em;
     display: flex;
     flex-direction: column;
-    width: 10em;
-    // border: 1px solid green;
+    border: 1px solid green;
     height: 100%;
     line-height: 2.8em;
 }
@@ -85,9 +84,8 @@ h1
 {
     display: flex;
     flex-direction: column;
-    // border: 1px solid red;
+    border: 1px solid red;
     height: 30%;
-    width: 55%;
     line-height: 2.8em;
     font-size: 1.1em;
     justify-content: center;
@@ -97,9 +95,8 @@ h1
 {
     display: flex;
     flex-direction: column;
-    // border: 1px solid pink;
+    border: 1px solid pink;
     height: 30%;
-    width: 55%;
     line-height: 2.8em;
     font-size: 1.1em;
     justify-content: center;
@@ -109,7 +106,9 @@ h1
 {
     display: flex;
     flex-direction: row;
-    width: 60%;
+    width: 80%;
+    border: 1px solid orange;
+    justify-content: center;
 }
 
 #button_box
