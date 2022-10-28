@@ -267,7 +267,9 @@ ALTER TABLE `beer`
   ADD PRIMARY KEY (`ID_beer`),
   ADD KEY `ID_category` (`ID_category`),
   ADD KEY `ID_color` (`ID_color`),
-  ADD KEY `ID_taste` (`ID_taste`);
+  ADD KEY `ID_taste` (`ID_taste`),
+  ADD KEY `ID_hops` (`ID_hops`),
+  ADD KEY `ID_grains` (`ID_grains`);
 
 --
 -- Index pour la table `grains`
