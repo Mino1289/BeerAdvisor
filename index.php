@@ -51,17 +51,17 @@
                     }
                 }
 
-                if ($value == "") {
+                if (empty($value)) {
                     return;
                 } else {
                     $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                             INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                             INNER JOIN category ON beer.ID_category = category.ID_category 
-                            WHERE name LIKE '%$value%'";
+                            WHERE name LIKE ?";
                 }
 
                 $query = $db->prepare($sql);
-                $query->execute();
+                $query->execute(["%".$value."%"]);
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 $n = count($result);

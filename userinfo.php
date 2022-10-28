@@ -26,9 +26,9 @@
             include 'beerinfo.php';
             global $db;
 
-            $sql = "SELECT * FROM beer_user WHERE ID_user = " .$this->ID_user;
+            $sql = "SELECT * FROM beer_user WHERE ID_user = ?";
             $query = $db->prepare($sql);
-            $query->execute();
+            $query->execute([$this->ID_user]);
 
             $beeruser = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -55,9 +55,9 @@
             if (isset($_SESSION["ID_user"]) && $_SESSION["ID_user"] != $this->ID_user) {
                 $ID_user = $_SESSION["ID_user"];
 
-                $sql = "SELECT * FROM follow WHERE ID_user = $ID_user AND ID_followed =". $this->ID_user;
+                $sql = "SELECT * FROM follow WHERE ID_user = ? AND ID_followed = ?";
                 $result = $db->prepare($sql);
-                $result->execute();
+                $result->execute([$ID_user, $this->ID_user]);
                 $follow = $result->fetch();
                 if (empty($follow)) {
                     $act = "Follow";
@@ -76,10 +76,10 @@
                         $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                                 INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                                 INNER JOIN category ON beer.ID_category = category.ID_category 
-                                WHERE ID_beer = " .$beer["ID_beer"];
+                                WHERE ID_beer = ?";
                                 
                         $query = $db->prepare($sql);
-                        $query->execute();
+                        $query->execute([$beer["ID_beer"]]);
         
                         $beer = $query->fetch(PDO::FETCH_ASSOC);
                         $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],$beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name']);

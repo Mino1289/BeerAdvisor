@@ -22,9 +22,9 @@
             
         function display_comment() {
             global $db;
-            $sql = "SELECT * FROM user WHERE ID_user = ".$this->ID_user;
+            $sql = "SELECT * FROM user WHERE ID_user = ?";
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([$this->ID_user]);
             $user = $result->fetch();
 
             echo "<div class='comment'>";
