@@ -90,7 +90,7 @@
             echo "<div id='info_supp'>";
 
             echo "<ul id='red_box'>";
-            echo "<li>Calories : ".$this->taste."</li>";
+            echo "<li>Calories : ".$this->calories."</li>";
             echo "<li>Location : ".$this->location."</li>";
             echo "<li>IBU : ".$this->IBU."</li>";
            
