@@ -27,130 +27,129 @@
 
         ?>
         
+        <h1>Admin panel</h1>
+
         <!-- create an admin panel where we can remove beers, add/edit/remove category/colors/tastes. -->
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Admin panel</h1>
-                </div>
+            
+            <div class="col-12">
+                <h2>Beers</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM beer";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            echo "<tr>";
+                            echo "<td>" . $row["ID_beer"] . "</td>";
+                            echo "<td><a href='beer.php?id=".$row["ID_beer"]."'>" . $row["name"] . "</a></td>";
+                            echo "<td><a href='add_beer.php?id=" . $row["ID_beer"] . "'>Edit</a></td>";
+                            echo "<td><a href='remove.php?type=beer&id=" . $row["ID_beer"] . "'>Remove</a></td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add_beer.php" class="button">Add a beer</a>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <h2>Beers</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Edit</th>
-                            <th>Remove</th>
-                        </tr>
-                        <?php
-                            $sql = "SELECT * FROM beer";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll();
-                            foreach ($result as $row) {
+
+            <div class="col-12">
+                <h2>Categories</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM category";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            if ($row["ID_category"] != 1) {
                                 echo "<tr>";
-                                echo "<td>" . $row["ID_beer"] . "</td>";
-                                echo "<td><a href='beer.php?id=".$row["ID_beer"]."'>" . $row["name"] . "</a></td>";
-                                echo "<td><a href='add_beer.php?id=" . $row["ID_beer"] . "'>Edit</a></td>";
-                                echo "<td><a href='remove.php?type=beer&id=" . $row["ID_beer"] . "'>Remove</a></td>";
+                                echo "<td>" . $row["ID_category"] . "</td>";
+                                echo "<td>" . $row["category_name"] . "</td>";
+                                echo "<td><a href='add.php?type=category&id=" . $row["ID_category"] . "'>Rename</a></td>";
+                                echo "<td><a href='remove.php?type=category&id=" . $row["ID_category"] . "'>Remove</a></td>";
                                 echo "</tr>";
                             }
-                        ?>
-                    </table>
-                    <br>
-                    <a href="add_beer.php">Add a beer</a>
-                </div>
-                <div class="col-12">
-                    <h2>Categories</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Rename</th>
-                            <th>Remove</th>
-                        </tr>
-                        <?php
-                            $sql = "SELECT * FROM category";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll();
-                            foreach ($result as $row) {
-                                if ($row["ID_category"] != 1) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row["ID_category"] . "</td>";
-                                    echo "<td>" . $row["category_name"] . "</td>";
-                                    echo "<td><a href='add.php?type=category&id=" . $row["ID_category"] . "'>Rename</a></td>";
-                                    echo "<td><a href='remove.php?type=category&id=" . $row["ID_category"] . "'>Remove</a></td>";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </table>
-                    <br>
-                    <a href="add.php?type=category">Add a category</a>
-                </div>                
-                <div class="col-12">
-                    <h2>Colors</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Rename</th>
-                            <th>Remove</th>
-                        </tr>
-                        <?php
-                            $sql = "SELECT * FROM color";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll();
-                            foreach ($result as $row) {
-                                if ($row["ID_color"] != 1) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row["ID_color"] . "</td>";
-                                    echo "<td>" . $row["color_name"] . "</td>";
-                                    echo "<td><a href='add.php?type=color&id=" . $row["ID_color"] . "'>Rename</a></td>";
-                                    echo "<td><a href='remove.php?type=color&id=" . $row["ID_color"] . "'>Remove</a></td>";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </table>
-                    <br>
-                    <a href="add.php?type=color">Add a color</a>
-                </div>
-                <div class="col-12">
-                    <h2>Taste</h2>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Rename</th>
-                            <th>Remove</th>
-                        </tr>
-                        <?php
-                            $sql = "SELECT * FROM taste";
-                            $query = $db->prepare($sql);
-                            $query->execute();
-                            $result = $query->fetchAll();
-                            foreach ($result as $row) {
-                                if ($row["ID_taste"] != 1) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row["ID_taste"] . "</td>";
-                                    echo "<td>" . $row["taste_name"] . "</td>";
-                                    echo "<td><a href='add.php?type=color&id=" . $row["ID_taste"] . "'>Rename</a></td>";
-                                    echo "<td><a href='remove.php?type=taste&id=" . $row["ID_taste"] . "'>Remove</a></td>";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </table>
-                    <br>
-                    <a href="add.php?type=taste">Add a taste</a>
-                </div>
-                
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add.php?type=category" class="button">Add a category</a>
             </div>
+
+            <div class="col-12">
+                <h2>Colors</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM color";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            if ($row["ID_color"] != 1) {
+                                echo "<tr>";
+                                echo "<td>" . $row["ID_color"] . "</td>";
+                                echo "<td>" . $row["color_name"] . "</td>";
+                                echo "<td><a href='add.php?type=color&id=" . $row["ID_color"] . "'>Rename</a></td>";
+                                echo "<td><a href='remove.php?type=color&id=" . $row["ID_color"] . "'>Remove</a></td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add.php?type=color" class="button">Add a color</a>
+            </div>
+
+            <div class="col-12">
+                <h2>Taste</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM taste";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            if ($row["ID_taste"] != 1) {
+                                echo "<tr>";
+                                echo "<td>" . $row["ID_taste"] . "</td>";
+                                echo "<td>" . $row["taste_name"] . "</td>";
+                                echo "<td><a href='add.php?type=color&id=" . $row["ID_taste"] . "'>Rename</a></td>";
+                                echo "<td><a href='remove.php?type=taste&id=" . $row["ID_taste"] . "'>Remove</a></td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add.php?type=taste" class="button">Add a taste</a>
+            </div>
+                
         </div>
        
     </body>
