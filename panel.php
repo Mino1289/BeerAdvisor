@@ -151,7 +151,7 @@
             </div>
 
             <div class="box">
-                <h2>Taste</h2>
+                <h2>Hops</h2>
                 <table>
                     <tr>
                         <th>ID</th>
