@@ -19,7 +19,7 @@
             include 'function.php';
             global $db;
 
-            $types = ["category", "color", "taste"];
+            $types = ["category", "color", "taste", "hops"];
             $err = "";
             if (isset($_GET["type"]) && !empty($_GET["type"])) {
                 // check if $_GET["type"] is in $types

@@ -28,7 +28,7 @@ h1
     width: 75%;
 }
 
-.col-12
+.box
 {
     border: 1px solid rgb(255,163,26);
     border-radius: 1.5em;
@@ -37,7 +37,7 @@ h1
     line-height: 1.5em;
 }
 
-.col-12 a:hover:not(.button)
+.box a:hover:not(.button)
 {
     color: gray;
 }
