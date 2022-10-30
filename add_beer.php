@@ -208,7 +208,12 @@
                 <div class="conteneur">
                         <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
                         <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
-                        <input class='input' id='beer_picture' name="beer_picture" type="file" placeholder="Avatar" autocomplete="off"/>
+
+                        <div class="parent-div">
+                            <button class="btn-upload">Beer's picture</button>
+                            <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
+                        </div>
+
                     </div>
 
                 <div class="conteneur" name="color_box">
@@ -348,9 +353,9 @@
 
         <div id='button_submit'>
 
-                <input type="submit" value="Submit" id="submit">
-                
-            </div>
+            <input type="submit" value="Submit" id="submit">
+            
+        </div>
 
     </form>
 </body>

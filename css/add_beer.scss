@@ -200,3 +200,26 @@ input
     justify-content: center;
     animation: .25s shake;
 }
+
+.parent-div
+{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+.parent-div input[type=file] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+}
+.btn-upload {
+    background-color: #fff;
+    color: gray;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-top: 1em;
+}

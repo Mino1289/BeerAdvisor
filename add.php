@@ -14,6 +14,8 @@
     
     <body>
         <?php
+
+            include 'header.php';
             include 'database.php';
             include 'function.php';
             global $db;
@@ -70,12 +72,16 @@
                 }
             }
         ?>
-        <div class="col-12">
-            <h2>Add/Update <?php echo $type; ?></h2>
+        <div class="col-11">
+            <h2>Add / update <?php echo $type; ?></h2>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <label for="new-item">Name</label>
-                <input type="text" name="new-item" id="new-item" required value="<?php if (isset($val)) {echo $val; } ?>">
-                <input type="submit" value="Add/Update">
+
+                <div class="name">
+                    <div><i class="fa fa-fw fa-user" id="logosearch"></i></div>
+                    <input type="text" name="new-item" required class='input' placeholder="New or update value" required value="<?php if (isset($val)) {echo $val; } ?>">
+                </div>
+
+                <input type="submit" class="button" value="Add / update">
                 <?php echo $err; ?>
             </form>
         </div>
