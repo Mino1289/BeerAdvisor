@@ -14,9 +14,10 @@
         public $calories;
         public $clarity;
         public $carbohydrates;
+        public $picture_beer;
 
         function __construct($ID_beer, $name, $location, $color, $strength, $taste, 
-            $brewery, $category, $IBU, $hops, $grains, $calories, $clarity, $carbohydrates) {
+            $brewery, $category, $IBU, $hops, $grains, $calories, $clarity, $carbohydrates, $picture_beer) {
 
             $this->ID_beer = $ID_beer;
             $this->name = $name;
@@ -32,6 +33,7 @@
             $this->clarity = $clarity;
             $this->carbohydrates = $carbohydrates;
             $this->IBU = $IBU;
+            $this->picture_beer = $picture_beer;
         }
 
         function get_ID_beer() {
@@ -68,7 +70,15 @@
             echo "<h1>".$this->name."</h1>";
             echo "<div class='beer'>";
             echo "<div id='black_box'>";
-            echo "<img src='img/photo_test.jpg' id='picture_beer'>";
+
+            if(!empty($this->picture_beer)){
+                echo '<img id="picture_beer" alt="profile_picture" src="data:image/png;base64,'. base64_encode($this->picture_beer) . '" />';
+            }
+            else
+            {
+                echo '<img id="picture_beer" alt="profile_picture" src="img/no connect.png" />';
+            }
+
             echo "<ul id='green_box'>";
             echo "<li>Color : ".$this->color."</li>";
             echo "<li>Category : ".$this->category."</li>";
@@ -80,7 +90,7 @@
             echo "<div id='info_supp'>";
 
             echo "<ul id='red_box'>";
-            echo "<li>Calories : ".$this->taste."</li>";
+            echo "<li>Calories : ".$this->calories."</li>";
             echo "<li>Location : ".$this->location."</li>";
             echo "<li>IBU : ".$this->IBU."</li>";
            
@@ -110,7 +120,7 @@
             echo "<li>Hops : ".$this->color."</li>";
             echo "<li>Grains : ".$this->category."</li>";
             echo "<li>Carbohydrates : ".$this->carbohydrates."</li>";
-            echo "<li>Clarity : ".$this->strength."</li>";
+            echo "<li>Clarity : ".$this->clarity."</li>";
             echo "</ul>";
 
             echo "</div>";

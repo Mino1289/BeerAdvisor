@@ -46,6 +46,8 @@
                 $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                         INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                         INNER JOIN category ON beer.ID_category = category.ID_category 
+                        INNER JOIN hops ON beer.ID_hops = hops.ID_hops
+                        INNER JOIN grains ON beer.ID_grains = grains.ID_grains
                         WHERE ID_beer = ?";
                         
                 $query = $db->prepare($sql);
@@ -56,7 +58,7 @@
                                     $beer['color_name'],$beer['strength'],$beer['taste_name'],
                                     $beer['brewery'], $beer['category_name'], $beer['IBU'],
                                     $beer['hops_name'], $beer['grains_name'], $beer['calories'],
-                                    $beer['clarity'], $beer['carbohydrates']);
+                                    $beer['clarity'], $beer['carbohydrates'], $beer['beer_picture']);
                 }
                 
 
@@ -82,6 +84,7 @@
             $IBU = test_input($_POST["IBU"]);
             $hops_name = test_input($_POST["hops"]);
             $grains_name = test_input($_POST["grains"]);
+            $picture_beer = test_input($_POST["beer_picture"]);
             
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
@@ -109,23 +112,32 @@
                 if (isset($_SESSION["ID_ADD_BEER"]) && !empty($_SESSION["ID_ADD_BEER"])) {
                     // update a beer            
                     $ID_beer = $_SESSION["ID_ADD_BEER"];
-                    $sql = "UPDATE beer SET name = ?, location = ?, ID_color = ?, strength = ?, ID_taste = ?, brewery = ?, ID_category = ? WHERE ID_beer = ?";
+                    $sql = "UPDATE beer SET name = ?, location = ?, ID_color = ?, strength = ?, 
+                                            ID_taste = ?, brewery = ?, ID_category = ?, IBU = ?, ID_hops = ?,
+                                            ID_grains = ?, clarity = ?, calories = ?, carbohydrates = ?, beer_picture = ? WHERE ID_beer = ?";
                     $query = $db->prepare($sql);
-                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category, $ID_beer]);	
+                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category, 
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $picture_beer, $ID_beer]);	
+
                     $id=$ID_beer;
                     
                 } else {
                     // add a beer
-                    $sql = "INSERT INTO beer (name, location, ID_color, strength, ID_taste, brewery, ID_category) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO beer 
+                    (name, location, ID_color, strength, ID_taste, brewery, ID_category, IBU, ID_hops, ID_grains, clarity, calories, carbohydrates, beer_picture) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
                     $query = $db->prepare($sql);
-                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category]);
+                    $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category,
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $picture_beer]);
+
                     $id=$db->lastInsertId();
                 }
                 if (empty($id)) {
                     echo "Error";
                 } else {
                     // header("Location: beer.php?id=$id");
-                    echo "<script> window.location.href='beers.php?id=".$id."'; </script>";
+                    echo "<script> window.location.href='beer.php?id=".$id."'; </script>";
                 }                
             }    
         }
@@ -164,24 +176,24 @@
 
                 <div class="conteneur">
                     <div><i class="fa fa-fw fa-thermometer-2" id="logosearch"></i></div>
-                    <input class='input' placeholder="Strength" type="number" step="0.1" min=0 name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
+                    <input class='input' placeholder="Strength" type="number" step="0.1" min=0 max=100 name="strength" value="<?php if (isset($beer->strength)) {echo $beer->strength;} ?>">
                 </div>
 
                 <?php echo $strengthErr ?>
 
                 <div class="conteneur">
                     <div><i class="fa fa-fw fa-thermometer-3" id="logosearch"></i></div>
-                    <input class='input' placeholder="IBU" type="number" step="0.1" min=0 name="IBU" value="<?php if (isset($beer->IBU)) {echo $beer->IBU;} ?>">
+                    <input class='input' placeholder="IBU" type="number" step="0.1" min=0 name="IBU" max=100000 value="<?php if (isset($beer->IBU)) {echo $beer->IBU;} ?>">
                 </div>
 
                 <div class="conteneur">
                     <div><i class="fa fa-fw fa-fire" id="logosearch"></i></div>
-                    <input class='input' placeholder="Calories" type="number" step="0.5" min=0 name="calories" value="<?php if (isset($beer->calories)) {echo $beer->calories;} ?>">
+                    <input class='input' placeholder="Calories" type="number" step="0.5" min=0 max=1000 name="calories" value="<?php if (isset($beer->calories)) {echo $beer->calories;} ?>">
                 </div>
 
                 <div class="conteneur">
                     <div><i class="fa fa-fw fa-eye" id="logosearch"></i></div>
-                    <input class='input' placeholder="Clarity" type="number" step="1" min=0 name="clarity" value="<?php if (isset($beer->clarity)) {echo $beer->clarity;} ?>">
+                    <input class='input' placeholder="Clarity" type="number" step="1" min=0 name="clarity" max=100 value="<?php if (isset($beer->clarity)) {echo $beer->clarity;} ?>">
                 </div>
 
             </div>
@@ -190,8 +202,19 @@
 
                 <div class="conteneur">
                     <div><i class="fa fa-fw fa-battery-2" id="logosearch"></i></div>
-                    <input class='input' placeholder="Carbohydrates" type="number" step="1" min=0 name="carbohydrates" value="<?php if (isset($beer->carbohydrates)) {echo $beer->carbohydrates;} ?>">
+                    <input class='input' placeholder="Carbohydrates" type="number" step="1" min=0 name="carbohydrates" max=1000 value="<?php if (isset($beer->carbohydrates)) {echo $beer->carbohydrates;} ?>">
                 </div>
+
+                <div class="conteneur">
+                        <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+
+                        <div class="parent-div">
+                            <button class="btn-upload">Beer's picture</button>
+                            <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
+                        </div>
+
+                    </div>
 
                 <div class="conteneur" name="color_box">
 
@@ -324,10 +347,14 @@
 
                 </div>
                 
-                <input type="submit" value="Submit" id="submit">
-
             </div>
 
+        </div>
+
+        <div id='button_submit'>
+
+            <input type="submit" value="Submit" id="submit">
+            
         </div>
 
     </form>

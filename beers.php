@@ -211,7 +211,7 @@
 
                 $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],
                     $beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name'], $beer['IBU'],$beer['hops_name']
-                    ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates']);
+                    ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates'], $beer['beer_picture']);
 
                 $beer->display_box();
                 echo "<div class='border_separation'></div>";

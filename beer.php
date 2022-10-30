@@ -29,12 +29,11 @@
             $result = $db->prepare($sql);
             $result->execute([$ID_beer]);
             $beer = $result->fetch();
+            
             if (isset($beer["ID_beer"])) {
                 $beer = new Beer($beer['ID_beer'],$beer['name'],$beer['location'],$beer['color_name'],
                 $beer['strength'],$beer['taste_name'],$beer['brewery'], $beer['category_name'], $beer['IBU'],$beer['hops_name']
-                ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates']);
-
-                $beer->display_page();
+                ,$beer['grains_name'],$beer['calories'],$beer['clarity'],$beer['carbohydrates'], $beer['beer_picture']);
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $ID_user = $_SESSION["ID_user"];
@@ -59,12 +58,11 @@
                 
                 $beer->display_page();
 
-                
             } else {
-                echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
+                echo "<div id='doesnt_exit'>This beer does not exist. <a href='add_beer.php'> Add one ?</a></div>";
             }
         } else {
-            echo "<p>This beer does not exist. <a href='add_beer.php'> Add one</a> ?</p>";
+            echo "<div id='doesnt_exit'>This beer does not exist. <a href='add_beer.php'> Add one ?</a></div>";
         }
 
     ?>

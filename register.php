@@ -43,7 +43,6 @@
                
                 $rank= $_POST["rank"];
                 
-                
                 if (!preg_match("/^[a-zA-Z-'éàèê ]*$/",$name)) { // preg_match look for a specific pattern in the string 
                     $nameErr = "<script>validate('name_box');</script>
                     <p class='error_message'>Only letters and white space allowed</p>";
@@ -149,7 +148,12 @@
                     <div class="name">
                         <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
                         <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
-                        <input class='input' id='profile_picture' name="profile_picture" type="file" placeholder="Avatar" autocomplete="off"/>
+
+                        <div class="parent-div">
+                            <button class="btn-upload">Choose a profil picture</button>
+                            <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
+                        </div>  
+
                     </div>
 
                     <div class="name">
