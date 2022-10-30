@@ -15,7 +15,6 @@
     <body>
         <?php
 
-            include 'header.php';
             include 'database.php';
             include 'function.php';
             global $db;
