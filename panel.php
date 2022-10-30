@@ -32,7 +32,7 @@
         <!-- create an admin panel where we can remove beers, add/edit/remove category/colors/tastes. -->
         <div class="container">
             
-            <div class="col-12">
+            <div class="box">
                 <h2>Beers</h2>
                 <table>
                     <tr>
@@ -60,7 +60,7 @@
                 <a href="add_beer.php" class="button">Add a beer</a>
             </div>
 
-            <div class="col-12">
+            <div class="box">
                 <h2>Categories</h2>
                 <table>
                     <tr>
@@ -90,7 +90,7 @@
                 <a href="add.php?type=category" class="button">Add a category</a>
             </div>
 
-            <div class="col-12">
+            <div class="box">
                 <h2>Colors</h2>
                 <table>
                     <tr>
@@ -120,7 +120,7 @@
                 <a href="add.php?type=color" class="button">Add a color</a>
             </div>
 
-            <div class="col-12">
+            <div class="box">
                 <h2>Taste</h2>
                 <table>
                     <tr>
@@ -149,8 +149,68 @@
                 <br>
                 <a href="add.php?type=taste" class="button">Add a taste</a>
             </div>
-                
+
+            <div class="box">
+                <h2>Hops</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM hops";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            if ($row["ID_hops"] != 1) {
+                                echo "<tr>";
+                                echo "<td>" . $row["ID_hops"] . "</td>";
+                                echo "<td>" . $row["hops_name"] . "</td>";
+                                echo "<td><a href='add.php?type=color&id=" . $row["ID_hops"] . "'>Rename</a></td>";
+                                echo "<td><a href='remove.php?type=hops&id=" . $row["ID_hops"] . "'>Remove</a></td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add.php?type=hops" class="button">Add a hops</a>
+            </div>
+
+            <div class="box">
+                <h2>Grains</h2>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action 1</th>
+                        <th>Action 2</th>
+                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM grains";
+                        $query = $db->prepare($sql);
+                        $query->execute();
+                        $result = $query->fetchAll();
+                        foreach ($result as $row) {
+                            if ($row["ID_grains"] != 1) {
+                                echo "<tr>";
+                                echo "<td>" . $row["ID_grains"] . "</td>";
+                                echo "<td>" . $row["grains_name"] . "</td>";
+                                echo "<td><a href='add.php?type=color&id=" . $row["ID_grains"] . "'>Rename</a></td>";
+                                echo "<td><a href='remove.php?type=grains&id=" . $row["ID_grains"] . "'>Remove</a></td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </table>
+                <br>
+                <a href="add.php?type=grains" class="button">Add a grains</a>
+            </div>
         </div>
+
        
     </body>
 </html>

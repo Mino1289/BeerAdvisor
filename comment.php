@@ -28,11 +28,12 @@
             $user = $result->fetch();
 
             echo "<div class='comment'>";
+            echo "<div class='entete'>";
             if (!empty($user["profile_picture"])) {
-                echo '<img width="20em" heigth="20em" src="data:image/png;base64,'. base64_encode($user["profile_picture"]) . '" />';
+                echo '<img src="data:image/png;base64,'. base64_encode($user["profile_picture"]) . '" />';
             }
             echo "<h3><span>From</span><a href='user.php?id=". $user['ID_user'] ."' class='user_name'> ".$user['username']."</a>
-                <span>| Drinking Date : ". $this->date_drinking ."</span></h3>";
+                <span>| Drinking Date : ". $this->date_drinking ."</span></h3></div>";
 
             if (!empty($this->content)) {
                 echo "<p class='comment_text'>Comment : ". $this->content ."</p>";

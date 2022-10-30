@@ -15,12 +15,11 @@
     <body>
         <?php
 
-            include 'header.php';
             include 'database.php';
             include 'function.php';
             global $db;
 
-            $types = ["category", "color", "taste"];
+            $types = ["category", "color", "taste", "hops"];
             $err = "";
             if (isset($_GET["type"]) && !empty($_GET["type"])) {
                 // check if $_GET["type"] is in $types
@@ -42,12 +41,7 @@
                         }
                     }
 
-                } else {
-                    // if not, redirect to panel.php
-                    header("Location: ./panel.php");
-                }               
-            } else {
-                header("Location: ./panel.php");
+                }
             }
             
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -61,18 +55,21 @@
                         $val = $_SESSION["val"];
                         $sql = "UPDATE " . $type . " SET " . $type . "_name = ? WHERE ID_" . $type . " = ?";
                         $query = $db->prepare($sql);
-                        $query->execute([$_POST["new-item"], $_SESSION["ID_item"]]);
+                        $query->execute([$_POST["new-item"], $_SESSION["id"]]);
                     } else {
                         $sql = "INSERT INTO " . $type . " (" . $type . "_name) VALUES (?)";
                         $query = $db->prepare($sql);
                         $query->execute([$_POST["new-item"]]);
                     }
+                    unset($_SESSION["type"]);
+                    unset($_SESSION["id"]);
+                    unset($_SESSION["val"]);
                     
                     header("Location: ./panel.php");
                 }
             }
         ?>
-        <div class="col-11">
+        <div class="box1">
             <h2>Add / update <?php echo $type; ?></h2>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 

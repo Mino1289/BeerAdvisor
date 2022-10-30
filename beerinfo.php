@@ -36,14 +36,6 @@
             $this->picture_beer = $picture_beer;
         }
 
-        function get_ID_beer() {
-            return $this->ID_beer;
-        }
-
-        function get_name() {
-            return $this->name;
-        }
-
         function display_box() {
             global $db;
 
@@ -117,8 +109,8 @@
             echo "</ul>";
 
             echo "<ul id='pink_box'>";
-            echo "<li>Hops : ".$this->color."</li>";
-            echo "<li>Grains : ".$this->category."</li>";
+            echo "<li>Hops : ".$this->hops."</li>";
+            echo "<li>Grains : ".$this->grains."</li>";
             echo "<li>Carbohydrates : ".$this->carbohydrates."</li>";
             echo "<li>Clarity : ".$this->clarity."</li>";
             echo "</ul>";

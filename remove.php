@@ -8,7 +8,7 @@
         header("Location: ./index.php");
     }
 
-    $types = ["beer", "category", "color", "taste"];
+    $types = ["beer", "category", "color", "taste", "hops"];
     if (isset($_GET["type"]) && !empty($_GET["type"])) {
         // check if $_GET["type"] is in $types
         if (in_array($_GET["type"], $types)) {
