@@ -42,7 +42,9 @@
             $result->execute([$ID_user]);
             $user = $result->fetch();
 
-            $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"], $user["password"], $user["rank_name"]);
+            $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"],
+                             $user["password"], $user["rank_name"]);
+                             
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $ID_user = $_SESSION["ID_user"];
                 
