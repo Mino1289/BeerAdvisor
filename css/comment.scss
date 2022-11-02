@@ -1,4 +1,3 @@
-
 #comments_box
 {
     // border: 1px solid orange;
@@ -52,4 +51,21 @@ h3
 .post_date
 {
     font-style: italic;
+}
+
+.entete
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -1em;
+}
+
+.comment img
+{   
+    width: 1.6em;
+    height: 1.6em;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 1.5em;
+    margin-right: .5em;
 }

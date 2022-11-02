@@ -17,6 +17,7 @@
             $ID_beer = $_GET["id"];
             include 'database.php';
             include 'beerinfo.php'; 
+            
             global $db;
 
             $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 

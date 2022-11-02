@@ -35,7 +35,7 @@ select
     justify-content: space-between;
     background-color: white;
     border: 1px solid white;
-    max-width: 50%;
+    max-width: 60%;
     height: 3em;
     border-radius: 1.5em;
     display: flex;
@@ -48,7 +48,7 @@ select
     background-color: white;
     border: 1px solid white;
     border-radius: 1.5em;
-    width: 20%;
+    width: 10%;
     height: 100%;
     color: #999999;
     cursor: pointer;
@@ -104,4 +104,23 @@ form
     margin-right: auto;
     margin-top: -.1em;
     padding-bottom: 2em;
+}
+
+.strength_filter
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.IBU_filter
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.input
+{
+    border: 1px solid white;
+    width: 70px;
+    color: black;
 }

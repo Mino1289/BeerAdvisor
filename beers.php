@@ -38,7 +38,7 @@
 
         <div id="search">
             <div><i class="fa fa-fw fa-search" id="logosearch"></i></div>
-            <select name="category">
+            <select name="category" id='category'>
 
                 <option value="0">Category</option>
 
@@ -57,7 +57,7 @@
                 ?>
 
             </select>
-            <select name="color">
+            <select name="color" id='color'>
 
                 <option value="0">Color</option>
                 
@@ -76,7 +76,7 @@
                 ?>
 
             </select>
-            <select name="taste">
+            <select name="taste" id='taste'>
 
                 <option value="0">Taste</option>
                 
@@ -133,6 +133,19 @@
                 ?>
 
             </select>
+
+            <div class='strength_filter'>
+
+                <input class='input' name="strength" type="number" min=0 max=100 step=0.1 placeholder="Strength" autocomplete="off">
+
+            </div>
+
+            <div class='IBU_filter'>
+
+                <input class='input' name="IBU" type="number" min=0 max=10000 step=0.1 placeholder="IBU" autocomplete="off">
+
+            </div>
+
             <input type="submit" value="Research" id="submit">
         </div>
 
@@ -145,9 +158,11 @@
             $taste = test_input($_POST["taste"]);
             $color = test_input($_POST["color"]);
             $hops = test_input($_POST["hops"]);
-            $grains = test_input($_POST["grains"]); 
+            $grains = test_input($_POST["grains"]);
+            $strength = test_input($_POST["strength"]);
+            $IBU = test_input($_POST["IBU"]);
             
-            if ($color != 0 || $taste != 0 || $category != 0 || $hops != 0 || $grains != 0)
+            if ($color != 0 || $taste != 0 || $category != 0 || $hops != 0 || $grains != 0 || $strength != '' || $IBU != '')
             {
                 $rq = "WHERE ";
 
@@ -190,6 +205,24 @@
                 else if ($grains != 0)
                 {
                     $rq = $rq." grains.ID_grains = $grains ";
+                }
+
+                if ($strength != '' && ($grains != 0 || $hops != 0 || $category != 0 || $taste != 0 || $color != 0))
+                {
+                    $rq = $rq."AND beer.strength = $strength ";
+                }
+                else if ($strength != '')
+                {
+                    $rq = $rq." beer.strength = $strength ";
+                }
+
+                if ($IBU != '' && ($strength != '' || $grains != 0 || $hops != 0 || $category != 0 || $taste != 0 || $color != 0))
+                {
+                    $rq = $rq."AND beer.IBU = $IBU ";
+                }
+                else if ($IBU != '')
+                {
+                    $rq = $rq." beer.IBU = $IBU ";
                 }
             }
             else
