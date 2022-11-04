@@ -230,11 +230,13 @@
                 $rq = "";
             }
 
-            $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
+            $sql = "SELECT * FROM beer 
+                INNER JOIN color ON beer.ID_color = color.ID_color 
                 INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
                 INNER JOIN category ON beer.ID_category = category.ID_category
                 INNER JOIN hops ON beer.ID_hops = hops.ID_hops
-                INNER JOIN grains ON beer.ID_grains = grains.ID_grains " . $rq . ";";
+                INNER JOIN grains ON beer.ID_grains = grains.ID_grains 
+                " . $rq . ";";
 
             $result = $db->prepare($sql);
             $result->execute();

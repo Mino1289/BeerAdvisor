@@ -86,14 +86,8 @@
                     header("Location: ./index.php");
                 }
                 
-                   
-                   
-                    
             }
 
-
-        
-            
         ?>
 
         <?php include "header.php"?>
