@@ -41,10 +41,10 @@
             $result = $db->prepare($sql);
             $result->execute([$ID_user]);
             $user = $result->fetch();
-
-            $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"],
-                             $user["password"], $user["rank_name"]);
-                             
+            if (!empty($user)){
+                $user = new User($user["ID_user"], $user["name"], $user["firstname"], $user["username"], $user["mail"], $user["profile_picture"],
+                        $user["password"], $user["rank_name"]);
+                }
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $ID_user = $_SESSION["ID_user"];
                 
@@ -65,8 +65,9 @@
                     $query->execute([$ID_follow]);
                 }
             }
-            $user->display_page();
-
+            if (!empty($user)){
+                $user->display_page();
+            }
         } else {
             echo "<p>This user doesn't exist</p>";
         }
