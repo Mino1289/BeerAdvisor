@@ -75,7 +75,7 @@
                     __sendUserData($name,$firstname,$username,$mail,$password,$rank,$db);
                     $_SESSION['ID_user'] = $db->lastInsertId();
 
-                    if($_FILES["profile_picture"]["size"] != 0){
+                    if($_FILES["profile_picture"]["size"] != 0 ){
                         $sql = "UPDATE user SET profile_picture = ? WHERE mail=?";
                         $qry = $db->prepare($sql);
                         $qry->execute([file_get_contents($_FILES["profile_picture"]["tmp_name"]), $mail]);
@@ -145,8 +145,10 @@
 
                         <div class="parent-div">
                             <button class="btn-upload">Choose a profil picture</button>
-                            <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
-                        </div>  
+                            <input class='input' id='profile_picture' name="profile_picture" type="file" accept="image/png, image/jpeg, image/jpg" autocomplete="off"/>
+                        </div>
+
+                      
 
                     </div>
 
