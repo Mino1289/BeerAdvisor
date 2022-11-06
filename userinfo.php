@@ -69,8 +69,10 @@
                     <div id='follow_button'><button type='submit'>$act</button></div></form>";
                 }
                 if (!empty($follow) || $_SESSION["ID_user"] == $this->ID_user) {
+                    echo "<div class='border_separation2'></div>";
                     echo "<div id='beeruser'>";
                     echo "<h1>Beers informations</h1>";
+                    echo "<div><a href='beersort.php' id='beersort_page'>Check out the beer ordered by grade / average grade</a></div>";
                     foreach ($beeruser as $beer) {
                         $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                         INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
