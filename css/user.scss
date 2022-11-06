@@ -11,7 +11,7 @@ body
 {
     margin-top: 1em;
     color: white;
-    border: 1px solid red;
+    // border: 1px solid red;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-bottom: 2em;
@@ -20,7 +20,7 @@ body
 #black_box
 {
     margin-top: 1em;
-    border: 1px solid orange;
+    // border: 1px solid orange;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,7 +42,7 @@ body
     flex-direction: column;
     line-height: 3em;
     color: white;
-    border: 1px solid blue;
+    // border: 1px solid blue;
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto;
@@ -95,7 +95,7 @@ button:hover
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     justify-content: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
 }
 
 .beerbox a
@@ -113,7 +113,7 @@ button:hover
 
 .beerbox
 {
-    border: 1px solid yellow;
+    // border: 1px solid yellow;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -127,6 +127,17 @@ button:hover
     margin-left: auto;
     margin-right: auto;
     margin-top: 1.5em;
+    height: 0;
+}
+
+.border_separation2
+{
+    border-bottom: 1px solid gray;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    margin-bottom: -1.5em;
     height: 0;
 }
 
@@ -179,7 +190,7 @@ button:hover
     margin-top: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
     width: 99%;
 }
 
@@ -188,7 +199,7 @@ button:hover
     margin-top: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
     width: 99%;
 }
 
@@ -206,7 +217,7 @@ button:hover
     margin-top: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
     width: 99%;
 }
 
