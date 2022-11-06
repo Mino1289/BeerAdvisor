@@ -91,17 +91,19 @@
         </div>
 
         <div class="name">
-            <div><i class="fa fa-fw fa-image" id="logosearch"></i></div>
-            <p>Picture</p>
-            <div id="picture">
-                <input name="profile_picture" id="profile_picture" type="file" autocomplete="off">
-            </div>
+            <div><i class="fa fa-fw fa-camera" id="logosearch"></i></div>
+            <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+
+            <div class="parent-div">
+                <button class="btn-upload">Picture</button>
+                <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
+            </div>  
+
         </div>
         
         <?php echo $dateErr;echo $date; ?>
         <br>
 
-        <!-- <button type="submit">Add Comment</button> -->
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
     </form>

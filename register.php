@@ -30,8 +30,6 @@
             $name= $firstname = $username = $mail = $password = $profile_picture = $rank =" ";
             $validation =" ";
             global $db;
-        
-
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
@@ -85,18 +83,11 @@
                     $validation="<p id='welcome'>You are now registered $username !</p>";
                     header("Location: ./index.php");
                 }
-                
-                   
-                   
-                    
-            }
-
-
-        
+            }        
         ?>
 
         <?php include "header.php"?>
-
+        
         <h1 id="title"><a href="./register.php">Register form</a></h1>
 
         <form name="sign" enctype="multipart/form-data"  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!-- Useful to prevent from attackers who can exploit the code by injecting javascript code -->
@@ -152,8 +143,6 @@
                             <button class="btn-upload">Choose a profil picture</button>
                             <input class='input' id='profile_picture' name="profile_picture" type="file" accept="image/png, image/jpeg, image/jpg" autocomplete="off"/>
                         </div>
-
-                      
 
                     </div>
 
