@@ -13,10 +13,27 @@
     </head>
     
     <body>
+        <script>
+            /**
+             * @param x {HTMLElement}
+             */
+            function affichage() {
+                if (document.getElementById("table1").classList.contains("hidden")) {
+                    document.getElementById("table1").classList.remove("hidden");
+                    document.getElementById("table2").classList.add("hidden");
+                } else {
+                    document.getElementById("table1").classList.add("hidden");
+                    document.getElementById("table2").classList.remove("hidden");
+                }
+                // document.getElementById("table1").
+            }
+        </script>
         <?php
             include 'header.php';
             include 'database.php';
             global $db;
+
+            echo '<button onclick="affichage(this)">Changer l\'affichage</button>';
             if (!isset($_SESSION["ID_user"]) || empty($_SESSION["ID_user"])) {
                 header("Location: index.php");
             }
@@ -27,7 +44,7 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             // affichage des nom des bières et de la note en table
-            echo "<div class='table1'>";
+            echo "<div id='table1'>";
             echo "<table id='table_beer'>";
             echo "<tr>";
             echo "<th>Beer</th>";
@@ -48,7 +65,7 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
-            echo "<div class='table2'>";
+            echo "<div id='table2' class='hidden'>";
             echo "<table id='table_beer'>";
             echo "<tr>";
             echo "<th>Beer</th>";
