@@ -69,8 +69,10 @@
                     <div id='follow_button'><button type='submit'>$act</button></div></form>";
                 }
                 if (!empty($follow) || $_SESSION["ID_user"] == $this->ID_user) {
+                    echo "<div class='border_separation2'></div>";
                     echo "<div id='beeruser'>";
                     echo "<h1>Beers informations</h1>";
+                    echo "<div id='beersort_page_box'><a href='beersort.php' id='beersort_page'>Check out the beer ordered by grade / average grade</a></div>";
                     foreach ($beeruser as $beer) {
                         $sql = "SELECT * FROM beer INNER JOIN color ON beer.ID_color = color.ID_color 
                         INNER JOIN taste ON beer.ID_taste = taste.ID_taste 
@@ -95,26 +97,38 @@
                     echo "<div class='border_separation_undo'></div>";
 
                     echo "</div>";
+
+
                     $sql = "SELECT * FROM comment WHERE ID_user = ?";
                     $query = $db->prepare($sql);
                     $query->execute([$this->ID_user]);
                     $comments = $query->fetchAll(PDO::FETCH_ASSOC);
+
                     if (count($comments) >= 1) {
                         echo "<div id='comments'>";
                         if (count($comments) == 1) {
+                            echo "<div class='border_separation3'></div>";
                             echo "<h1>Comment</h1>";
                         } else {
+                            echo "<div class='border_separation3'></div>";
                             echo "<h1>Comments</h1>";
                         }
                         
-
                         foreach ($comments as $comment) {
                             $comment = new Comment($comment['ID_comment'], $comment['ID_beer'], $comment['ID_user'], $comment['content'], $comment["grade"], $comment['date_publication'], $comment["date_drinking"], $comment["picture"]);
 
                             $comment->display_comment();
+                            echo "<div class='border_separation'></div>";
                         }
+                        echo "<div class='border_separation_undo'></div>";
                         echo "</div>";
+                        echo "<div class='border_separation4'></div>";
                     }
+                    else
+                    {
+                        echo "<div class='border_separation3'></div>";
+                    }
+                    
                     echo "<div id='followed'>";
                     echo "<h1>Followed</h1>";
                     $sql = "SELECT * FROM follow WHERE ID_user = ?";
@@ -138,8 +152,8 @@
                             echo "</tr>";
                         }
                         echo "</table>";
-
                     }
+                    
 
                 }
             

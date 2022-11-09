@@ -11,7 +11,7 @@ body
 {
     margin-top: 1em;
     color: white;
-    border: 1px solid red;
+    // border: 1px solid red;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-bottom: 2em;
@@ -20,7 +20,7 @@ body
 #black_box
 {
     margin-top: 1em;
-    border: 1px solid orange;
+    // border: 1px solid orange;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,7 +42,7 @@ body
     flex-direction: column;
     line-height: 3em;
     color: white;
-    border: 1px solid blue;
+    // border: 1px solid blue;
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto;
@@ -95,7 +95,7 @@ button:hover
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     justify-content: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
 }
 
 .beerbox a
@@ -113,7 +113,7 @@ button:hover
 
 .beerbox
 {
-    border: 1px solid yellow;
+    // border: 1px solid yellow;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -127,6 +127,39 @@ button:hover
     margin-left: auto;
     margin-right: auto;
     margin-top: 1.5em;
+    height: 0;
+}
+
+.border_separation2
+{
+    border-bottom: 1px solid gray;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+    margin-bottom: -1.5em;
+    height: 0;
+}
+
+.border_separation3
+{
+    border-bottom: 1px solid gray;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1em;
+    margin-bottom: 2em;
+    height: 0;
+}
+
+.border_separation4
+{
+    border-bottom: 1px solid gray;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -4em;
+    margin-bottom: 2em;
     height: 0;
 }
 
@@ -172,6 +205,12 @@ button:hover
     margin-top: 5em;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 4em;
+}
+
+#comments
+{
+    margin-bottom: 3em;
 }
 
 #comments h1
@@ -179,6 +218,94 @@ button:hover
     margin-top: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
-    border: 1px solid violet;
+    // border: 1px solid violet;
+}
+
+#followed h1
+{
+    margin-top: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    // border: 1px solid violet;
+}
+
+#followed
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+#beercommentedsorted h1
+{
+    margin-top: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    // border: 1px solid violet;
     width: 99%;
+}
+
+// #beercommentedsorted
+// {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     justify-content: center;
+//     text-align: center;
+// }
+
+#beersort_page
+{
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    border-radius: 1.5em;
+    border: 1px solid white;
+    padding: .7em;
+    font-size: 1em;
+    transition: .5s;
+}
+
+#beersort_page:hover
+{
+    text-decoration: underline;
+    background-color: black;
+    color: white;
+    border-radius: 1.5em;
+    border: 1px solid black;
+    padding: .7em;
+    font-size: 1.1em;
+    transition: .5s;
+}
+
+#beersort_page_box
+{
+    text-align: center;
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment
+{
+    // border: 1px solid violet;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+
+td a
+{
+    color: white;
+    text-decoration: none;
+}
+
+td a:hover
+{
+    color: gray;
 }

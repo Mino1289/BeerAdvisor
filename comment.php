@@ -45,4 +45,12 @@
             echo "</div>";
         }
     }
+    echo "<style>.comment
+    {
+        //border: 1px solid violet;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+    }</style>";
 ?>
