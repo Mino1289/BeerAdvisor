@@ -27,18 +27,22 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             // affichage des nom des bières et de la note en table
+
             echo "<div class='table1'>";
             echo "<table id='table_beer'>";
             echo "<tr>";
             echo "<th>Beer</th>";
             echo "<th>Grade</th>";
             echo "</tr>";
-            foreach ($result as $row) {
+
+            foreach ($result as $row)
+            {
                 echo "<tr>";
                 echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
                 echo "<td>" . $row['grade'] . "</td>";
                 echo "</tr>";
             }
+
             echo "</table>";
             echo "</div>";
 
@@ -47,19 +51,21 @@
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
             echo "<div class='table2'>";
             echo "<table id='table_beer'>";
             echo "<tr>";
             echo "<th>Beer</th>";
             echo "<th>Average Grade</th>";
             echo "</tr>";
-            foreach ($result as $row) {
+
+            foreach ($result as $row)
+            {
                 echo "<tr>";
                 echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
                 echo "<td>" . $row['average'] . "</td>";
                 echo "</tr>";
             }
+            
             echo "</table>";
             echo "</div>";
             

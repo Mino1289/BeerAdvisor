@@ -299,13 +299,19 @@ button:hover
     margin-bottom: 1em;
 }
 
-td a
+.link_name
 {
     color: white;
     text-decoration: none;
+    line-height: 1.5em;
 }
 
-td a:hover
+.link_name:hover
 {
     color: gray;
+}
+
+#name
+{
+    font-size: 1.2em;
 }

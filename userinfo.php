@@ -135,26 +135,28 @@
                     $query = $db->prepare($sql);
                     $query->execute([$this->ID_user]);
                     $followed = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    if(!empty($followed))
+                    {
+                        echo "<table>
+                            <tr>
+                                <th id='name'>Name</th>
+                            </tr>";
+                    }
 
                     foreach ($followed as $user) {
-                        // echo table
-                        echo "<table>
-                        <tr>
-                            <th>Name</th>
-                        </tr>";
+                        
                         $sql = "SELECT ID_user, username FROM user WHERE ID_user = ?";
                         $query = $db->prepare($sql);
                         $query->execute([$user["ID_followed"]]);
                         $result = $query->fetchAll();
                         foreach ($result as $row) {
                             echo "<tr>";
-                            echo "<td><a href='user.php?id=".$row["ID_user"]."'>" . $row["username"] . "</a></td>";
+                            echo "<td><a class='link_name' href='user.php?id=".$row["ID_user"]."'>" . $row["username"] . "</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
                     }
-                    
-
                 }
             
                 echo "</div>";
