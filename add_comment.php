@@ -46,6 +46,9 @@
             $comment = test_input($_POST["content"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
+            $picture = test_input($_POST["beer_picture"]);
+
+            echo '<img src="data:image/png;base64,'. base64_encode($picture) . '" />';
 
             $date = strtotime($date);
             $date = date('Y-m-d', $date);
@@ -55,9 +58,12 @@
             } else if (empty($date)) {
                 $dateErr = "<p>Date is required</p>";
             } else {
-                $sql = "INSERT INTO comment (ID_user, ID_beer, content, grade, date_publication, date_drinking) VALUES (?, ?, ?, ?, NOW(), ?)";
+                $sql = "INSERT INTO 
+                        comment (ID_user, ID_beer, content, grade, date_publication, date_drinking, picture) 
+                        VALUES (?, ?, ?, ?, NOW(), ?, ?)";
+
                 $query = $db->prepare($sql);
-                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date]);
+                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date, $picture]);
                 echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
             }
         }
@@ -96,8 +102,8 @@
 
             <div class="parent-div">
                 <button class="btn-upload">Picture</button>
-                <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
-            </div>  
+                <input class='input' id='beer_picture' name="beer_picture" type="file" accept="image/png, image/jpeg, image/jpg" autocomplete="off"/>
+            </div>
 
         </div>
         
