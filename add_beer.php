@@ -84,7 +84,6 @@
             $IBU = test_input($_POST["IBU"]);
             $hops_name = test_input($_POST["hops"]);
             $grains_name = test_input($_POST["grains"]);
-            $beer_picture = test_input($_POST["beer_picture"]);
             
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
@@ -114,29 +113,35 @@
                     $ID_beer = $_SESSION["ID_ADD_BEER"];
                     $sql = "UPDATE beer SET name = ?, location = ?, ID_color = ?, strength = ?, 
                                             ID_taste = ?, brewery = ?, ID_category = ?, IBU = ?, ID_hops = ?,
-                                            ID_grains = ?, clarity = ?, calories = ?, carbohydrates = ?, beer_picture = ? WHERE ID_beer = ?";
+                                            ID_grains = ?, clarity = ?, calories = ?, carbohydrates = ? WHERE ID_beer = ?";
                     $query = $db->prepare($sql);
                     $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category, 
-                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $beer_picture, $ID_beer]);	
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $ID_beer]);	
 
                     $id=$ID_beer;
                     
                 } else {
                     // add a beer
                     $sql = "INSERT INTO beer 
-                    (name, location, ID_color, strength, ID_taste, brewery, ID_category, IBU, ID_hops, ID_grains, clarity, calories, carbohydrates, beer_picture) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    (name, location, ID_color, strength, ID_taste, brewery, ID_category, IBU, ID_hops, ID_grains, clarity, calories, carbohydrates) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                     $query = $db->prepare($sql);
                     $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category,
-                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $beer_picture]);
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates]);
 
                     $id=$db->lastInsertId();
+                }
+                if ($_FILES["beer_picture"]["size"] != 0) {
+                    $picture = $_FILES["beer_picture"]["tmp_name"];
+                    $picture = file_get_contents($picture);
+                    $sql = "UPDATE beer SET beer_picture = ? WHERE ID_Beer = ?";
+                    $query = $db->prepare($sql);
+                    $query->execute([$picture, $id]);
                 }
                 if (empty($id)) {
                     echo "Error";
                 } else {
-                    // header("Location: beer.php?id=$id");
                     echo "<script> window.location.href='beer.php?id=".$id."'; </script>";
                 }                
             }    
@@ -145,7 +150,7 @@
 
     <h1 id="title"><a href="./add_beer.php">Add a beer</a></h1>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
 
         <div class="spacing"></div>
 
@@ -211,7 +216,7 @@
 
                         <div class="parent-div">
                             <button class="btn-upload">Beer's picture</button>
-                            <input class='input' id='profile_picture' name="beer_picture" type="file" autocomplete="off"/>
+                            <input class='input' id='beer_picture' name="beer_picture" type="file" accept="image/png, image/jpeg, image/jpg" autocomplete="off"/>
                         </div>
 
                     </div>

@@ -46,10 +46,7 @@
             $comment = test_input($_POST["content"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
-            $picture = " ";
-            $picture = test_input($_POST["beer_picture"]);
 
-            echo '<img src="data:image/png;base64,'. base64_encode($picture) . '" />';
 
             $date = strtotime($date);
             $date = date('Y-m-d', $date);
@@ -60,11 +57,20 @@
                 $dateErr = "<p>Date is required</p>";
             } else {
                 $sql = "INSERT INTO 
-                        comment (ID_user, ID_beer, content, grade, date_publication, date_drinking, picture) 
-                        VALUES (?, ?, ?, ?, NOW(), ?, ?)";
+                        comment (ID_user, ID_beer, content, grade, date_publication, date_drinking) 
+                        VALUES (?, ?, ?, ?, NOW(), ?)";
 
                 $query = $db->prepare($sql);
-                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date, $picture]);
+                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date]);
+                $id = $db->lastInsertId();
+
+                if ($_FILES["beer_picture"]['size'] != 0) {
+                    $picture = $_FILES["beer_picture"]["tmp_name"];
+                    $picture = file_get_contents($picture);
+                    $sql = "UPDATE comment SET picture = ? WHERE ID_comment = ?";
+                    $query = $db->prepare($sql);
+                    $query->execute([$picture, $id]);
+                }
                 echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
             }
         }
@@ -72,7 +78,7 @@
 
     <h1 id="title">Add a comment</h1>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
         
         <div class="comment">
             <div><i class="fa fa-fw fa-comments" id="logosearch"></i></div>
@@ -108,7 +114,7 @@
 
         </div>
         
-        <?php echo $dateErr;echo $date; ?>
+        <?php echo $dateErr;?>
         
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
