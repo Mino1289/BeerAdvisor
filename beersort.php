@@ -28,13 +28,18 @@
                 // document.getElementById("table1").
             }
         </script>
+
         <?php
             include 'header.php';
             include 'database.php';
             global $db;
 
+            echo "<h1 id='title'>Beer grades</h1>";
+
             echo '<button onclick="affichage(this)">Changer l\'affichage</button>';
-            if (!isset($_SESSION["ID_user"]) || empty($_SESSION["ID_user"])) {
+
+            if (!isset($_SESSION["ID_user"]) || empty($_SESSION["ID_user"]))
+            {
                 header("Location: index.php");
             }
 
@@ -44,23 +49,22 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             // affichage des nom des bières et de la note en table
-
-            echo "<div class='table1'>";
-            echo "<table id='table_beer'>";
-            echo "<tr>";
-            echo "<th>Beer</th>";
-            echo "<th>Grade</th>";
-            echo "</tr>";
+            echo "<div id='table1'>";
+                echo "<table id='table_beer'>";
+                    echo "<tr>";
+                        echo "<th>Beer</th>";
+                        echo "<th>Grade</th>";
+                    echo "</tr>";
 
             foreach ($result as $row)
             {
                 echo "<tr>";
-                echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
-                echo "<td>" . $row['grade'] . "</td>";
+                    echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
+                    echo "<td>" . $row['grade'] . "</td>";
                 echo "</tr>";
             }
 
-            echo "</table>";
+                echo "</table>";
             echo "</div>";
 
             $sql = "SELECT beer.ID_beer, name, AVG(grade) AS average FROM comment INNER JOIN beer ON comment.ID_beer = beer.ID_beer GROUP BY ID_beer ORDER BY AVG(grade) DESC";
@@ -68,23 +72,22 @@
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
             echo "<div id='table2' class='hidden'>";
-            echo "<table id='table_beer'>";
-            echo "<tr>";
-            echo "<th>Beer</th>";
-            echo "<th>Average Grade</th>";
-            echo "</tr>";
+                echo "<table id='table_beer'>";
+                echo "<tr>";
+                    echo "<th>Beer</th>";
+                    echo "<th>Average Grade</th>";
+                echo "</tr>";
 
             foreach ($result as $row)
             {
                 echo "<tr>";
-                echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
-                echo "<td>" . $row['average'] . "</td>";
+                    echo "<td><a href='beer.php?id=" . $row['ID_beer'] . "'>" . $row['name'] . "</a></td>";
+                    echo "<td>" . $row['average'] . "</td>";
                 echo "</tr>";
             }
             
-            echo "</table>";
+                echo "</table>";
             echo "</div>";
             
         ?>

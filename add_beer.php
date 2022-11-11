@@ -84,7 +84,7 @@
             $IBU = test_input($_POST["IBU"]);
             $hops_name = test_input($_POST["hops"]);
             $grains_name = test_input($_POST["grains"]);
-            $picture_beer = test_input($_POST["beer_picture"]);
+            $beer_picture = test_input($_POST["beer_picture"]);
             
             if (!empty($name) && __isbeerhere($name, "name", $db)) {
                 if (!isset($_SESSION["ID_ADD_BEER"])) {
@@ -117,7 +117,7 @@
                                             ID_grains = ?, clarity = ?, calories = ?, carbohydrates = ?, beer_picture = ? WHERE ID_beer = ?";
                     $query = $db->prepare($sql);
                     $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category, 
-                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $picture_beer, $ID_beer]);	
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $beer_picture, $ID_beer]);	
 
                     $id=$ID_beer;
                     
@@ -125,11 +125,11 @@
                     // add a beer
                     $sql = "INSERT INTO beer 
                     (name, location, ID_color, strength, ID_taste, brewery, ID_category, IBU, ID_hops, ID_grains, clarity, calories, carbohydrates, beer_picture) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                     $query = $db->prepare($sql);
                     $query->execute([$name, $location, $color, $strength, $taste, $brewery, $category,
-                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $picture_beer]);
+                                    $IBU, $hops_name, $grains_name, $clarity, $calories, $carbohydrates, $beer_picture]);
 
                     $id=$db->lastInsertId();
                 }
@@ -211,7 +211,7 @@
 
                         <div class="parent-div">
                             <button class="btn-upload">Beer's picture</button>
-                            <input class='input' id='profile_picture' name="profile_picture" type="file" autocomplete="off"/>
+                            <input class='input' id='profile_picture' name="beer_picture" type="file" autocomplete="off"/>
                         </div>
 
                     </div>

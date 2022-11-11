@@ -46,6 +46,7 @@
             $comment = test_input($_POST["content"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
+            $picture = " ";
             $picture = test_input($_POST["beer_picture"]);
 
             echo '<img src="data:image/png;base64,'. base64_encode($picture) . '" />';
@@ -108,8 +109,7 @@
         </div>
         
         <?php echo $dateErr;echo $date; ?>
-        <br>
-
+        
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
     </form>
