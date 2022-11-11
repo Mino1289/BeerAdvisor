@@ -46,7 +46,9 @@
             $comment = test_input($_POST["content"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
+            $beer_picture = test_input($_POST["beer_picture"]);
 
+            file_get_contents($_FILES["beer_picture"]["beer_picture"]);
 
             $date = strtotime($date);
             $date = date('Y-m-d', $date);
@@ -61,16 +63,7 @@
                         VALUES (?, ?, ?, ?, NOW(), ?)";
 
                 $query = $db->prepare($sql);
-                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date]);
-                $id = $db->lastInsertId();
-
-                if ($_FILES["beer_picture"]['size'] != 0) {
-                    $picture = $_FILES["beer_picture"]["tmp_name"];
-                    $picture = file_get_contents($picture);
-                    $sql = "UPDATE comment SET picture = ? WHERE ID_comment = ?";
-                    $query = $db->prepare($sql);
-                    $query->execute([$picture, $id]);
-                }
+                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date, $picture]);
                 echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
             }
         }
@@ -114,7 +107,7 @@
 
         </div>
         
-        <?php echo $dateErr;?>
+        <?php echo $dateErr;echo $date; ?>
         
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
