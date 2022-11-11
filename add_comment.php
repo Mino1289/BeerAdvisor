@@ -46,10 +46,9 @@
             $comment = test_input($_POST["content"]);
             $grade = test_input($_POST["grade"]);
             $date = test_input($_POST["date_drinking"]);
-            $picture = " ";
-            $picture = test_input($_POST["beer_picture"]);
+            $beer_picture = test_input($_POST["beer_picture"]);
 
-            echo '<img src="data:image/png;base64,'. base64_encode($picture) . '" />';
+            file_get_contents($_FILES["beer_picture"]["beer_picture"]);
 
             $date = strtotime($date);
             $date = date('Y-m-d', $date);
@@ -64,8 +63,8 @@
                         VALUES (?, ?, ?, ?, NOW(), ?, ?)";
 
                 $query = $db->prepare($sql);
-                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date, $picture]);
-                echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
+                $query->execute([$ID_user, $ID_beer, $comment, $grade, $date, $beer_picture]);
+                // echo "<script> window.location.href='beer.php?id=".$ID_beer."'; </script>";
             }
         }
     ?>
@@ -108,7 +107,7 @@
 
         </div>
         
-        <?php echo $dateErr;echo $date; ?>
+        <?php echo $dateErr; ?>
         
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 

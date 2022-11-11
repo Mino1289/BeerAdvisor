@@ -54,6 +54,9 @@ button:hover
     width: 50%;
     justify-content: center;
     text-align: center;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #table2
@@ -61,6 +64,8 @@ button:hover
     border: 1px solid orange;
     width: 50%;
     justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .hidden
@@ -68,10 +73,18 @@ button:hover
     display: none;
 }
 
-
-th, td{
-    padding: 0 .5em .2em .5em;
+table th
+{
+    border: 1px solid green;
+    font-size: 1.5em;
     justify-content: center;
     text-align: center;
     vertical-align: middle;
+}
+
+table td a
+{
+    font-size: 1.1em;
+    text-decoration: none;
+    color: white;
 }
