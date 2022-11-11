@@ -67,7 +67,7 @@
             $_SESSION["ID_ADD_BEER"] = $ID_BEER;
         }
 
-        $nameErr = $locationErr = $colorErr = $strengthErr = $tasteErr = $breweryErr = $categoryErr = "";
+        $nameErr = $locationErr = $strengthErr = $breweryErr = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
@@ -93,20 +93,20 @@
                 }
             } 
             if ($color == "0") {
-                
-                $colorErr = "<script>validate('color_box');</script>
-                <p class='error_message'>Color is required</p>";
+                $color = "1";
             } 
             if ($taste == "0") {
-                
-                $tasteErr = "<script>validate('taste_box');</script>
-                <p class='error_message'>Taste is required</p>";
+                $taste = "1";
             } 
             if ($category == "0") {
-                
-                $categoryErr = "<script>validate('category_box');</script>
-                <p class='error_message'>Category is required</p>";
-            } 
+                $category = "1";
+            }
+            if ($hops_name == "0") {
+                $hops_name = "1";
+            }
+            if ($grains_name == "0") {
+                $grains_name = "1";
+            }
             if (empty($nameErr) && empty($colorErr) && empty($tasteErr) && empty($categoryErr)) {
                 if (isset($_SESSION["ID_ADD_BEER"]) && !empty($_SESSION["ID_ADD_BEER"])) {
                     // update a beer            
@@ -245,9 +245,7 @@
                     </select>
 
                 </div>
-            
-                <?php echo $colorErr ?>
-                
+                            
                 <div class="conteneur" name="taste_box">
                     
                     <div><i class="fa fa-fw fa-flask" id="logosearch"></i></div>
@@ -272,8 +270,6 @@
                     </select>
 
                 </div>
-
-                <?php echo $tasteErr ?>
 
                 <div class="conteneur" name="category_box">
 
@@ -300,8 +296,6 @@
 
                 </div>
                 
-                <?php echo $categoryErr ?>
-
                 <div class="conteneur" name="grains_box">
 
                     <div><i class="fa fa-fw fa-tree" id="logosearch"></i></div>
