@@ -157,6 +157,8 @@
                         }
                         echo "</table>";
                     }
+
+                    echo "<div class='border_separation_undo'></div>";
                 }
             
                 echo "</div>";
