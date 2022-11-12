@@ -99,7 +99,7 @@
             <div><i class="fa fa-fw fa-calendar" id="logosearch"></i></div>
             <p>Drinking date :</p>
             <div id="date_case">
-                <input type="date" name="date_drinking" max="<?php echo date('Y-m-d', time());?>">
+                <input type="date" name="date_drinking" value="<?php echo date('Y-m-d', time());?>" max="<?php echo date('Y-m-d', time());?>">
             </div>
         </div>
 
