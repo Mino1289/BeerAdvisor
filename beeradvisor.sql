@@ -790,7 +790,7 @@ ALTER TABLE `beer`
 --
 ALTER TABLE `beer_user`
   ADD CONSTRAINT `beer_user_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `user` (`ID_user`),
-  ADD CONSTRAINT `beer_user_ibfk_2` FOREIGN KEY (`ID_beer`) REFERENCES `beer` (`ID_beer`);
+  ADD CONSTRAINT `beer_user_ibfk_2` FOREIGN KEY (`ID_beer`) REFERENCES `beer` (`ID_beer`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `comment`
