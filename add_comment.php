@@ -78,7 +78,7 @@
 
     <h1 id="title">Add a comment</h1>
 
-    <form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         
         <div class="comment">
             <div><i class="fa fa-fw fa-comments" id="logosearch"></i></div>
@@ -114,7 +114,7 @@
 
         </div>
         
-        <?php echo $dateErr;?>
+        <?php echo $dateErr; ?>
         
         <input name="submit" type="submit" value="Add Comment" id="submit"/>
 
