@@ -38,7 +38,7 @@
 
             echo "<h1 id='title'>Beer grades</h1>";
 
-            echo '<button onclick="affichage(this)">Changer l\'affichage</button>';
+            echo '<button onclick="affichage(this)">Change display</button>';
 
             if (!isset($_SESSION["ID_user"]) || empty($_SESSION["ID_user"]))
             {
