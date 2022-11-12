@@ -28,38 +28,74 @@
             $user = $result->fetch();
 
             echo "<div class='comment'>";
-            echo "<div class='entete'>";
-            if (!empty($user["profile_picture"])) {
-                echo '<img src="data:image/png;base64,'. base64_encode($user["profile_picture"]).'" />';
-            }
-            echo "<h3><span>From</span><a href='user.php?id=". $user['ID_user'] ."' class='user_name'> ".$user['username']."</a>
-                <span>| Drinking Date : ". $this->date_drinking ."</span></h3></div>";
 
-            if (!empty($this->content)) {
+                echo "<div class='entete'>";
+
+            if (!empty($user["profile_picture"]))
+            {
+                    echo '<img src="data:image/png;base64,'. base64_encode($user["profile_picture"]).'" />';
+            }
+                    echo "<h3><span>From</span><a href='user.php?id=". $user['ID_user'] ."' class='user_name'> ".$user['username']."</a>
+                    <span>| Drinking Date : ". $this->date_drinking ."</span></h3>
+                    
+                </div>";
+
+            if (!empty($this->content))
+            {
                 echo "<p class='comment_text'>Comment : ". $this->content ."</p>";
-                // echo "<div class='border_separation'></div>";
             }
             
-            echo "<p class='grade'>Grade : ". $this->grade ."/5</p>";
-            if (!empty($this->picture)) {
+                echo "<p class='grade'>Grade : ". $this->grade ."/5</p>";
+
+            if (!empty($this->picture))
+            {
                 echo "<div class='beer_picture'>";
+
                     echo "<p class='beer_picture_label'>Picture : </p>";
                     echo '<img src="data:image/png;base64,'. base64_encode($this->picture).'" />';
+
                 echo "</div>";
             }
             
-            echo "<p class='post_date'> Posted on : ".date('jS F Y',$this->date)."</p>";
+                echo "<p class='post_date'> Posted on : ".date('jS F Y',$this->date)."</p>";
+            
             echo "</div>";
         }
     }
     echo "
-        <style>.comment
+        <style>
+        .comment
         {
             //border: 1px solid violet;
             width: 95%;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 1em;
-        }</style>
-    ";
+        }
+        .comment img
+        {   
+            width: 1.6em;
+            height: 1.6em;
+            margin-top: auto;
+            margin-bottom: auto;
+            border-radius: 1.5em;
+            margin-right: .5em;
+        }
+        .beer_picture
+        {
+            display: flex;
+            flex-direction: row;
+        }
+        .beer_picture_label
+        {
+            margin-left: .5em;
+            margin-right: .5em;
+        }
+        .beer_picture img
+        {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1em;
+        }
+        </style>";
 ?>
