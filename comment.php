@@ -63,13 +63,39 @@
         }
     }
     echo "
-        <style>.comment
+        <style>
+        .comment
         {
             //border: 1px solid violet;
             width: 95%;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 1em;
-        }</style>
-    ";
+        }
+        .comment img
+        {   
+            width: 1.6em;
+            height: 1.6em;
+            margin-top: auto;
+            margin-bottom: auto;
+            border-radius: 1.5em;
+            margin-right: .5em;
+        }
+        .beer_picture
+        {
+            display: flex;
+            flex-direction: row;
+        }
+        .beer_picture_label
+        {
+            margin-left: .5em;
+            margin-right: .5em;
+        }
+        .beer_picture img
+        {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1em;
+        }
+        </style>";
 ?>
